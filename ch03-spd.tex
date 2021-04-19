@@ -1,0 +1,1865 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8 Feb-96 SS: Updated with corrections from semester 2, 1995
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Single Particle Dynamics}
+\label{spd chp}
+
+A \name{particle} is a moving geometric point at which matter is
+concentrated.  \name{Newton's Laws of Motion} describe how particles behave:
+\begin{description}
+\item[First Law] A particle moves at constant velocity $\dot{\vect{r}}$ 
+relative to an inertial frame of reference unless acted upon by a force.
+
+\item[Second Law] If a particle is acted upon by a force $\vect{F}$, it will
+accelerate relative to an inertial frame of reference such that
+$$\vect{F}=m\ddot{\vect{r}}$$
+The constant of proportionality $m$ is the \name{inertial mass} of the
+particle.
+
+\item[Third Law] When two particles act on one another, the two forces
+acting on the particles are equal in magnitude and opposite in direction and
+along the line of their centres
+$$\vect{F}_{12}=-\vect{F}_{21}$$
+\end{description}
+
+Particles are also affected by \name{Newton's postulate of gravitation},
+which says that any two particles in the universe attract each other with a
+gravitational force of magnitude
+$$\frac{Gm_1m_2}{r^2}$$
+along the line of their centres, where $r$ is the distance between the
+particles, $m_1$ and $m_2$ are their inertial masses and $G$ is the
+\name{gravitational constant}
+$$G=6.67\times 10^{-11}\rm\,m^3kg^{-1}s^{-2}$$
+
+The gravitational force between a uniform sphere of mass $M$ and a particle
+of mass $m$ is
+$$\vect{F}_p=-\frac{GmM}{r^2}\rvect$$
+This is derived in Fowles, pp. 134--136.
+
+The near gravitational field of the Earth can be found using
+$$\vect{F}_p=-\frac{GmM}{r^2}\rvect$$
+where $M$ is the mass of the Earth and $r$ is the distance of the particle
+from the centre of the Earth.  Write $r=R+h$ where $R$ is the radius of the
+Earth and $h$ is the height of the particle above the surface of the Earth. 
+Then
+$$\vect{F}_p=-\frac{GmM}{(R+h)^2}\rvect$$
+If the particle is close to the Earth's surface,
+$$\vect{F}_p=-\frac{GM}{R^2}m\rvect + O\left(\frac{h}{R}\right)$$
+Since $h\ll R$, the $h/R$ terms can be neglected so that
+$$\vect{F}_p=-\frac{GM}{R^2}m\rvect=-gm\rvect$$
+where $g$ is gravitational acceleration at the Earth's surface
+$$g=\frac{GM}{R^2}=9.81\rm\,ms^{-2}$$
+This simplification is valid as long as $h\ll R$ and it assumes that the Earth
+is composed of uniform spherical shells.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rectilinear Motion}
+
+If the particle moves in a straight line, the force must always be parallel
+to the direction of its motion.  Suppose that the force is constant
+$$m\ddot{\vect{r}}=\vect{F}$$
+Choose the $x$ axis to lie in the direction of $\vect{F}$.  Then
+$\vect{F}=F\ivect$ and
+\begin{eqnarray*}
+m\ddot{x}&=&F\\
+m\ddot{y}&=&0\\
+m\ddot{z}&=&0
+\end{eqnarray*}
+Integrating gives the particle's velocities 
+\begin{eqnarray*}
+\dot{x}(t)&=&\frac{F}{m}t+\dot{x}(0)\\
+\dot{y}(t)&=&\dot{y}(0)=0\\
+\dot{z}(t)&=&\dot{z}(0)=0
+\end{eqnarray*}
+because there is no motion in the $y$ and $z$ directions.
+
+Integrating again gives the particle's position
+\begin{eqnarray*}
+x(t)&=&\frac{1}{2}\frac{F}{m}t^2+\dot{x}(0)t+x(0)\\
+y(t)&=&y(0)\\
+z(t)&=&z(0)
+\end{eqnarray*}
+
+
+Using this, note that
+\begin{eqnarray*}
+2\frac{F}{m}\left[x(t)-x(0)\right]
+&=&\left(\frac{F}{m}t\right)^2+2\frac{F}{m}t\dot{x}(0) \\
+&=&\left(\dot{x}(t)-\dot{x}(0)\right)^2
+	+2\dot{x}(0)\left(\dot{x}(t)-\dot{x}(0)\right)\\
+&=&\dot{x}^2(t)-\dot{x}^2(0)
+\end{eqnarray*}
+This can be written as
+$$F\left[x(t)-x(0)\right]=\frac{1}{2}m\dot{x}^2(t)-\frac{1}{2}m\dot{x}^2(0)$$
+which shows that the work done is equal to the change in kinetic energy.
+
+Alternatively, this can be obtained using
+$$\ddot{x}=\der{\dot{x}}{t}=\der{\dot{x}}{x}\der{x}{t}
+=\dot{x}\der{\dot{x}}{x}=\frac{1}{2}\dbd{x}\left(\dot{x}^2\right)$$
+so that
+$$\frac{1}{2}\dbd{x}\left(\dot{x}^2\right)=\frac{F}{m}$$
+Integrating both sides with respect to $x$ shows that
+$$\dot{x}^2(t)-\dot{x}^2(0)=\frac{2F}{m}\left(x(t)-x(0)\right)$$
+
+In the \name{general rectilinear problem}, only one coordinate is important.
+If the $z$ axis lies along the line of motion,
+$$\vect{r}=z\kvect$$
+and
+$$\vect{F}=F\kvect$$
+The equation of motion becomes a scalar differential equation in $z$
+$$m\ddot{z}=F(z,\dot{z},t)$$
+
+%============================================================================
+\begin{example}
+\label{spd ex:dropped}
+
+\problem A particle is dropped from rest at a height $z_0$ close to the
+Earth's surface, with air resistance proportional to the particle's speed.
+Find the particle's height $z(t)$ and its terminal velocity 
+$\dot{z}_{\rm ter}$.
+
+\solution
+Air resistance is proportional to speed so the force on the particle is
+$$\vect{F}=-mg\kvect-\lambda\dot{z}\kvect$$
+Therefore the equation of motion is a second order linear \ODE with 
+constant coefficients
+$$m\ddot{z}=-mg-\lambda\dot{z}$$
+with $\dot{z}=0$ and $z=z_0$ when $t=0$.
+
+In standard form, this is
+$$\ddot{z}+\frac{\lambda}{m}\dot{z}=-g$$
+Try a homogeneous solution of the form $z=e^{\alpha t}$.  This gives
+$$\ddot{z}+\frac{\lambda}{m}\dot{z}
+=\left[\alpha^2+\frac{\lambda}{m}\alpha\right]e^{\alpha t}=0$$
+so that
+$$z=A+Be^{-\frac{\lambda}{m}t}+z_p$$
+where the particular solution $z_p$ is yet to be determined.
+
+The homogeneous solution with $\alpha=0$ has the same form as the
+inhomogeneous term in the differential equation, thus a constant is not an
+acceptable particular solution.  Instead try
+$$z_p(t)=ct$$
+Substituting into the differential equation shows that
+$$c=-\frac{mg}{\lambda}$$
+so that 
+$$z_p(t)=-\frac{mg}{\lambda}t$$
+giving the general solution
+$$z=A+Be^{-\frac{\lambda}{m}t}-\frac{mg}{\lambda}t$$
+
+When $t=0$, $z_0=A+B$ and $\dot{z}=0=-\lambda B/m-mg/\lambda$,
+so the constants are
+$$B=-\left(\frac{m}{\lambda}\right)^2g$$
+and
+$$A=z_0-B=z_0+\left(\frac{m}{\lambda}\right)^2g$$
+giving the solution
+$$z(t)=z_0+\left(\frac{m}{\lambda}\right)^2g\left[
+1-e^{-\frac{\lambda}{m}t}-\frac{\lambda}{m}t\right]$$
+
+The speed of the particle is
+$$\dot{z}(t)=-\frac{mg}{\lambda}\left[1-e^{-\frac{\lambda}{m}t}\right]$$
+which reaches a terminal velocity of 
+$$\dot{z}_{\rm ter}=-\frac{mg}{\lambda}$$
+as $t\to\infty$.
+
+\parbreak Alternatively the terminal velocity can be obtained directly 
+from the \ODE by noting
+that as the terminal velocity is approached, $\dot{z}$ becomes constant so
+that $\ddot{z}$ tends to zero.  Therefore the differential equation
+$$m\ddot{z}=-mg-\lambda\dot{z}$$
+becomes
+$$0=-mg-\lambda\dot{z}_{\rm ter}$$
+so that the terminal velocity is
+$$\dot{z}_{\rm ter}=-\frac{mg}{\lambda}$$
+
+To see what happens in the absence of air resistance, take the limit as
+$\lambda\to 0$.  Now 
+\begin{eqnarray*}
+\lim_{\lambda\to 0} z(t)
+&=&z_0+\lim_{\lambda\to 0}\left(\frac{m}{\lambda}\right)^2g\left(
+1-e^{-\frac{\lambda}{m}t}-\frac{\lambda}{m}t\right) \\
+&=&z_0+g\lim_{\alpha\to 0}\frac{1}{\alpha^2}
+	\left(1-e^{-\alpha t}-\alpha t\right) \\
+&=&z_0+g\lim_{\alpha\to 0}\frac{1}{\alpha^2}
+	\left[(1-\alpha t)-\left(1-\alpha t +\frac{\alpha^2t^2}{2}-\cdots
+\right)\right] \\
+&=&z_0-\frac{gt^2}{2}
+\end{eqnarray*}
+which is the free-fall limit.
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+\problem Find the height reached by a particle launched vertically upwards 
+with speed $v$ from the Earth's surface with air resistance proportional 
+to the square of the particle's speed.
+
+\solution The equation of motion is 
+$$m\ddot{z}=-mg-\lambda\dot{z}^2$$
+subject to $z=0$ and $\dot{z}=v$ at $t=0$.
+
+The differential equation is
+$$\ddot{z}=-g-\frac{\lambda}{m}\dot{z}^2$$
+But $\ddot{z}=\dbd{z}\left(\frac{1}{2}\dot{z}^2\right)$ so put 
+$w=\dot{z}^2/2$ in the equation of motion to give
+$$\der{w}{z}=-g-\frac{2\lambda}{m}w$$
+or
+$$\der{w}{z}+\frac{2\lambda}{m}w=-g$$
+$w(z)$ is the sum of the homogeneous solution and a particular solution.  
+For the homogeneous solution, trying $w=e^{\alpha z}$ shows that
+$\alpha=-2\lambda/m$.  For the particular solution, try 
+$$w_p=A$$
+Substituting into the \ODE shows that
+$$\frac{2\lambda}{m}A=-g$$
+so that the general solution is
+$$w(z)=Ce^{-\frac{2\lambda}{m}z}-\frac{mg}{2\lambda}$$
+
+At $z=0$, $w=v^2/2$ so
+$$\frac{1}{2}v^2=C-\frac{mg}{2\lambda}$$
+Therefore
+$$w(z)=\left(\frac{v^2}{2}+\frac{mg}{2\lambda}\right)
+\,e^{-\frac{2\lambda}{m}z}-\frac{mg}{2\lambda}$$
+
+At the greatest height reached, the velocity is zero, hence
+$$w(z_{\rm max})=0$$
+Therefore
+$$0=\left(\frac{v^2}{2}+\frac{mg}{2\lambda}\right)
+\,e^{-\frac{2\lambda}{m}z_{\rm max}}-\frac{mg}{2\lambda}$$
+so that
+$$z_{\rm max}=\frac{m}{2\lambda}\ln\left[1+\frac{\lambda v^2}{mg}\right]$$
+
+To find the greatest height reached when there is no air resistance,
+take the limit as $\lambda\to 0$.  Since, for small $x$,
+$$\frac{1}{1+x}=1-x+x^2-x^3+\cdots$$
+integrating term-by-term gives
+$$\ln(1+x)=\int^x \frac{dx}{1+x}=x-\frac{x^2}{x}+\frac{x^3}{3}-\cdots$$
+Therefore
+$$z_{\rm max}=\frac{m}{2\lambda}\left[
+\frac{\lambda v^2}{mg}-\frac{1}{2}\left(\frac{\lambda v^2}{mg}\right)^2
++\frac{1}{3}\left(\frac{\lambda v^2}{mg}\right)^3-\cdots\right]$$
+This can be written in the form
+$$z_{\rm max}=\frac{v^2}{2g}+O(\lambda)$$
+where $O(\lambda)$ indicates terms of order $\lambda$ and higher.  In the
+limit as $\lambda\to 0$, the $O(\lambda)$ terms tend to zero, leaving
+$$z_{\rm max}=\frac{v^2}{2g}$$
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motion in a Plane}
+
+For this analysis of projectile motion, ignore the Earth's rotation and
+assume that the height of the projectile is always much smaller than the
+radius of the Earth.
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{Motion of a projectile with air resistance $\vect{F}_{\rm res}$. 
+The projectile's initial velocity is $v$ at an angle $\alpha$ to the
+horizontal.}
+\label{spd fig:pm I}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.25,-0.35)(1.65,1.2)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0}{1.2}{2 x mul 
+1.2 x sub mul}
+% Now the axes and their labels
+\psline{<->}(0,0.8)(0,0)(1.4,0)
+\uput[dl](0,0){$O$}
+\uput[r](1.4,0){$x$}
+\uput[u](0,0.8){$z$}
+% The velocity at the origin
+\psline{->}(0,0)(0.154,0.369)
+\uput[u](0.154,0.369){$v$}
+\psarc{->}(0,0){0.2}{0}{67}
+\uput[r](0.17,0.07){$\alpha$}
+% The vector r(t)
+\pcline{->}(0,0)(0.9,0.54)
+\Bput{$\vect{r}(t)$}
+% The weight
+\psline{->}(0.9,0.54)(0.9,0.29)
+\uput[d](0.9,0.29){$mg$}
+% The air resistance
+\rput[b]{-50.2}(0.9,0.54){
+	\psline[linecolor=black,linestyle=dashed]{-}(0,0)(0.25,0) 
+	\rput[b]{*0}(0,0.05){$P$}
+	\psline[linecolor=black]{->}(0,0)(-0.25,0) 
+	\rput[br]{*0}(-0.26,0){$\vect{F}_{\rm res}$}
+}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+From figure \ref{spd fig:pm I}, the equation of motion is
+$$m\ddot{\vect{r}}=-mg\kvect+\vect{F}_{\rm res}$$
+where the air resistance has magnitude $\phi(v)$ and is directed in the
+opposite direction to the projectile's motion
+$$\vect{F}_{\rm res}=-\phi(v) \hat{\dot{\vect{r}}}
+=-\frac{\phi(v)}{v}\dot{\vect{r}}$$
+where the projectile's speed is
+$$v=\left|\dot{\vect{r}}\right|=\sqrt{\dot{x}^2+\dot{z}^2}$$
+
+The equation of motion can be written as separate equations for the $x$ and
+$z$ directions
+$$\ddot{x}=-\frac{\phi(v)}{mv}\dot{x}$$
+and
+$$\ddot{z}=-g-\frac{\phi(v)}{mv}\dot{z}$$
+The solution of these depend on the form of the air resistance function
+$\phi(v)$.
+
+
+%============================================================================
+\begin{example}
+When $\phi(v)=0$ and there is no air resistance, the equations of motion
+become
+$$\ddot{x}=0\qquad\mbox{and}\qquad\ddot{z}=-g$$
+subject to the initial conditions $x(0)=z(0)=0$, $\dot{x}(0)=v\cos\alpha$ 
+and $\dot{z}(0)=v\sin\alpha$.
+
+The solution is 
+$$x(t)=vt\cos\alpha$$
+$$z(t)=vt\sin\alpha-\frac{1}{2}gt^2$$
+Eliminating $t$ from these two equations gives the equation of the
+projectile's trajectory
+$$z=x\tan\alpha-\frac{gx^2}{2v^2\cos^2\alpha}$$
+which is a parabola.  Factorising $z$ as
+$$z=\frac{x}{\cos\alpha}\left(\sin\alpha-\frac{gx}{2v^2\cos\alpha}\right)$$
+shows that $z=0$ when $x=0$ and when $x=2v^2\sin\alpha\cos\alpha/g$
+so that the horizontal range is
+$$x_{\rm max}=\frac{v^2}{g}\sin 2\alpha$$
+This range is maximised when $\sin 2\alpha=1$, which is an elevation of 
+$\alpha=\pi/4$.  
+
+The maximum height occurs when $\dot{z}(t)=0$, which occurs when
+$$t=\frac{v\sin\alpha}{g}$$
+Therefore the maximum height as a function of the projectile's initial
+elevation is
+$$z_{\rm max}(\alpha)=\frac{v^2\sin^2\alpha}{2g}$$
+which occurs when $x$ is equal to half the range.  Note that
+$$z_{\rm max}\left(\frac{\pi}{4}\right)=\frac{v^2}{4g}$$
+which is equal to one-quarter of the maximum range.
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{exercise}
+Now try the problem again assuming that the ground is at an angle $\beta$
+so that when the projectile lands, $x$ and $z$ must satisfy
+$$z=x\tan\beta$$
+Combine this with the equation for the projectile's motion to find the $x$
+and $z$ coordinates of the point when the projectile lands.
+\end{exercise}
+%============================================================================
+
+
+%============================================================================
+\begin{example}
+\label{spd ex:prop sp}
+
+When $\phi(v)=\lambda v$ and the air resistance is proportional to the
+projectile's speed, the equations of motion become
+$$\ddot{x}=-\frac{\lambda}{m}\dot{x}$$
+and
+$$\ddot{z}=-g-\frac{\lambda}{m}\dot{z}$$
+subject to the initial conditions $x(0)=z(0)=0$, $\dot{x}(0)=v\cos\alpha$ 
+and $\dot{z}(0)=v\sin\alpha$.
+
+This has already been solved for $z$ with different boundary conditions
+in example \ref{spd ex:dropped}, so the solution is
+$$z(t)=A+Be^{-\frac{\lambda}{m}t}-\frac{m}{\lambda}gt$$
+The boundary conditions are
+$$z(0)=0=A+B$$
+and
+$$\dot{z}(0)=v\sin\alpha=-\frac{\lambda}{m}B-\frac{mg}{\lambda}$$
+Therefore
+$$A=-B=\left(\frac{m}{\lambda}\right)^2g+\frac{m}{\lambda}v\sin\alpha$$
+so the $z$ solution is
+$$z(t)=\left[\left(\frac{m}{\lambda}\right)^2g+\frac{m}{\lambda}v\sin\alpha
+\right]\left(1-e^{-\frac{\lambda}{m}t}\right)-\frac{m}{\lambda}gt$$
+
+The general solution for $x$ is
+$$x(t)=C+De^{-\frac{\lambda}{m}t}$$
+The boundary conditions are
+$$x(0)=0=C+D$$ 
+and
+$$\dot{x}(0)=v\cos\alpha=-\frac{\lambda}{m}D$$
+Therefore
+$$C=-D=\frac{m}{\lambda}v\cos\alpha$$
+so the $x$ solution is
+$$x(t)=\frac{m}{\lambda}v\cos\alpha\left(1-e^{-\frac{\lambda}{m}t}\right)$$
+
+Eliminating $t$ from the equations for $x(t)$ and $z(t)$ gives
+$$z=\left(\frac{v\sin\alpha+mg/\lambda}{v\cos\alpha}\right)x
++\left(\frac{m}{\lambda}\right)^2g
+\ln\left(1-\frac{\lambda x}{mv\cos\alpha}\right)$$
+which is plotted in figure \ref{spd fig:pm II}.
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{For projectile motion with air resistance, three points $x_1$,
+$x_2$ and $x_3$ can be defined.  $x_1$ is the horizontal position of the
+projectile's greatest elevation, $x_2$ the point at which the projectile
+hits the ground, and $x_3$ the position of the vertical asymptote if the
+projectile were to continue falling through the ground.}
+\label{spd fig:pm II}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.25,-0.5)(1.65,1.2)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0}{1.175}{1 x 1.2 div
+sub ln 0.4 mul x add 1.4 mul} 
+% Now the axes and their labels
+\psline{->}(0,0)(1.4,0)
+\psline{->}(0,-0.5)(0,0.8)
+\uput[l](0,0){$O$}
+\uput[r](1.4,0){$x$}
+\uput[u](0,0.8){$z$}
+% The velocity at the origin
+\psline{->}(0,0)(0.29,0.27)
+\uput[u](0.29,0.27){$v$}
+\psarc{->}(0,0){0.2}{0}{43}
+\uput[r](0.17,0.07){$\alpha$}
+% The intercepts				
+\psline[linecolor=black,linestyle=dashed]{-}(0.8,0)(0.8,0.5) 
+\uput[d](0.8,0){$x_1$}
+\psline[linecolor=black,linestyle=dashed]{-}(1.2,-0.5)(1.2,0.5) 
+\uput[ur](1.2,0){$x_3$}
+\uput[dl](1.1,0){$x_2$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{exercise}
+Find expressions for the points $x_1$ and $x_3$ in figure \ref{spd fig:pm
+II}.
+\end{exercise}
+%============================================================================
+
+%============================================================================
+\begin{example}
+The general expression for air resistance is $\phi(v)=\lambda v^m$ for some
+power $m$.  The equation of motion is
+$$m\ddot{\vect{r}}=-mg\kvect-\phi(v)\Tvect$$
+The velocity of the projectile is just the speed in the tangential direction
+$\dot{\vect{r}}=\dot{s}\Tvect$ so
+$$\left|\dot{\vect{r}}\right|=v=\dot{s}$$
+From
+$$\ddot{\vect{r}}=\ddot{s}\Tvect+\dot{s}\dot{\psi}\Nvect$$
+the equation of motion in the $\Tvect$ direction is
+\begin{eqnarray*}
+\ddot{s}&=&-g\kvect\cdot\Tvect-\frac{\phi(\dot{s})}{m} \\
+&=&-g\sin\psi-\frac{\phi(\dot{s})}{m}
+\end{eqnarray*}
+and in the $\Nvect$ direction,
+\begin{eqnarray*}
+\dot{s}\dot{\psi}&=&-g\kvect\cdot\Nvect\\
+&=&-g\cos\psi
+\end{eqnarray*}
+The remainder of the solution depends on the form of $\phi(\dot{s})$.
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{Motion of the missile for the Death Star problem.}
+\label{spd fig:ds}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.25,-0.65)(1.45,0.9)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0}{1.175}{1 x 1.2 div
+sub ln 0.4 mul x add 1.4 mul} 
+% Now the axes and their labels
+\psline{->}(0,0)(0.4,0)
+\psline{->}(0,0)(0,0.4)
+\uput[r](0.4,0){$x$}
+\uput[u](0,0.4){$z$}
+% The velocity at the origin
+\psline{->}(0,0)(0.29,0.27)
+\uput[u](0.29,0.27){$v$}
+\psarc{->}(0,0){0.2}{0}{43}
+\uput[r](0.17,0.07){$\alpha$}
+% The Death Star
+\psline[linecolor=black,linewidth=2pt]{-}(0,-0.3)(1,-0.3)(1,-0.6) 
+\psline[linecolor=black,linewidth=2pt]{-}(1.2,-0.6)(1.2,-0.3)(1.4,-0.3)
+% The D, H and d labels with arrows
+\pcline{<->}(0,-0.55)(1.2,-0.55)
+\Bput{$D$}
+\pcline{<->}(1,-0.35)(1.2,-0.35)
+\Aput{$d$}
+\pcline{<->}(0,-0.3)(0,0)
+\Aput{$H$}
+% The weight
+\psline{->}(0.95,0.45)(0.95,0.2)
+\uput[d](0.95,0.2){$mg$}
+% The air resistance
+\rput[br]{-40.3}(0.95,0.45){
+	\psline[linecolor=black]{->}(0,0)(-0.25,0) 
+	\rput[br]{*0}(-0.26,0){$\vect{F}_{\rm res}=-\lambda\dot{\vect{r}}$}
+}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[The Death Star]
+
+\problem From the diagram in figure \ref{spd fig:ds}, you have to fire a 
+missile	that falls down a narrow chute of width $d$.  The missile is
+launched at an initial angle $\alpha$ with speed $v$ from a height $H$ and
+a distance $D$ from the far edge of the chute.  Given that air resistance is
+proportional to speed, calculate the maximum value of $D$.  Also calculate
+the minimum height $H$ from which the missile can be released at this
+maximum distance $D$ and still fall down the chute.
+
+\solution
+With air resistance proportional to speed, the equation of motion is
+$$m\ddot{\vect{r}}=-mg\kvect-\lambda \dot{\vect{r}}$$
+This is identical to the situation considered in example \ref{spd ex:prop sp}
+with solution
+$$z=\left(\frac{v\sin\alpha+mg/\lambda}{v\cos\alpha}\right)x
++\left(\frac{m}{\lambda}\right)^2g
+\ln\left(1-\frac{\lambda x}{mv\cos\alpha}\right)$$
+
+The maximum horizontal range is the furthest $x$ distance reached as
+$z\to-\infty$.  This occurs when
+$$1-\frac{\lambda x}{mv\cos\alpha}=0$$
+or when
+$$x=\frac{mv}{\lambda}\cos\alpha$$
+
+The maximum range is maximised when $\alpha=0$, so this is achieved when the
+missile is fired horizontally, and 
+$$D=x_{\rm max}=\frac{mv}{\lambda}$$
+Putting $\alpha=0$, the trajectory becomes
+$$z=\left(\frac{mg}{\lambda v}\right)x
++\left(\frac{m}{\lambda}\right)^2g\ln\left(1-\frac{\lambda x}{mv}\right)$$
+
+The trajectory with minimum height just grazes the inner lip of the chute
+and the asymptote is the chute's back wall.  Therefore the trajectory
+passes through
+$$z=-H\qquad\mbox{at}\qquad x=D-d$$
+Substituting this into the trajectory with $\alpha=0$ gives
+$$-H=\left(\frac{mg}{\lambda v}\right)(D-d)
++\left(\frac{m}{\lambda}\right)^2g\ln\left(1-\frac{\lambda (D-d)}{mv}\right)$$
+which gives
+$$H=\frac{gD^2}{v^2}\left[-\ln\left(\frac{d}{D}\right)+\frac{d}{D}-1\right]$$
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows a projectile $P$ launched from the equator $E$ of an airless
+planet with speed $v$ at an angle $\alpha$ to the vertical towards the
+north.  $\vect{F}_{\rm gr}$ is the gravitational attraction.}
+\label{spd fig:ap}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.6,-0.6)(1.2,0.9)
+% Here is the Earth with its axes
+\pscircle(0,0){0.5}
+\psline{->}(-0.6,0)(1,0)
+\psline{->}(0,-0.6)(0,0.6)
+\uput[dr](0.5,0){$E$}
+\uput[u](0,0.6){$N$}
+% The parabola describes the projectile's trajectory
+\parametricplot[linecolor=gray,linewidth=2pt,plotstyle=curve,arrows=->]%
+{-0.3}{0.2}{1 t t mul 0.18 div sub t 0.3 add}
+% The velocity at the origin
+\SpecialCoor
+\psline{->}(0.5,0)(0.8,0.1)
+\uput[r](0.8,0.1){$v$}
+\psarc{->}(0.5,0){0.2}{0}{(0.3,0.1)}
+\uput[ur](0.7,0){$\alpha$}
+% The point P
+\uput[r](1,0.3){$P$}
+\psarc{->}(0,0){0.2}{0}{(1,0.3)}
+\uput[ur](0.2,0){$\theta$}
+\pcline{->}(0,0)(1,0.3)
+\Aput{$\vect{r}(t)$}
+\pcline{->}(1,0.3)(0.8,0.24)
+\Bput{$\vect{F}_{gr}$}
+% Radius of the Earth
+\pcline{->}(0,0)(0.5;300)\Aput{$R$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+A projectile is fired from the equator $E$ of an airless planet of radius
+$R$ northwards with initial speed $v$ and at an angle $\alpha$ to the
+vertical.  The acceleration due to gravity at the surface is $g$.
+This is illustrated in figure \ref{spd fig:ap}. 
+
+\begin{description}
+\item[(a)] Show that the projectile's motion satisfies
+$$\ddot{r}-r\dot{\theta}^2=-\frac{gR^2}{r^2}$$
+and
+$$r\ddot{\theta}+2\dot{r}\dot{\theta}=0$$
+
+\item[(b)] Hence show that 
+$$\dot{\theta}=\frac{Rv\sin\alpha}{r^2}$$
+
+\item[(c)] Also show that the maximum height of the projectile is given by
+$$\frac{r}{R}=\frac{1}{2(\lambda-1)}\left(
+\sqrt{\lambda^2-4(\lambda-1)\sin^2\alpha}+\lambda\right)$$
+where $\lambda=2gR/v^2$ provided $\lambda>1$.
+\end{description}
+
+\solution
+With $m$ the projectile's mass and $M$ the planet's mass, the force due to 
+gravity is
+$$\vect{F}=-\frac{GmM}{r^2}\rvect$$
+At the surface, when $r=R$, the force due to gravity is
+$$\vect{F}=-mg\rvect=-\frac{GmM}{R^2}\rvect$$
+so that
+$$\vect{F}=-\frac{mgR^2}{r^2}\rvect$$
+
+There is no air resistance, so from Newton's second law,
+$$m\ddot{\vect{r}}=\vect{F}$$
+Choosing a polar coordinate system,
+$$\ddot{\vect{r}}=(\ddot{r}-r\dot{\theta}^2)\rvect
++(r\ddot{\theta}+2\dot{r}\dot{\theta})\tvect=-\frac{gR^2}{r^2}\rvect$$
+Equating radial and polar components yields
+$$\ddot{r}-r\dot{\theta}^2=-\frac{gR^2}{r^2}$$
+and
+$$r\ddot{\theta}+2\dot{r}\dot{\theta}=0$$
+as required.
+
+
+From the initial conditions, $r(0)=R$ and $\theta(0)=0$.  Initially,
+$$\dot{\vect{r}}(0)=v\cos\alpha\rvect+v\sin\alpha\tvect$$
+Using
+$$\dot{\vect{r}}=\dot{r}\rvect+r\dot{\theta}\tvect$$
+shows that
+$$\dot{r}(0)=v\cos\alpha$$
+and
+$$R\dot{\theta}(0)=v\sin\alpha$$
+
+To show that
+$$\dot{\theta}=\frac{Rv\sin\alpha}{r^2}$$
+multiply
+$$r\ddot{\theta}+2\dot{r}\dot{\theta}=0$$
+by $r$ and use product rule to show that
+$$\dbd{t}(r^2\dot{\theta})=0$$
+Integrating shows that
+$$r^2\dot{\theta}=C$$
+for some constant $C$.  At $t=0$, $r=R$ and
+$\dot{\theta}=v\sin\alpha/R$.  Therefore
+$$r^2\dot{\theta}=R^2\frac{v}{R}\sin\alpha$$
+so that
+$$\dot{\theta}=\frac{Rv\sin\alpha}{r^2}$$
+
+To show that the maximum height of the projectile is given by
+$$\frac{r}{R}=\frac{1}{2(\lambda-1)}\left(
+\sqrt{\lambda^2-4(\lambda-1)\sin^2\alpha}+\lambda\right)$$
+where $\lambda=2gR/v^2$ provided $\lambda>1$, we know that
+$$\dot{\theta}=\frac{Rv\sin\alpha}{r^2}$$
+and
+$$\ddot{r}-r\dot{\theta}^2=-\frac{gR^2}{r^2}$$
+Substituting for $\dot{\theta}$ shows that
+$$\ddot{r}=\frac{v^2R^2\sin^2\alpha}{r^3}-\frac{gR^2}{r^2}$$
+Using the usual identity,
+$$\ddot{r}=\dbd{r}\left(\frac{1}{2}\dot{r}^2\right)=
+\frac{v^2R^2\sin^2\alpha}{r^3}-\frac{gR^2}{r^2}$$
+Integrating with respect to $r$ gives
+$$\frac{1}{2}\dot{r}^2=
+-\frac{1}{2}\frac{v^2R^2\sin^2\alpha}{r^2}+\frac{gR^2}{r}+C$$
+At time $t=0$, $r=R$ and $\dot{r}=v\cos\alpha$ so
+$$\frac{1}{2}v^2\cos^2\alpha=
+-\frac{1}{2}\frac{v^2R^2\sin^2\alpha}{R^2}+\frac{gR^2}{R}+C$$
+which determines the constant
+$$C=\frac{1}{2}v^2-gR$$
+Therefore, a first integral of the radial equation is
+$$\frac{1}{2}\dot{r}^2=\frac{1}{2}v^2-gR
+-\frac{1}{2}\frac{v^2R^2\sin^2\alpha}{r^2}+\frac{gR^2}{r}$$
+The maximum height occurs when $\dot{r}=0$, thus
+$$0=\frac{1}{2}v^2-gR
+-\frac{1}{2}\frac{v^2R^2\sin^2\alpha}{r^2}+\frac{gR^2}{r}$$
+Divide by $v^2/2$ and rearrange to give the quadratic
+$$\left(\frac{r}{R}\right)^2(\lambda-1)-\lambda\frac{r}{R}+\sin^2\alpha=0$$
+Therefore
+$$\frac{r}{R}=\frac{1}{2(\lambda-1)}\left(
+\lambda\pm\sqrt{\lambda^2-4(\lambda-1)\sin^2\alpha}\right)$$
+To determine which of the two solutions is appropriate, note that as
+$v\to0$, $r/R$ must tend to $1$.  As $v\to0$, $\lambda\to\infty$,
+showing that the positive solution is needed.  This gives the maximum 
+height as
+$$\frac{r}{R}=\frac{1}{2(\lambda-1)}\left(
+\sqrt{\lambda^2-4(\lambda-1)\sin^2\alpha}+\lambda\right)$$
+as required.
+
+Note that if $\lambda<1$, then $\sqrt{\lambda^2-4(\lambda-1)\sin^2\alpha}
+>\lambda$ so the negative solution must be chosen to ensure that $r/R>0$.
+In this case,
+$$\frac{r}{R}=\frac{1}{2(1-\lambda)}\left(
+\sqrt{\lambda^2-4(\lambda-1)\sin^2\alpha}-\lambda\right)<1$$
+so no maximum height is reached.  When $\lambda=1$, the speed of the projectile
+is exactly equal to the escape velocity of the planet.
+\end{example}
+%============================================================================
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Momentum and Torque}
+
+\name{Linear momentum} $\vect{p}$ is defined as
+$$\vect{p}=m\dot{\vect{r}}$$
+From Newton's second law, in an inertial reference frame,
+$$\vect{F}=m\ddot{\vect{r}}=\dbd{t}(m\dot{\vect{r}})$$
+so that
+$$\der{\vect{p}}{t}=\vect{F}$$
+When $\vect{F}=0$, $\vect{p}$ is constant, so linear momentum is conserved
+when no net force acts on the particle.
+
+The \name{angular momentum} $\vect{L}$ of a particle about the point $O$
+is defined as 
+$$\vect{L}=\vect{r}\times\vect{p}$$
+where $\vect{r}$ is the particle's position relative to $O$ and $\vect{p}$
+is the particle's linear momentum.  Note that
+$$\der{\vect{L}}{t}=\dbd{t}(\vect{r}\times(m\dot{\vect{r}}))
+=\dot{\vect{r}}\times(m\dot{\vect{r}})+\vect{r}\times(m\ddot{\vect{r}})$$
+from product rule.  The first cross-product is zero because $\dot{\vect{r}}$
+and $m\dot{\vect{r}}$ are parallel.  Writing $\vect{F}=m\ddot{\vect{r}}$
+shows that
+$$\der{\vect{L}}{t}=\vect{r}\times \vect{F}$$
+provided the reference frame is inertial.
+
+The \name{torque} of a force $\vect{F}$ about a point $O$ is
+$\vect{r}\times\vect{F}$ where $\vect{r}$ is the position vector from $O$ to
+the point of application of the force.  
+
+Therefore, torque is equal to the rate of change of angular momentum.  Angular
+momentum is conserved when no torque acts.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Central Forces}
+
+A force $\vect{F}$ which always acts along the position vector $\vect{r}$ is
+called a \name{central force}.
+$$\vect{F}=f(r)\rvect$$
+
+%============================================================================
+\begin{theorem}
+The trajectory of a particle acted on by a central force lies in a plane.
+\end{theorem}
+
+\begin{proof}
+At any instant $t$, the two vectors $\vect{r}(t)$ and $\dot{\vect{r}}(t)$
+define a plane.  The acceleration is
+$$\ddot{\vect{r}}=\frac{1}{m}\vect{F}=\frac{1}{m}f(r)\rvect$$
+which lies in the plane.  Thus the particle's subsequent motion is confined
+to that plane.
+\end{proof}
+%============================================================================
+
+Therefore central forces imply motion in a plane.
+
+%============================================================================
+\begin{theorem}
+The angular momentum of a particle in a central force field is constant.
+\end{theorem}
+
+\begin{proof}
+The rate of change is angular momentum is
+$$\der{\vect{L}}{t}=\vect{r}\times \vect{F}=\vect{r}\times f(r)\rvect=0$$
+because $\vect{F}$ is parallel to $\vect{r}$.  Therefore $\vect{L}$ is
+constant.
+\end{proof}
+%============================================================================
+
+The physical significance of constant angular momentum is related to the
+area swept out by the particle's position vector $\vect{r}(t)$.  Suppose
+that $\vect{r}(t)$ sweeps out an area $A(t)$ as it moves in the plane.  In a
+short time $\delta t$, the area swept out is
+$$\delta A\approx\frac{1}{2}\left|\vect{r}(t+\delta t)\times\vect{r}(t)\right|$$
+Now $\vect{r}(t+\delta t)=\vect{r}(t)+\delta\vect{r}$ so
+$$\vect{r}(t+\delta t)\times\vect{r}(t)=\delta\vect{r}\times\vect{r}(t)$$
+Therefore
+$$\der{A}{t}=\lim_{\delta t\to 0}\frac{\delta A}{\delta t}
+=\lim_{\delta t\to 0}\frac{1}{2}\left|\vect{r}\times\frac{\delta\vect{r}}
+{\delta t}\right|=\frac{1}{2}\left|\vect{r}\times\dot{\vect{r}}\right|$$
+Writing
+$$\frac{1}{2}\left|\vect{r}\times\dot{\vect{r}}\right|
+=\frac{1}{2m}\left|\vect{r}\times(m\dot{\vect{r}})\right|$$
+shows that
+$$\der{A}{t}=\frac{1}{2m}\left|\vect{L}\right|$$
+Since angular momentum is constant in a central force field, we have
+$$\der{A}{t}=\rm constant$$
+This is Kepler's second rule of planetary motion (1609) which was explained
+by Newton as a property of central forces in his {\em Principia} of 1687.
+
+In polar coordinates, 
+$$\dot{\vect{r}}=\dot{r}\rvect+r\dot{\theta}\tvect$$
+so that
+$$\vect{L}=\vect{r}\times (m\dot{\vect{r}})=m(r\rvect)\times
+(\dot{r}\rvect+r\dot{\theta}\tvect)$$
+Therefore 
+$$\vect{L}=mr^2\dot{\theta}(\rvect\times\tvect)$$
+Now $\rvect\times\tvect$ is the unit vector normal to the plane in which the
+particle moves, so the magnitude of the angular momentum is
+$$\left|\vect{L}\right|=mr^2\left|\dot{\theta}\right|$$
+Substituting this back into the equation for $\der{A}{t}$ shows that
+$$\der{A}{t}=\frac{1}{2}r^2\left|\dot{\theta}\right|$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Orbits in a Central Force Field}
+
+The equation of motion is
+$$m\ddot{\vect{r}}=f(r)\rvect$$
+where the acceleration can be expressed as
+$$\ddot{\vect{r}}=\left(\ddot{r}-r\dot{\theta}^2\right)\rvect
++\left(r\ddot{\theta}+2\dot{r}\dot{\theta}\right)\tvect$$
+in polar coordinates.
+
+The radial component is
+$$\ddot{r}-r\dot{\theta}^2=\frac{f(r)}{m}$$
+and the transverse component is
+$$r\ddot{\theta}+2\dot{r}\dot{\theta}=0$$
+This can be solved for $\dot{\theta}$ by writing it as
+$$\dbd{t}\dot{\theta}+2\frac{\dot{r}}{r}\dot{\theta}=0$$
+The integrating factor is $r^2$ which shows that
+$$\dbd{t}\left(r^2\dot{\theta}\right)=0$$
+so that $r^2\dot{\theta}$ is a constant.  Let this constant be $h$ so that
+$$r^2\dot{\theta}=h$$
+Note that $\frac{1}{2}\left|h\right|=\der{A}{t}=\frac{1}{2m}\left|\vect{L}
+\right|$.
+
+To obtain the equation of the orbit in the form $r(\theta)$, use
+$$\dot{r}=\der{r}{\theta}\dot{\theta}=\frac{h}{r^2}\der{r}{\theta}$$
+and
+$$\ddot{r}=\frac{h}{r^2}\dbd{\theta}
+\left(\frac{h}{r^2}\der{r}{\theta}\right)$$
+The radial equation of motion can then be written as
+$$\frac{h^2}{r^2}\dbd{\theta}\left(\frac{1}{r^2}\der{r}{\theta}\right)
+-r\left(\frac{h}{r^2}\right)^2=\frac{f(r)}{m}$$
+Rearranging this gives
+$$\dbd{\theta}\left(\frac{1}{r^2}\der{r}{\theta}\right)
+-\frac{1}{r}=\frac{r^2f(r)}{mh^2}$$
+which can be solved to give $r(\theta)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Motion in a Gravitational Field}
+
+Let the central force be
+$$f(r)=-\frac{GMm}{r^2}$$
+where $M$ is the mass of the Sun at the origin and $m$ is the mass of the
+body.  We will asssume that $M\gg m$ so that the Sun may be assumed to be
+fixed at the origin.
+
+The equation for the orbit becomes
+$$\dbd{\theta}\left(\frac{1}{r^2}\der{r}{\theta}\right)
+-\frac{1}{r}=-\frac{GM}{h^2}$$
+Since 
+$$\frac{1}{r^2}\der{r}{\theta}=-\dbd{\theta}\left(\frac{1}{r}\right)$$
+this can be written
+$$\ndbd{\theta}{2}\left(\frac{1}{r}\right)+\frac{1}{r}=\frac{GM}{h^2}$$
+The general solution is
+$$\frac{1}{r}=B\cos\theta+C\sin\theta+\frac{GM}{h^2}=A\cos(\theta-\theta_0)
++\frac{GM}{h^2}$$
+where $A$ and $\theta_0$ are arbitrary constants giving the orbit's
+amplitude and phase angle.  In terms of $r$, this is
+$$r=\frac{1}{A\cos(\theta-\theta_0)+GM/h^2}$$
+$A$ and $\theta_0$ are determined by the initial conditions.  Since
+$\theta_0$ determines only the orientation of the orbit in the plane, we can
+set it to zero when discussing the orbit's shape.
+
+\typeout{There is no page 74, but my written notes don't have a break.}
+
+Define the orbit's \name{eccentricity} to be
+$$e=\frac{Ah^2}{GM}$$
+and $r_0$ to be the \name{perihelion distance}
+$$r_0=\frac{h^2/GM}{1+e}$$
+which is the smallest distance between the body and the Sun during the
+orbit.  Then the orbit equation can be written
+$$r=r_0\frac{1+e}{1+e\cos\theta}$$
+so that $r=r_0$ when $\theta=0$ and $r>r_0$ for all other $\theta$ during
+each orbit.
+
+The shape of the orbit depends on the eccentricity $e$.  If $e=0$, the orbit
+is a circle, and for $0<e<1$, the orbit is an ellipse.  Both of these are
+closed, periodic orbits.  When $e=1$, the orbit is a parabola and for $e>1$,
+the orbit is a hyperbola.  Both of these are open, single encounter orbits.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cartesian Equation of an Orbit}
+
+The orbit equation can be written
+$$r(1+e\cos\theta)=r_0(1+e)$$
+Writing $L=r_0(1+e)$ and putting $x=r\cos\theta$, we have
+$$r=L-ex$$
+Squaring both sides so that $r^2=x^2+y^2$,
+$$x^2+y^2=(L-ex)^2$$
+thus
+$$(1-e^2)x^2+2Lex+y^2=L^2$$
+Completing the square gives
+$$\frac{(x-x_0)^2}{L^2/(1-e^2)^2}+\frac{y^2}{L^2/(1-e^2)}=1$$
+where
+$$x_0=-\frac{Le}{1-e^2}$$
+When $e=0$, this simplifies to the equation of a circle
+$$x^2+y^2=L^2$$
+When $0<e<1$, this simplifies to the equation of an ellipse
+$$\frac{(x-x_0)^2}{a^2}+\frac{y^2}{b^2}=1$$
+where $a=L/(1-e^2)$ and $b=L/\sqrt{1-e^2}$.  
+
+When  $e=1$, the equation becomes that of a parabola
+$$y^2=L^2-2Lx$$
+and when $e>1$, it becomes the equation of a hyperbola
+$$\frac{(x-x_0)^2}{a^2}-\frac{y^2}{b^2}=1$$
+where $a=L/(e^2-1)$ and $b=L/\sqrt{e^2-1}$.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kepler's Laws}
+
+Centuries of increasingly accurate astronomical observations culminated in
+Kepler's laws of planetary motion (1609):
+
+\begin{enumerate}
+\item Each planet moves in an ellipse with the Sun as a focus.
+\item The radius vector sweeps out equal areas in equal times 
+($\der{A}{t}$ is constant).
+\item The square of the period of revolution about the Sun is proportional
+to the cube of the major axis of the orbit.
+\end{enumerate}
+
+Law 2 is a consequence of gravity being a central force.  Law 1 is a
+consequence of gravity being an inverse square attractive force.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Elliptical Planetary Orbits}
+
+The equations for a planet's orbit are
+$$r=r_0\frac{1+e}{1+e\cos\theta}$$
+or
+$$\frac{(x-x_0)^2}{a^2}+\frac{y^2}{b^2}=1$$
+where $a=L/(1-e^2)$ and $b=L/\sqrt{1-e^2}$ (so $a>b$) and
+$x_0=-Le/(1-e^2)$. 
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{Planets move in an ellipse around the Sun.  Their closest approach
+is at perihelion and their furthest distance is at aphelion.}
+\label{spd fig:pm}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.8,-0.5)(0.5,0.6)
+% First the curve, so the axes show through
+\psellipse[linecolor=gray,linewidth=2pt,plotstyle=curve](-0.2,0)(0.5,0.3)
+% Now the axes and their labels
+\psline{->}(-0.8,0)(0.4,0)
+\psline{->}(0,-0.35)(0,0.4)
+\uput[r](0.4,0){$x$}
+\uput[u](0,0.4){$y$}
+% Dashed lines
+\psline[linecolor=black,linestyle=dashed]{-}(-0.7,-0.5)(-0.7,0) 
+\psline[linecolor=black,linestyle=dashed]{-}(-0.2,-0.5)(-0.2,0.4) 
+\psline[linecolor=black,linestyle=dashed]{-}(0.3,-0.5)(0.3,0) 
+% Arrows and labels
+\pcline{<->}(-0.7,-0.4)(0,-0.4)\Aput{$r_1$}
+\pcline{<->}(0,-0.4)(0.3,-0.4)\Aput{$r_0$}
+\pcline{<->}(-0.2,-0.5)(0.3,-0.5)\Bput{$a$}
+\pcline{<->}(-0.2,0)(-0.2,0.3)\Aput{$b$}
+\uput[dr](-0.2,0){$x_0$}
+\pcline{*-*}(0,0)(0.2,0.18)\Aput{$r$}
+\psarc{->}(0,0){0.14}{0}{42}
+\uput[r](0.13,0.05){$\theta$}
+% Words for aphelion and perihelion
+\pnode(0.3,0){PER}
+\rput[bl](0.3,0.3){\rnode{PERLAB}{perihelion}}
+\ncline[nodesep=3pt]{->}{PERLAB}{PER}
+\pnode(-0.7,0){AP}
+\rput[br](-0.6,0.3){\rnode{APLAB}{aphelion}}
+\ncline[nodesep=3pt]{->}{APLAB}{AP}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+This elliptic orbit is shown in figure \ref{spd fig:pm}.  The \name{aphelion
+distance}, $r_1$, is related to the \name{perihelion distance}, $r_0$, 
+according to
+$$r_1=r_0\frac{1+e}{1-e}$$
+The area of the ellipse is 
+$$A=\pi ab=\frac{\pi L^2}{(1-e^2)^{3/2}}$$
+The rate at which the ellipse's area is swept out is
+$$\der{A}{t}=\frac{h}{2}=\frac{1}{2}r^2\dot{\theta}$$
+The period $T$ of the orbit is thus
+$$T=\frac{A}{\der{A}{t}}=\frac{2\pi L^2}{h(1-e^2)^{3/2}}$$
+so that $T^2$ is
+$$T^2=\frac{4\pi^2 L^4}{h^2(1-e^2)^3}=\frac{4\pi^2a^3L}{h^2}$$
+where $a=L/(1-e^2)$.  But $L=h^2/GM$ so 
+$$\frac{a^3}{T^2}=\frac{GM}{4\pi^2}$$
+which is the same for all planets.  This is the explanation of Kepler's
+third law given by Newton.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Orbit in Terms of Perihelion Parameters}
+
+From the definition of $r_0$,
+$$e=\frac{h^2}{GMr_0}-1$$
+At perihelion, $r=r_0$ and $\dot{r}=0$.  The speed at perihelion $v_0$ is
+$$v_0=r_0\dot{\theta}_{\rm per}$$
+But $h=r^2\dot{\theta}$ so at perihelion,
+$$h=r_0^2\dot{\theta}_{\rm per}=r_0v_0$$
+Therefore the eccentricity can be written
+$$e=\frac{r_0v_0^2}{GM}-1$$
+Define $v_c$ as the perihelion speed necessary to give a circular orbit
+$$v_c=\sqrt{\frac{GM}{r_0}}$$
+so that another way of writing the eccentricity is
+$$e=\left(\frac{v_0}{v_c}\right)^2-1$$
+Then the orbit equation can be written as
+$$r=\frac{r_0\left(v_0/v_c\right)^2}
+{1+\left[\left(v_0/v_c\right)^2-1\right]\cos\theta}$$
+At aphelion, $r=r_1$ and $\theta=\pi$ so that
+$$r_1=\frac{r_0\left(v_0/v_c\right)^2}
+{2-\left(v_0/v_c\right)^2}$$
+
+%============================================================================
+\begin{example}
+\problem
+Find the speed of a satellite executing a circular orbit around the Earth.
+
+\solution
+Assuming that the Earth's gravitational field dominates over the Sun's field,
+the satellite is moving in a central force field with
+$$f(r)=-\frac{GM_em}{r^2}$$
+where $M_e$ is the mass of the Earth.
+
+The critical speed for a circular orbit at $r=r_0$ is
+$$v_c=\sqrt{\frac{GM_e}{r_0}}$$
+Note that $g=GM_e/R_e^2$ where $R_e$ is the Earth's radius so this
+critical velocity can also be written
+$$v_c=\sqrt{\frac{gR_e^2}{r_0}}$$
+For a satellite close to the Earth, $r_0\approx R_e$ so
+$$v_c\approx\sqrt{gR_e}=7920\ \rm ms^{-1}$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+\problem
+Calculate the escape velocity at perihelion from the solar system.
+
+\solution
+When $e=1$, the orbit is open and so the orbiting body may escape.  Since
+$e=\left(v_0/v_c\right)^2-1$, $e=1$ when $v_0=\sqrt{2}v_c$. 
+Therefore the escape velocity is
+$$v_c=\sqrt{\frac{2gR_e^2}{r_0}}$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+\problem
+A satellite in a circular orbit $r_0$ fires its rocket to increase its speed
+suddenly by a factor of $\alpha$.   Calculate the new apogee distance.
+
+\solution
+The old speed was
+$$v_c=\sqrt{\frac{GM_e}{r_0}}$$
+The new speed 
+$$v_0=(1+\alpha)v_c$$
+is the perihelion speed since the satellite will immediately move to
+increase $r$.  The new orbit is
+$$r=\frac{r_0\left(v_0/v_c\right)^2}
+{1+\left[\left(v_0/v_c\right)^2-1\right]\cos\theta}
+=\frac{r_0(1+\alpha)^2}{1+\left[(1+\alpha)^2-1\right]\cos\theta}$$
+The apogee distance is
+$$r=\frac{r_0(1+\alpha)^2}{2-(1+\alpha)^2}$$
+
+Note that when $\alpha=0.15$, $r_1=1.95 r_0$.  When
+$\alpha=\sqrt{2}-1\approx 0.4$, $r_1=\infty$ and the satellite escapes.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inverse Cubic Attraction}
+
+
+In general, the equation of orbital motion is
+$$\ndbd{\theta}{2}\left(\frac{1}{r}\right)+\frac{1}{r}=-\frac{r^2f(r)}{mh^2}$$
+When the attraction follows an inverse cubic law, 
+$$f(r)=-\frac{k}{r^3}$$
+the orbital motion with inverse cubic attraction is found by solving
+$$\ndbd{\theta}{2}\left(\frac{1}{r}\right)+\frac{1}{r}
+=\frac{k}{mh^2}\frac{1}{r}$$
+which may be written as
+$$\ndbd{\theta}{2}\left(\frac{1}{r}\right)
+-\left(\frac{k}{mh^2}-1\right)\left(\frac{1}{r}\right)=0$$
+When $k/mh^2>1$, the solution is
+$$\frac{1}{r}=Ae^{-\alpha\theta}+Be^{\alpha\theta}$$
+where 
+$$\alpha=\sqrt{\frac{k}{mh^2}-1}$$
+and $A$ and $B$ are determined by the initial conditions.
+If $B>0$, $1/r\to Be^{\alpha\theta}\to\infty$ and the satellite
+follows a path that spirals into the planet.
+If $B<0$, $1/r$ will vanish (which means that $r\to\infty$) at some
+finite value of $\theta$.
+If $B=0$, $1/r=Ae^{-\alpha\theta}$ so $r\to\infty$ and the satellite
+escapes from the planet.
+
+When $k/mh^2=1$, the solution is
+$$\frac{1}{r}=A+B\theta$$
+If $B>0$, $1/r\to\infty$ as $\theta$ increases, so the satellite is
+captured in a decaying spiralling orbit.
+If $B<0$, $1/r\to 0$ as $\theta$ tends to some finite
+$\theta_{\infty}$ and the satellite escapes.  If $B=0$, $1/r=A$ and
+the satellite is in a closed circular orbit.
+
+When $k/mh^2<1$, the solution is
+$$\frac{1}{r}=A\cos\alpha\theta+B\sin\alpha\theta
+=C\cos\alpha(\theta-\theta_0)$$
+where $\alpha=\sqrt{1-k/mh^2}<1$, $C=\sqrt{A^2+B^2}$ and
+$\tan\alpha\theta_0=B/A$.  Since $1/r\to0$ as
+$\theta\to\theta_0+\pi/2\alpha$, the satellite escapes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constrained Motion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Frictionless Constrained Motion}
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows a bead moving on a smooth wire.  There is no friction, 
+so the only forces on the bead are gravity $mg$ and the reaction $R$.}
+\label{spd fig:bsw}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.1,-0.1)(1.3,0.8)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve,arrows=->]{0.3}{0.45}%
+{1 1 x x mul sub sqrt sub}
+\uput[ul](0.45,0.11){$s$}
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0.25}{0.9}%
+{1 1 x x mul sub sqrt sub}
+% Now the axes and their labels
+\psline{->}(0,0)(1.2,0)
+\psline{->}(0,0)(0,0.6)
+\uput[r](1.2,0){$x$}
+\uput[u](0,0.6){$y$}
+\psline[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0.414,0)(0.707,0.293)
+\psarc{->}(0.414,0){0.2}{0}{45}
+\uput[r](0.6,0.05){$\psi$}
+\rput[B]{45}(0.707,0.293){
+	\qdisk(0,0){3pt}
+	\psline[linecolor=black]{->}(0,0)(0.2,0) 
+	\uput[d](0.2,0){\rput[t]{*0}{$\Tvect$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.2) 
+	\uput[u](0,0.2){\rput[b]{*0}{$\Nvect$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.15) 
+	\uput[l](0,0.15){\rput[r]{*0}{$R$}}
+}
+% The weight
+\pcline{->}(0.707,0.293)(0.707,0.1)
+\Aput{$mg$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+Suppose a bead of mass $m$ slides smoothly on a wire whose shape is given by
+the function $\vect{r}(s)$.  From section \ref{vf sec:2D ic}, the bead's 
+velocity and acceleration in intrinsic coordinates are
+$$\dot{\vect{r}}=\dot{s}\Tvect$$
+$$\ddot{\vect{r}}=\ddot{s}\Tvect+\dot{s}\dot{\psi}\Nvect$$
+The intrinsic coordinates are illustrated in figure \ref{spd fig:bsw}.
+
+For a smooth wire, the only force the wire can exert on the bead is a 
+\name{reaction} that is \name{normal}, $R\Nvect$ ($R$ can be either
+positive or negative).
+
+The only other force is gravity, giving the total force
+$$\vect{F}=-mg\jvect+R\Nvect$$
+From Newton's second law, the equation of motion is
+$$m\ddot{\vect{r}}=-mg\jvect+R\Nvect$$
+The tangential component is
+$$m\ddot{s}=-mg\Tvect\cdot\jvect$$
+and the normal component is
+$$m\dot{s}\dot{\psi}=-mg\Nvect\cdot\jvect+R$$
+Since $\Tvect\cdot\jvect=\sin\psi$ and $\Nvect\cdot\jvect=\cos\psi$,
+$$\ddot{s}=-g\sin\psi$$
+and
+$$\dot{s}\dot{\psi}=-g\cos\psi+\frac{R}{m}$$
+
+Suppose the curve can be specified in terms of $\psi=\psi(s)$.  Then
+$$\dot{\psi}=\der{\psi}{s}\dot{s}$$
+where $\der{\psi}{s}$ is a known function of $s$.  Substituting this into
+the normal equation of motion gives
+$$R=m\left[\dot{s}^2\der{\psi}{s}+g\cos\psi\right]$$
+Therefore, once $\dot{s}$ is known as a function of $s$, $R(s)$ is known at
+any point $s$ on the wire.  The tangential component can then be written
+$$\ddot{s}=\frac{1}{2}\dbd{s}\left(\dot{s}^2\right)=-g\sin\psi$$
+Since $\psi(s)$ is specified, integrate the tangential equation with respect
+to $s$ to obtain
+$$\dot{s}^2=-2g\int_0^s\sin\psi(s)\,ds +\left.\dot{s}^2\right|_{s=0}$$
+Once $\dot{s}(s)$ is known, we can integrate again to obtain $s(t)$.
+
+Note that it may be more convenient to solve with $\psi$ rather than with
+$s$ as the variable.  For example, the tangential equation can be written
+$$\der{\dot{s}^2}{\psi}=\der{(\dot{s}^2)}{s}\der{s}{\psi}=-2g\sin\psi
+\der{s}{\psi}$$
+where $\der{s}{\psi}$ is a known function of $\psi$.
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows a bead moving on a straight wire at an angle $\alpha$ to
+the horizontal.  The distance $s$ is measured from the origin.}
+\label{spd fig:bstw}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.25,-0.25)(1,1.1)
+% First the curve, so the axes show through
+\psline[linecolor=gray,linewidth=2pt]{-}(-0.1,-0.1)(0.8,0.8)
+% Now the axes and their labels
+\psline{->}(-0.1,0)(0.9,0)
+\psline{->}(0,-0.1)(0,0.9)
+\uput[r](0.9,0){$x$}
+\uput[u](0,0.9){$y$}
+\psarc{->}(0,0){0.2}{0}{45}
+\uput[r](0.2,0.1){$\alpha$}
+\rput[B]{45}(0.6,0.6){
+	\qdisk(0,0){3pt}
+	\pcline[linecolor=black]{->}(0,0)(0,0.2) 
+	\uput[u](0,0.2){\rput[b]{*0}{$R$}}
+}
+% The weight
+\psline{->}(0.6,0.6)(0.6,0.4)
+\uput[d](0.6,0.4){$mg$}
+% The label for s
+\psline[linecolor=gray,linewidth=2pt]{->}(0.2,0.2)(0.4,0.4)
+\uput[ul](0.4,0.4){$s$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+Consider a wire at an angle $\alpha$ to the horizontal with the bead on the
+wire released from rest at a height $H$, as in figure \ref{spd fig:bstw}.  
+Calculate the equation of motion of the bead.
+
+\solution
+In this case, $\psi=\alpha$ and
+$$\der{\dot{s}^2}{s}=-2g\sin\alpha$$
+Integrate to show that
+$$\dot{s}^2=-2gs\sin\alpha+C$$
+The bead is released from a height $H$ so when $t=0$
+$$s=\frac{H}{\sin\alpha}$$
+and
+$$\dot{s}=0$$
+Therefore $C=2gH$ and
+$$\dot{s}^2=2g\left(H-s\sin\alpha\right)$$
+and the normal equation is
+$$R=m\left(\dot{s}^2\der{\psi}{s}+g\cos\psi\right)=mg\cos\alpha$$
+because $\psi$ is independent of $s$.
+
+Taking the square root of the expression for $\dot{s}^2$ gives
+$$\dot{s}=-\sqrt{2g(H-s\sin\alpha)}$$
+where the negative root has been selected because the motion is in the
+direction of $s$ decreasing.  This is a separable equation
+$$\frac{ds}{\sqrt{H-s\sin\alpha}}=-\sqrt{2g}\,dt$$
+Integrating gives
+$$\frac{-2\sqrt{H-s\sin\alpha}}{\sin\alpha}=-\sqrt{2g}t+C$$
+At $t=0$, $s=H/\sin\alpha$ so $C=0$ and
+$$H-s\sin\alpha=\frac{gt^2}{2}\sin^2\alpha$$
+which can be rearranged to give
+$$s=\frac{H}{\sin\alpha}-\frac{1}{2}gt^2\sin\alpha$$
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{For the particle sliding down the sphere in problem
+\protect\ref{spd exam:psds}, place the top of the sphere at the origin.}
+\label{spd fig:psds}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.25,-1.1)(1.2,0.35)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0}{1}{1 x x mul sub 
+sqrt 1 sub}
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve,arrows=->]{0}{0.25}{1 x x mul sub 
+sqrt 1 sub}
+% Now the axes and their labels
+\psline{->}(-0.1,0)(1,0)
+\psline{->}(0,-1)(0,0.1)
+\uput[r](1,0){$x$}
+\uput[u](0,0.1){$y$}
+% Psi
+\psline[linestyle=dashed]{-}(0.414,0)(0.707,-0.293)
+\psarc{->}(0.414,0){0.08}{0}{315}
+\uput[u](0.414,0.08){$\psi$}
+% Phi
+\pcline[linestyle=dashed]{-}(0,-1)(0.707,-0.293)
+\Aput{$a$}
+\psarcn{->}(0,-1){0.2}{90}{45}
+\uput[u](0.07,-0.8){$\phi$}
+% Forces at the particle
+\rput[B]{-45}(0.707,-0.293){
+	\qdisk(0,0){3pt}
+	\psline[linecolor=black]{->}(0,0)(0,0.2) 
+	\rput[b]{*0}(0,0.21){$R$}
+	\psline[linecolor=black]{->}(0,0)(0.2,0) 
+	\rput[l]{*0}(0.21,0){$\Tvect$}
+}
+% The weight
+\psline{->}(0.707,-0.293)(0.707,-0.45)
+\uput[d](0.707,-0.45){$mg$}
+% The label for s
+\uput[d](0.25,-0.05){$s$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\label{spd exam:psds}
+
+\problem 
+A particle slides down the surface of a sphere of radius $a$.  Initially,
+the particle is at the top of the sphere and is moving so slowly that it is
+nearly at rest.  When does the particle leave the sphere?
+
+\solution
+This is illustrated in figure \ref{spd fig:psds}, from which it can be 
+seen that
+$$\psi=2\pi-\phi$$
+The tangential equation of motion is 
+$$\dbd{s}(\dot{s}^2)=-2g\sin\psi=2g\sin\phi$$
+The normal equation of motion is
+$$\dot{s}\dot{\psi}=-g\cos\psi+\frac{R}{m}$$
+which can be written in terms of $\phi$ as
+$$\dot{s}\dot{\phi}=g\cos\phi-\frac{R}{m}$$
+
+The equation of the surface is
+$$s=a\phi$$
+where $s$ is measured from the top.  This shows that
+$$\dot{\phi}=\frac{\dot{s}}{a}$$
+and 
+$$R=m\left(g\cos\phi-\frac{\dot{s}^2}{a}\right)$$
+The tangential equation becomes
+$$\dbd{s}(\dot{s}^2)=2g\sin\phi=2g\sin\frac{s}{a}$$
+Integrating gives
+$$\dot{s}^2=-2ag\cos\frac{s}{a}+C$$
+But when $t=0$, $s=0$ and $\dot{s}=0$ so that $C=2ag$.  Therefore
+$$\dot{s}^2=2ag\left(1-\cos\frac{s}{a}\right)=2ag\left(1-\cos\phi\right)$$
+Substituting this into the equation for the reaction $R$ shows that
+$$R=m\left(g\cos\phi-\frac{2ag(1-\cos\phi)}{a}\right)=mg(3\cos\phi-2)$$
+
+From this, the reaction is zero when 
+$$R=mg(3\cos\phi-2)=0$$
+which occurs when
+$$\cos\phi=\frac{2}{3}$$
+which is point at which the particle leaves the sphere.
+
+Note that in problems like this, there is nothing to sustain negative
+reactions, unlike the bead on the wire problem.
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This diagram shows a bead on a parabolic wire with equation
+$y=-x^2/2L$.  It has been drawn upside down so that gravity points upwards.}
+\label{spd fig:bopw}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.1,-0.1)(1.3,1.3)
+% Plot the curve twice, one with an arrow so the direction of s is shown
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve,arrows=->]{0}{0.4}{x x mul}
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0}{1}{x x mul}
+\uput[ul](0.4,0.16){$s$}
+% Now the axes and their labels
+\psline{->}(0,0)(1.1,0)
+\psline{->}(0,0)(0,1.1)
+\uput[r](1.1,0){$x$}
+\uput[u](0,1.1){$y$}
+% The vectors at the point (x,y)
+\psline[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0.3536,0)(0.707,0.5)
+\psarc{->}(0.3536,0){0.2}{0}{54.7}
+\uput[r](0.53,0.05){$\psi$}
+\rput[B]{54.7}(0.707,0.5){
+	\qdisk(0,0){3pt}
+	\psline[linecolor=black]{->}(0,0)(0.2,0) 
+	\uput[d](0.2,0){\rput[t]{*0}{$\Tvect$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.2) 
+	\uput[u](0,0.2){\rput[b]{*0}{$\Nvect$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.15) 
+	\uput[l](0,0.15){\rput[r]{*0}{$R$}}
+}
+% The weight
+\psline{->}(0.707,0.5)(0.707,0.7)
+\uput[u](0.707,0.7){$mg$}
+\uput[r](0.9,0.81){$y=\ds\frac{x^2}{2L}$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\label{spd ex:bopw}
+\problem
+Find the motion of a bead under gravity starting with speed $u$ at the
+origin, threaded on a frictionless wire that has been bent into a
+parabolic shape
+$$y=-\frac{x^2}{2L}$$
+
+\solution
+This is illustrated upside down (so gravity points upwards) in figure
+\ref{spd fig:bopw}.  From this, the tangential equation of motion is
+$$m\ddot{s}=mg\sin\psi$$
+and the normal equation is
+$$m\dot{s}\der{\psi}{s}=mg\cos\psi+R$$
+
+To find the equation of the  wire in intrinsic coordinates, use
+$$\der{s}{x}=\sqrt{1+\left(\der{y}{x}\right)^2}$$
+where the positive square root has been chosen as $s$ increases with $x$.
+
+Since $y=x^2/2L$ in the inverted diagram, 
+$$\der{y}{x}=\frac{x}{L}=\tan\psi$$
+Therefore
+$$\der{x}{\psi}=\frac{L}{\cos^2\psi}$$
+and
+$$\der{s}{\psi}=\der{s}{x}\der{x}{\psi}=\sqrt{1+tan^2\psi}
+\frac{L}{\cos^2\psi}=\frac{L}{\cos^3\psi}$$
+The tangential equation of motion can be written as
+$$\der{\dot{s}^2}{\psi}=\der{\dot{s}^2}{s}\der{s}{\psi}=
+2\ddot{s}\der{s}{\psi}=2Lg\frac{\sin\psi}{\cos^3\psi}$$
+Integrating gives
+$$\dot{s}^2=2gL\int^{\psi}_0\frac{sin\psi}{\cos^3\psi}\,d\psi
++\left.\dot{s}^2\right|_{\psi=0}
+=\left.\frac{gL}{\cos^2\psi}\right|_0^{\psi}+u^2$$
+Therefore
+$$\dot{s}^2=gL\left[\frac{1}{\cos^2\psi}-1\right]+u^2$$
+Now 
+$$\frac{1}{\cos^2\psi}-1=\tan^2\psi=\frac{x^2}{L^2}$$
+so
+$$\dot{s}^2=\frac{g}{L}x^2+u^2$$
+
+From the normal equation of motion, 
+\begin{eqnarray*}
+R&=&m\dot{s}^2\der{\psi}{s}-mg\cos\psi \\
+&=&m\left[gL\left(\frac{1}{\cos^2\psi}-1\right)+u^2\right]
+\frac{\cos^3\psi}{L}-mg\cos\psi \\
+&=&m(u^2-gL)\cos^3\psi
+\end{eqnarray*}
+Therefore the reaction is
+$$R=\frac{m(u^2-gL)}{\left(1+x^2/L^2\right)^{3/2}}$$
+Note that the reaction is positive for $u>\sqrt{gL}$ and negative for
+$u<\sqrt{gL}$.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Friction}
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The three forces on a stationary mass on a rough surface are the
+reaction $R$, an applied force $f_{\rm app}$ and friction $F$.  The 
+direction of the frictional force $F$ opposes the motion that
+would occur if friction were absent.}
+\label{spd fig:fr I}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.3,-0.1)(1.3,0.9)
+% First the ground
+\psline[linecolor=black,linewidth=2pt]{-}(0,0.03)(1,0.03)
+% The box
+\pspolygon[fillstyle=solid,linewidth=2pt,fillcolor=lightgray]%
+(0.3,0.05)(0.7,0.05)(0.7,0.45)(0.3,0.45)
+% The reaction
+\psline{->}(0.5,0.07)(0.5,0.65)\uput[u](0.5,0.65){$R$}
+% Friction
+\psline{->}(0.3,0.05)(-0.1,0.05)\uput[l](-0.1,0.05){$F$}
+% Applied force
+\psline{<-}(0.3,0.35)(-0.1,0.35)\uput[l](-0.1,0.35){$f_{\rm app}$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+\name{Friction} is a force that acts to oppose the relative motion of rough
+surfaces.  As shown in figure \ref{spd fig:fr I}, $f_{\rm app}$ is the force
+applied to the body, $R$ is the normal reaction force of the surface on the
+body and $F$ is the frictional force on the body acting along the surface in
+a direction which opposes the motion that would occur if friction were
+absent.
+
+\name{Static friction} occurs provided there is no motion, so that
+$$F=f_{\rm app}$$
+As $f_{\rm app}$ is increased, $F$ increases.  Experiments show that there
+is a critical $f_{\rm app}$ at which the body starts to move, which is
+proportional to the reaction $R$.  The friction force at this point can be
+written
+$$F=\mu_sR$$
+where $\mu_s$ is the coefficient of limiting static friction.
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The three forces on a stationary mass on a rough plane inclined at
+an angle $\alpha$ are the reaction $R$, friction $F$ and weight $mg$.}
+\label{spd fig:moi}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.3,-0.1)(1.3,0.8)
+% The box
+\rput[B]{30}(0.45,0.3773){
+	\pspolygon[fillstyle=solid,fillcolor=lightgray]%
+	(-0.15,-0.1)(0.15,-0.1)(0.15,0.1)(-0.15,0.1)
+	\qdisk(0,0){3pt}
+	\psline[linecolor=black]{->}(0,0)(0.3,0) 
+	\uput[r](0.3,0){\rput[l]{*0}{$F$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.3) 
+	\uput[u](0,0.3){\rput[b]{*0}{$R$}}
+}
+% First the ground
+\SpecialCoor
+\psline[linecolor=black,linewidth=2pt]{-}(1.1;30)(0;30)(1;0)
+% The angle alpha
+\psarc{->}(0,0){0.2}{0}{30}
+\uput[r](0.2,0.05){$\alpha$}
+% The weight vector
+\psline{->}(0.45,0.3773)(0.45,0.1773)
+\uput[d](0.45,0.1773){$mg$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+For a stationary mass on an inclined plane, such as in figure 
+\ref{spd fig:moi}, the forces must add to zero.  The tangential force
+component is
+$$F-mg\sin\alpha=0$$
+and the normal force component is
+$$R-mg\cos\alpha=0$$
+At a critical angle $\alpha_c$ when the mass is just about to slip, we know
+that
+$$F=\mu_s R$$
+Therefore, eliminating $R$ from the force equations at this point,
+$$\mu_s=\tan\alpha_c$$
+
+So if $\alpha<\alpha_c$, $F<\mu_sR$ and there is no motion.  If $\alpha\geq
+\alpha_c$, the mass slides down the incline.
+\end{example}
+%============================================================================
+
+Once motion has started, the frictional force still acts to oppose the
+motion.  Experimentally, it is observed that
+$$F=\mu_k R$$
+for low speeds, where $\mu_k$ is the coefficient of \name{kinetic friction}.
+
+Note that $\mu_k\leq\mu_s$.  Friction in problems involving rolling is
+slightly different; this is dealt with later.
+
+The kinetic friction acts to oppose the motion, so it can be described by
+$$\vect{F}=-\mu_k\left|R\right|\hat{\dot{\vect{r}}}$$
+where $\hat{\dot{\vect{r}}}$ is the unit vector in the direction of motion.
+
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows one quarter of a rotating floor-polisher, which is
+rotating with angular speed $\omega$ and moving with velocity $v$ in the 
+$y$ direction.  The elemental unit of area $dA$ extends from $r$ to $r+dr$ 
+and from $\theta$ to $\theta+d\theta$.}
+\label{spd fig:fp}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.1,-0.1)(1.3,1.3)
+\SpecialCoor
+% The circular brush
+\psarc[linecolor=gray,linewidth=2pt,plotstyle=curve]{-}(0,0){1}{-5}{95}
+\uput[dr](1,0){$a$}
+% Now the axes and their labels
+\psline{->}(-0.1,0)(1.1,0)
+\psline{->}(0,-0.1)(0,1.1)
+\uput[r](1.1,0){$x$}
+\uput[u](0,1.1){$y$}
+% Dashed lines giving the elemental area
+\psarc[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0,0){0.45}{0}{90}
+\psarc[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0,0){0.55}{0}{90}
+\psline[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0,0)(0.55;40)
+\psline[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0,0)(0.55;50)
+\uput[dr](1,0){$a$}
+\uput[dr](0.55,0){$r+dr$}
+\uput[dl](0.45,0){$\vphantom{d}r$}
+\psarc{->}(0,0){0.2}{0}{40}
+\uput[r](0.18,0.05){$\theta$}
+\psarc{<-}(0,0){0.2}{50}{70}
+\uput[ur](0.2;45){$d\theta$}
+% The elemental area
+\psarc[linecolor=black,linewidth=2pt]{-}(0,0){0.45}{40}{50}
+\psarc[linecolor=black,linewidth=2pt]{-}(0,0){0.55}{40}{50}
+\psline[linecolor=black,linewidth=2pt]{-}(0.45;40)(0.55;40)
+\psline[linecolor=black,linewidth=2pt]{-}(0.45;50)(0.55;50)
+% The vectors from the elemental area
+\psarc{->}(0,0){0.5}{45}{65}
+\psline{->}(0.3536,0.3536)(0.3536,0.55)
+\uput[ul](0.5;65){$\omega r$}
+\uput[u](0.3536,0.55){$v$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+A floor polisher of weight $w$ has a circular brush of radius $a$ which is
+rotating with angular speed $\omega$ and slides over a floor with speed $v$. 
+Calculate the frictional force, where $\mu$ is the coefficient of sliding
+friction.  
+
+\solution
+Consider the element of the brush between $r$ to $r+dr$ and $\theta$ to
+$\theta+d\theta$, as shown in figure \ref{spd fig:fp}.  The area of this 
+element is 
+$$dA=r\,dr\,d\theta$$
+Assume that the weight is distributed uniformly over all area elements, so
+that the reaction force on this element is
+$$R_e=\frac{w}{\pi a^2}r\,dr\,d\theta$$
+The velocity of the element is
+$$\dot{\vect{r}}=v\jvect+\omega r (-\sin\theta\ivect+\cos\theta\jvect)$$
+and the unit vector in this direction is
+$$\hat{\dot{\vect{r}}}=\frac{v\jvect+\omega r 
+(-\sin\theta\ivect+\cos\theta\jvect)}
+{\sqrt{v^2+2\omega rv\cos\theta+\omega^2r^2}}$$
+The frictional force on the element is
+$$-\frac{\mu w r\,dr\,d\theta}{\pi a^2}\hat{\dot{\vect{r}}}$$
+The frictional force on the whole annulus from $r$ to $r+dr$ is found by
+integrating the frictional force on the element for $\theta$ from $0$ to
+$2\pi$
+$$-\int_0^{2\pi}\hat{\dot{\vect{r}}}\,d\theta\,\frac{\mu wr\,dr}{\pi a^2}$$
+
+This is difficult to solve exactly, so suppose that $\omega r\gg v$.  Then
+$$\frac{1}{\sqrt{v^2+2\omega rv\cos\theta+\omega^2r^2}}\approx
+\frac{1}{\omega r}\left[1-\frac{v\cos\theta}{\omega r}\right]$$
+So the frictional force on the annulus is
+$$-\jvect\frac{\mu wr\,dr}{a^2}\frac{v}{\omega r}$$
+and the frictional force on the whole brush is
+$$-\jvect\frac{\mu wv}{a\omega}$$
+
+If the brush is not rotating, $\omega=0$, and the frictional force must be
+$$\vect{F}_0=-\jvect\mu w$$
+Therefore, when the brush is rotating, the friction can be written
+$$\left|\vect{F}\right|=\left|\vect{F}_0\right|\frac{v}{aw}$$
+which tends to zero as $\omega\to\infty$ and the polisher becomes
+essentially frictionless as the rotational speed is increased.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Constrained Motion with Friction}
+
+The equation of motion in intrinsic coordinates with friction is
+$$m(\ddot{s}\Tvect+\dot{s}\dot{\psi}\Nvect)=m\vect{g}+R\Nvect-F\Tvect$$
+where the friction term is
+$$F=\mu\left|R\right|\frac{\dot{s}}{\left|\dot{s}\right|}$$
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows a bead on a rough parabolic wire, so friction $F$
+opposes the direction of motion $s$.  As in figure \protect\ref{spd
+fig:bopw}, the diagram has been drawn upside down so that gravity points 
+upwards.}
+\label{spd fig:bopwf}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.1,-0.1)(1.3,1.3)
+% Plot the curve twice, one with an arrow so the direction of s is shown
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve,arrows=->]{0}{0.4}{x x mul}
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0}{1}{x x mul}
+\uput[ul](0.4,0.16){$s$}
+% Now the axes and their labels
+\psline{->}(0,0)(1.1,0)
+\psline{->}(0,0)(0,1.1)
+\uput[r](1.1,0){$x$}
+\uput[u](0,1.1){$y$}
+% The vectors at the point (x,y)
+\psline[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0.3536,0)(0.707,0.5)
+\psarc{->}(0.3536,0){0.2}{0}{54.7}
+\uput[r](0.53,0.1){$\psi$}
+\rput[B]{54.7}(0.707,0.5){
+	\qdisk(0,0){3pt}
+	\psline[linecolor=black]{->}(0,0)(0.2,0) 
+	\uput[d](0.2,0){\rput[t]{*0}{$\Tvect$}}
+	\psline[linecolor=black]{->}(0,0)(-0.2,0) 
+	\uput[d](-0.2,0){\rput[t]{*0}{$F$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.2) 
+	\uput[u](0,0.2){\rput[b]{*0}{$\Nvect$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.15) 
+	\uput[l](0,0.15){\rput[r]{*0}{$R$}}
+}
+% The weight
+\psline{->}(0.707,0.5)(0.707,0.7)
+\uput[u](0.707,0.7){$mg$}
+\uput[r](0.9,0.81){$y=\ds\frac{x^2}{2L}$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+Consider the bead on the parabolic wire from example \ref{spd ex:bopw} where
+the wire is no longer smooth, so friction must be included.  This is
+illustrated in figure \ref{spd fig:bopwf}.  Calculate the bead's equation of
+motion.
+
+\solution
+Recall from example \ref{spd ex:bopw} that
+$$\der{s}{\psi}=\frac{L}{\cos^3\psi}$$
+and 
+$$1+\left(\frac{x}{L}\right)^2=\frac{1}{\cos^2\psi}$$
+
+Then tangential equation of motion is
+$$m\ddot{s}=mg\sin\psi-F$$
+and the normal equation of motion is
+$$m\dot{s}\dot{\psi}=mg\cos\psi+R$$
+
+Assume that the initial speed is sufficiently small that $R<0$ at the start. 
+We can then write
+$$F=-\mu R=-\mu(m\dot{s}\dot{\psi}-mg\cos\psi)$$
+Therefore
+$$\frac{1}{2}\dbd{s}(\dot{s}^2)=g\sin\psi+\mu(\dot{s}\dot{\psi}-g\cos\psi)$$
+so that
+$$\dbd{s}(\dot{s}^2)-2\mu\der{\psi}{s}(\dot{s}^2)=2g(\sin\psi-\mu\cos\psi)$$
+This is more conveniently expressed with respect to $\psi$ rather than $s$. 
+So multiply by $\der{s}{\psi}$ to give
+$$\dbd{\psi}(\dot{s}^2)-2\mu(\dot{s}^2)=2g\der{s}{\psi}
+(\sin\psi-\mu\cos\psi)$$
+The integrating factor is
+$$I(\psi)=e^{-2\mu\psi}$$ 
+so that
+$$\dbd{\psi}\left(e^{-2\mu\psi}\dot{s}^2\right)=
+\frac{2gLe^{-2\mu\psi}}{\cos^3\psi}(\sin\psi-\mu\cos\psi)$$
+which gives
+$$\dot{s}^2e^{-2\mu\psi}=u^2+2gL\int_0^{\psi}
+\frac{e^{-2\mu\psi}}{\cos^3\psi}(\sin\psi-\mu\cos\psi)\,d\psi$$
+Therefore $\dot{s}^2$ is 
+$$\dot{s}^2=u^2e^{2\mu\psi}+2gLe^{2\mu\psi}\int_0^{\psi}
+\frac{e^{-2\mu\psi}}{\cos^3\psi}(\sin\psi-\mu\cos\psi)\,d\psi$$
+which is substantially harder to solve than when there was no friction.
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{A light bead on a rough wire which is rotating in a horizontal
+plane.}
+\label{spd fig:lbrrw}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.25,-0.25)(1,1.1)
+% First the curve, so the axes show through
+\psline[linecolor=gray,linewidth=2pt]{-}(-0.1,-0.1)(0.8,0.8)
+% Now the axes and their labels
+\psline{->}(-0.1,0)(0.9,0)
+\psline{->}(0,-0.1)(0,0.9)
+\uput[r](0.9,0){$x$}
+\uput[u](0,0.9){$y$}
+\psarc{->}(0,0){0.2}{0}{45}
+\uput[r](0.2,0.1){$\theta$}
+\rput[B]{45}(0.6,0.6){
+	\qdisk(0,0){3pt}
+	\psline[linecolor=black]{->}(0,0)(0.2,0) 
+	\uput[d](0.2,0){\rput[t]{*0}{$\rvect$}}
+	\psline[linecolor=black]{->}(0,0)(-0.2,0) 
+	\uput[d](-0.2,0){\rput[t]{*0}{$F$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.2) 
+	\uput[u](0,0.2){\rput[b]{*0}{$\tvect$}}
+	\psline[linecolor=black]{->}(0,0)(0,0.15) 
+	\uput[l](0,0.15){\rput[r]{*0}{$R$}}
+}
+\psarc{->}(0,0){1.2}{35}{55}
+\uput[r](0.9,0.9){$\dot{\theta}=\omega$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+Consider a light bead on a rough wire that is rotating horizontally, as
+shown in figure \ref{spd fig:lbrrw}.  Since the bead is light, its weight 
+can be ignored.  Calculate the bead's position on the wire, $r(t)$.
+
+\solution
+The equations of motion in polar coordinates are
+$$m(\ddot{r}-r\dot{\theta}^2)=-F$$
+and
+$$m(r\ddot{\theta}+2\dot{r}\dot{\theta})=R$$
+Since the wire is rotating with angular speed $\omega$ and the bead is
+constained to the wire, 
+$$\dot{\theta}=\omega$$
+and
+$$\ddot{\theta}=0$$
+Thus
+$$m(\ddot{r}-r\omega^2)=-F$$
+and
+$$m(2\dot{r}\omega)=R$$
+
+To find the critical rotation rate for the bead to move, at the point of
+incipient motion
+$$F=\mu_sR$$ 
+with $\dot{r}=\ddot{r}=0$.  Then from the equations of motion, initially
+$R=0$ and therefore $F=0$ initially.  
+
+For any $\omega$, the initial acceleration is
+$$\ddot{r}=r\omega^2$$
+Friction only starts to act once $\dot{r}$, and hence $R$, becomes non-zero.
+Therefore
+$$\omega_{\rm crit}=0$$
+although this has to be modified if the weight of the bead is included.
+
+
+When $\omega\neq 0$ and the bead is sliding, the transverse equation shows 
+that
+$$F=\mu_kR=2m\omega\mu_k\dot{r}$$
+The radial equation is
+$$\ddot{r}-r\omega^2=-\frac{F}{m}=-2\omega\mu_k\dot{r}$$
+which is
+$$\ddot{r}+2\omega\mu_k\dot{r}-\omega^2r=0$$
+Try $r=e^{\alpha t}$ in the differential equation to get
+$$\alpha^2+2\omega\mu_k\alpha-\omega^2=0$$
+which can be expressed as
+$$\left(\frac{\alpha}{\omega}\right)^2+2\mu_k\left(\frac{\alpha}{\omega}
+\right)-1=0$$
+Thus
+$$\alpha=\omega\left(\mu_k\pm\sqrt{\mu_k^2+1}\right)$$
+This gives the two solutions
+$$\alpha_1=-\omega\left(\mu_k+\sqrt{\mu_k^2+1}\right)<0$$
+and
+$$\alpha_2=\omega\left(\sqrt{\mu_k^2+1}-\mu_k\right)>0$$
+so 
+$$r(t)=Ae^{\alpha_1t}+Be^{\alpha_2t}$$
+At $t=0$, $r=r_0$ and $\dot{r}=0$ so that
+$$r_0=A+B\qquad\mbox{and}\qquad 0=\alpha_1A+\alpha_2B$$
+Therefore
+$$A=-\frac{\alpha_2}{\alpha_1}\left(\frac{r_0}{1-\alpha_2/\alpha_1}
+\right)>0$$
+and
+$$B=\frac{r_0}{1-\alpha_2/\alpha_1}>0$$
+This gives the solution
+$$r(t)=\frac{r_0}{1-\alpha_2/\alpha_1}\left(
+-\frac{\alpha_2}{\alpha_1}e^{\alpha_1t}+e^{\alpha_2t}
+\right)$$
+\end{example}
+%============================================================================
+

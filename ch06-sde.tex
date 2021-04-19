@@ -1,0 +1,824 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8 Feb-96 SS: Updated with corrections from semester 2, 1995
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+
+\chapter{Systems of Differential Equations}
+\label{sde chp}
+
+
+Systems of differential equations arise when a higher order differential
+equation is written as a set of first order differential equations or when a
+system is modelled as a set of coupled differential equations.
+
+%============================================================================
+\begin{example}
+The second order differential equation 
+$$\ddot{y}=f(t,y,\dot{y})$$
+can be rewritten with $y_1=y$ and $y_2=\dot{y}$ as a set of coupled first
+order \ODEs.
+$$\dot{y}_1=y_2$$
+$$\dot{y}_2=f(t,y_1,y_2)$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}[Volterra-Lotka Systems]
+Volterra-Lotka systems are models of populations.  Let $y_1$ be the number
+of foxes (the predators) and $y_2$ the number of rabbits (the prey).  Then
+one model for the rabbits' and foxes' populations is
+$$\dot{y}_1=-ay_1+by_1y_2$$
+$$\dot{y}_2=cy_2-dy_1y_2$$
+where $a$ sets the rate at which foxes die of starvation, $b$ the fox birth 
+rate in the presence of a food supply, $c$ the rabbit birth rate and $d$ the
+rate of rabbit deaths due to predation.  All $a$, $b$, $c$ and $d$ are
+positive.
+
+In matrix form, the system becomes
+$$\begin{bmatrix}\dot{y}_1 \\\dot{y}_2\end{bmatrix}=
+\begin{bmatrix}-a & by_1 \\ -dy_2 & c \end{bmatrix}
+\begin{bmatrix}y_1 \\y_2\end{bmatrix}$$
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{These coupled springs give the system of coupled differential
+equations in example \protect\ref{sde ex:cs I}.  The two springs have spring
+constants $k_1$ and $k_2$ respectively, and their unstretched lengths are
+$l_1$ and $l_2$.}
+\label{sde fig:cs}
+
+\psset{unit=2.5cm}
+\begin{pspicture}(-1,-0.4)(1,2.2)
+% The line at which they are fixed
+\psline[linecolor=darkgray,linewidth=2pt]{-}(-1,2)(1,2)
+% The springs
+\pnode(0.5,2){mC}
+\cnodeput[fillstyle=solid,fillcolor=lightgray](0.5,1){mA}{$m_1$}
+\cnodeput[fillstyle=solid,fillcolor=lightgray](0.5,0){mB}{$m_2$}
+\nccoil[coilwidth=0.15]{-}{mC}{mA}
+\nccoil[coilwidth=0.15]{-}{mA}{mB}
+% The arrows
+\psline{->}(0,2)(0,1)
+\uput[r](0,1.5){$x_1$}
+\psline{->}(-0.5,2)(-0.5,0)
+\uput[r](-0.5,1){$x_2$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[Coupled Springs I]
+\label{sde ex:cs I}
+
+For the system of coupled springs shown in figure \ref{sde fig:cs}, whose
+unstretched lengths are $l_1$ and $l_2$, and whose spring constants are
+$k_1$ and $k_2$, from Newton's laws
+$$m_1\ddot{x_1}=m_1g-k_1(x_1-l_1)+k_2(x_2-x_1-l_2)$$
+$$m_2\ddot{x_2}=m_2g-k_2(x_2-x_1-l_2)$$
+In matrix form, this is
+$$\begin{bmatrix}\ddot{x}_1 \\\ddot{x}_2\end{bmatrix}=
+\begin{bmatrix} g+\frac{k_1l_1-k_2l_2}{m_1} 	\\
+		  g+\frac{k_2l_2}{m_2}		\end{bmatrix}
+-\begin{bmatrix}	\frac{k_1+k_2}{m_1} & -\frac{k_2}{m_1} 	 \\
+			-\frac{k_2}{m_2} & \frac{k_2}{m_2}	 \end{bmatrix}
+\begin{bmatrix}x_1 \\x_2\end{bmatrix}$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}[Chemical Reaction]
+The following four chemical reactions occur between four chemicals, species 
+1, species 2, $A$ and $B$:
+\begin{enumerate}
+\item $\mbox{species 1}\stackrel{k_1}{\rightarrow}\mbox{products}$
+\item $\mbox{species 1}+A\stackrel{k_2}{\rightarrow}\mbox{species 2}+\mbox{products}$
+\item $\mbox{species 2}\stackrel{k_3}{\rightarrow}\mbox{products}$
+\item $\mbox{species 2}+B\stackrel{k_4}{\rightarrow}\mbox{species 1}+\mbox{products}$
+\end{enumerate}
+Then the concentrations of species 1, $c_1$ and of species 2, $c_2$, follow
+$$\dot{c}_1=-k_1c_1-k_2[A]c_1+k_4[B]c_2$$
+$$\dot{c}_2=-k_3c_2+k_2[A]c_1-k_4[B]c_2$$
+where $[A]$ and $[B]$ are the concentrations of $A$ and $B$.
+
+Suppose that $[A],[B]\gg c_1,c_2$ so that $[A]$ and $[B]$ hardly change
+during the reaction.  Then
+$$K_1=k_2[A]\qquad\mbox{and}\qquad K_2=k_4[B]$$
+can be regarded as constant.  In matrix form
+$$\begin{bmatrix}\dot{c}_1 \\\dot{c}_2\end{bmatrix}=
+-\begin{bmatrix}     k_1+K_1 & -K_2 \\ -K_1 & k_3+K_2 	 \end{bmatrix}
+\begin{bmatrix}c_1 \\c_2\end{bmatrix}$$
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Systems of Linear First Order O.D.E.s}
+
+The general form is
+$$\dot{y}_1=a_{11}y_1+a_{12}y_2+f_1(t)$$
+$$\dot{y}_2=a_{21}y_1+a_{22}y_2+f_2(t)$$
+Expressed as matrices, this is
+$$\begin{bmatrix}\dot{y}_1 \\\dot{y}_2\end{bmatrix}=
+\begin{bmatrix}  a_{11} & a_{12} \\ a_{21} & a_{22} 	\end{bmatrix}
+\begin{bmatrix}   y_1 \\ y_2				\end{bmatrix}
++\begin{bmatrix}  f_1(t) \\ f_2(t)			\end{bmatrix}$$
+or
+$$\vect{\dot{Y}}=\vect{A}\vect{Y}+\vect{F}$$
+We will only consider systems where $\vect{A}$ is a constant matrix
+independent of $t$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Homogeneous Systems}
+
+The homogeneous system is
+$$\vect{\dot{Y}}=\vect{A}\vect{Y}$$
+where
+$$\vect{A}=\begin{bmatrix}  a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}
+\qquad
+\vect{Y}=\begin{bmatrix}   y_1 \\ y_2	\end{bmatrix}$$
+
+%============================================================================
+\begin{example}
+If $a_{12}=a_{21}=0$, these equations decouple
+$$\dot{y}_1=a_{11}y_1$$
+$$\dot{y}_2=a_{22}y_2$$
+with solution
+$$\begin{bmatrix} y_1 \\ y_2 \end{bmatrix}=
+\begin{bmatrix} C_1e^{a_{11}t} \\ C_2e^{a_{22}t} \end{bmatrix}$$
+\end{example}
+%============================================================================
+
+The general solution is found by trying an exponential solution of the form
+$$\vect{Y}(t)=\vect{K}e^{\alpha t}$$
+where $\vect{K}$ and $\alpha$ are to be determined.  Now 
+$$\vect{\dot{Y}}=\alpha\vect{K}e^{\alpha t}$$
+so substituting into the \ODE system gives
+$$\alpha\vect{K}e^{\alpha t}=\vect{A}\vect{K}e^{\alpha t}$$
+Therefore we require
+$$\vect{A}\vect{K}=\alpha\vect{K}$$
+so $\alpha$ is an eigenvalue of $\vect{A}$ and $\vect{K}$ is the
+corresponding eigenvector.
+
+So the general method of solution is
+\begin{enumerate}
+\item Find the two eigenvalues of $\vect{A}$ and their corresponding
+eigenvectors (which are linearly independent if $\alpha_1\neq \alpha_2$).
+\item This gives two linearly independent solutions
+$$\vect{Y}_1=\vect{K}_1e^{\alpha_1t}$$
+$$\vect{Y}_2=\vect{K}_2e^{\alpha_2t}$$
+\item The general solution is then
+$$\vect{Y}=C_1\vect{K}_1e^{\alpha_1t}+C_2\vect{K}_2e^{\alpha_2t}$$
+\end{enumerate}
+
+%============================================================================
+\begin{example}
+To show that the same solution is obtained from a second order \ODE as from
+the corresponding system, let
+$$\dot{y}_1=a_{11}y_1+a_{12}y_2$$
+$$\dot{y}_2=a_{21}y_1+a_{22}y_2$$
+Then differentiate the first and substitute the second 
+$$\ddot{y}_1=a_{11}\dot{y}_1+a_{12}\dot{y}_2
+=a_{11}\dot{y}_1+a_{12}(a_{21}y_1+a_{22}y_2)$$
+Then rearranging and using the first equation to eliminate $y_2$ gives
+$$\ddot{y}_1=a_{11}\dot{y}_1+a_{12}a_{21}y_1+a_{22}(\dot{y}_1-a_{11}y_1)$$
+This is the second order differential equation
+$$\ddot{y}_1-(a_{11}+a_{22})\dot{y}_1+(a_{11}a_{22}-a_{12}a_{21})y_1=0$$
+whose solution is
+$$y_1=C_1e^{\alpha_1t}+C_2e^{\alpha_2t}$$
+where $\alpha_1$ and $\alpha_2$ are the roots of
+$$\alpha^2-(a_{11}+a_{22})\alpha+(a_{11}a_{22}-a_{12}a_{21})=0$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+The system
+$$\dot{y}_1=y_1+4y_2$$
+$$\dot{y}_2=4y_1+y_2$$
+gives
+$$\vect{\dot{Y}}=\begin{bmatrix} 1 & 4 \\ 4 & 1 \end{bmatrix} \vect{Y}$$
+
+The eigenvalues of $\vect{A}$ satisfy
+$$\det \begin{bmatrix} 1-\alpha & 4 \\ 4 & 1-\alpha \end{bmatrix}=0$$
+This gives the quadratic
+$$(1-\alpha)^2-4^2=0$$
+whose roots are $\alpha_1=5$ and $\alpha_2=-3$.
+
+The eigenvectors are found by solving
+$$(\vect{A}-\vect{I}\alpha)\vect{K}=0$$
+
+When $\alpha_1=5$, this gives
+$$\begin{bmatrix} -4 & 4 \\ 4 & -4\end{bmatrix}
+\begin{bmatrix}k_1 \\ k_2 \end{bmatrix}=0$$
+so that $k_1=k_2$ and the first eigenvector is
+$$\vect{K}_1=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$$
+
+When $\alpha_2=-3$, this gives
+$$\begin{bmatrix} 4 & 4 \\ 4 & 4\end{bmatrix}
+\begin{bmatrix}k_1 \\ k_2 \end{bmatrix}=0$$
+so that $k_1=-k_2$ and the second eigenvector is
+$$\vect{K}_2=\begin{bmatrix} 1 \\ -1 \end{bmatrix}$$
+
+Therefore the general solution is
+$$\vect{Y}=C_1\begin{bmatrix} 1 \\ 1 \end{bmatrix}e^{5t}
++C_2\begin{bmatrix} 1 \\ -1 \end{bmatrix}e^{-3t}$$
+The constants $C_1$ and $C_2$ may be determined by the initial conditions on
+$y_1$ and $y_2$.
+\end{example}
+%============================================================================
+
+This can be generalized to $n$ equations.  If $\vect{Y}$ has $n$ elements
+and $\vect{A}$ is $n\times n$, the general solution is
+$$\vect{Y}=C_1\vect{K}_1e^{\alpha_1t}+C_2\vect{K}_2e^{\alpha_2t}+\cdots
++C_n\vect{K}_ne^{\alpha_nt}$$
+where
+$$\vect{A}\vect{K}_i=\alpha_i\vect{K}_i$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Repeated Factors of the Characteristic Polynomial}
+
+When two eigenvalues are equal, so that $\alpha_1=\alpha_2$, then one
+solution is
+$$\vect{Y}_1=\vect{K}_1e^{\alpha_1t}$$
+A second solution can always be found of the form
+$$\vect{Y}_2=\vect{K}_1te^{\alpha_1t}+\vect{P}e^{\alpha_1t}$$
+To see this, differentiate to give
+$$\vect{\dot{Y}}_2=\vect{K}_1e^{\alpha_1t}+\alpha_1\vect{K}_1te^{\alpha_1t}
++\alpha_1\vect{P}e^{\alpha_1t}$$
+and substitute into $\vect{\dot{Y}}=\vect{A}\vect{Y}$, giving
+$$e^{\alpha_1t}(\vect{K}_1+\alpha_1\vect{P}+\alpha_1\vect{K}_1t)
+=e^{\alpha_1t}(\vect{A}\vect{K}_1t+\vect{A}\vect{P})$$
+Equating coefficients of $e^{\alpha_1t}$ and $te^{\alpha_1t}$ shows that
+$$\vect{A}\vect{K}_1=\alpha_1\vect{K}_1$$
+which is just the eigenvalue/eigenvector equation, and
+$$\vect{A}\vect{P}=\alpha_1\vect{P}+\vect{K}_1$$
+which is equivalent to
+$$(\vect{A}-\alpha_1\vect{I})\vect{P}=\vect{K}_1$$
+This equation does not completely determine $\vect{P}$ because the
+determinant of $\vect{A}-\alpha_1\vect{I}$ is zero.
+
+%============================================================================
+\begin{example}
+The system
+$$\vect{\dot{Y}}=\begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix} \vect{Y}$$
+has eigenvalues which satisfy
+$$\det \begin{bmatrix} 1-\alpha & 0 \\ 2 & 1-\alpha \end{bmatrix}=0$$
+which gives the quadratic
+$$(1-\alpha)^2=0$$
+so there is a single repeated eigenvalue $\alpha=1$.
+
+The eigenvector for $\alpha=1$ satisfies
+$$\begin{bmatrix} 0 & 0 \\ 2 & 0\end{bmatrix}
+\begin{bmatrix}k_1 \\ k_2 \end{bmatrix}=0$$
+so that $k_1=0$ and the eigenvector is
+$$\vect{K}_1=\begin{bmatrix} 0 \\ 1 \end{bmatrix}$$
+Thus the first solution is
+$$\vect{Y}_1=\begin{bmatrix} 0 \\ 1 \end{bmatrix}e^t$$
+
+The second solution has the form
+$$\vect{Y}_2=\begin{bmatrix} 0 \\ 1 \end{bmatrix}te^t+\vect{P}e^t$$
+where $\vect{P}$ satisfies
+$$(\vect{A}-\alpha_1\vect{I})\vect{P}=\vect{K}_1$$
+In this case, 
+$$\begin{bmatrix} 0 & 0 \\ 2 & 0\end{bmatrix}
+\begin{bmatrix} p_1 \\ p_2 \end{bmatrix}=
+\begin{bmatrix} 0 \\ 1 \end{bmatrix}$$
+This shows that $p_1=1/2$ but $p_2$ is not determined.  Choosing any
+value of $p_2$, set $p_2=0$ so that the second solution is
+$$\vect{Y}_2=\begin{bmatrix} 0 \\ 1 \end{bmatrix}te^t+
+\begin{bmatrix}\frac{1}{2} \\ 0 \end{bmatrix}e^t$$
+
+Therefore the general solution is
+$$\vect{Y}=C_1\begin{bmatrix} 0 \\ 1 \end{bmatrix}e^t+C_2\left(
+\begin{bmatrix} 0 \\ 1 \end{bmatrix}te^t+
+\begin{bmatrix}\frac{1}{2} \\ 0 \end{bmatrix}e^t\right)$$
+
+Note that choosing another value for $\vect{P}$ would just change the
+constant $C_1$.  Suppose that $\vect{P}$ were
+$$\vect{P}=\begin{bmatrix}\frac{1}{2} \\ a \end{bmatrix}=
+\begin{bmatrix}\frac{1}{2} \\ 0 \end{bmatrix} + a\vect{K}_1$$
+This gives the general solution
+$$\vect{Y}=(C_1+aC_2)\begin{bmatrix} 0 \\ 1 \end{bmatrix}e^t+C_2\left(
+\begin{bmatrix} 0 \\ 1 \end{bmatrix}te^t+
+\begin{bmatrix}\frac{1}{2} \\ 0 \end{bmatrix}e^t\right)$$
+which is the same as before except for the constant $C_1$.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Higher Order Degeneracy}
+
+For $n\geq 3$, we have the possibility of $3$ degenerate eigenvalues.  We
+have already found two solutions
+$$\vect{Y}_1=\vect{K}_1e^{\alpha_1t}$$
+$$\vect{Y}_2=\vect{K}_1te^{\alpha_1t}+\vect{P}e^{\alpha_1t}$$
+where $(\vect{A}-\alpha_1\vect{I})\vect{P}=\vect{K}_1$.
+
+A third linearly independent solution is
+$$\vect{Y}_3=\vect{K}_1\frac{t^2}{2}e^{\alpha_1t}+\vect{P}te^{\alpha_1t}
++\vect{Q}e^{\alpha_1t}$$
+where $(\vect{A}-\alpha_1\vect{I})\vect{Q}=\vect{P}$.
+
+%============================================================================
+\begin{example}
+The system
+$$\vect{\dot{Y}}=\begin{bmatrix}1&1&1\\0&1&1\\0&0&1\end{bmatrix}\vect{Y}$$
+has a single eigenvalue $\alpha=1$ of multiplicity three.
+
+The eigenvector $\vect{K}_1$ satisfies
+$$\begin{bmatrix}0&1&1\\0&0&1\\0&0&0\end{bmatrix}
+\begin{bmatrix}k_1\\k_2\\k_3\end{bmatrix}=\begin{bmatrix}0\\0\\0
+\end{bmatrix}$$
+so that
+$$\vect{K}_1=\begin{bmatrix}1\\0\\0\end{bmatrix}$$
+
+The vector $\vect{P}$ satisfies
+$$\begin{bmatrix}0&1&1\\0&0&1\\0&0&0\end{bmatrix}
+\begin{bmatrix}p_1\\p_2\\p_3\end{bmatrix}=\begin{bmatrix}1\\0\\0
+\end{bmatrix}$$
+so that choosing $p_1=0$ for simplicity gives
+$$\vect{P}=\begin{bmatrix}p_1\\1\\0\end{bmatrix}
+=\begin{bmatrix}0\\1\\0\end{bmatrix}$$
+
+The vector $\vect{Q}$ satisfies
+$$\begin{bmatrix}0&1&1\\0&0&1\\0&0&0\end{bmatrix}
+\begin{bmatrix}q_1\\q_2\\q_3\end{bmatrix}=\begin{bmatrix}0\\1\\0
+\end{bmatrix}$$
+so that choosing $q_1=0$ for simplicity gives
+$$\vect{Q}=\begin{bmatrix}q_1\\-1\\1\end{bmatrix}
+=\begin{bmatrix}0\\-1\\1\end{bmatrix}$$
+
+Therefore the general solution is
+$$\vect{Y}=C_1\begin{bmatrix}1\\0\\0\end{bmatrix}e^t+C_2\left(
+\begin{bmatrix}1\\0\\0\end{bmatrix}te^t+
+\begin{bmatrix}0\\1\\0\end{bmatrix}e^t
+\right)+C_3\left(
+\begin{bmatrix}1\\0\\0\end{bmatrix}\frac{t^2}{2}e^t+
+\begin{bmatrix}0\\1\\0\end{bmatrix}te^t+
+\begin{bmatrix}0\\-1\\1\end{bmatrix}e^t
+\right)$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{exercise}
+Exercise 8.6 of Zill, pp. 466--469, has more examples of coupled linear
+systems.
+\end{exercise}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inhomogeneous Simultaneous Systems}
+
+An inhomogeneous simultaneous system has the form
+$$\vect{\dot{Y}}=\vect{A}\vect{Y}+\vect{F}(t)$$
+where $\vect{F}(t)$ is the inhomogeneous term.
+
+Then general solution is
+$$\vect{Y}=C_1\vect{Y}_1+C_2\vect{Y}_2+\cdots+C_n\vect{Y}_n
++\vect{Y}_{\rm ps}$$
+where the $\vect{Y}_i$ are the $n$ linearly independent solutions of
+$\vect{\dot{Y}}=\vect{A}\vect{Y}$ and $\vect{Y}_{\rm ps}$ is any particular
+solution of the inhomogeneous problem.
+
+$\vect{Y}_{\rm ps}$ is found using the method of undetermined coefficients.
+If $\vect{F}(t)$ is a polynomial of degree $n$, try a polynomial of degree
+$n$ for $\vect{Y}_{\rm ps}$.  If $\vect{F}(t)=\vect{C}e^{kt}$, try a
+solution of the form $\vect{Y}_{\rm ps}=\vect{D}e^{kt}$.  Finally, if
+$\vect{F}(t)=\vect{A}\sin\omega t+\vect{B}\cos\omega t$, try a solution of
+the form $\vect{Y}_{\rm ps}=\vect{D}\sin\omega t+\vect{E}\cos\omega t$.
+
+
+%============================================================================
+\begin{example}
+The coupled differential equations
+$$\dot{y}_1=y_1+4y_2+\cos t$$
+$$\dot{y}_2=4y_1+y_2+\sin t$$
+gives the matrix system
+$$\vect{\dot{Y}}=\begin{bmatrix}1&4\\4&1\end{bmatrix}\vect{Y}+
+\begin{bmatrix}1\\0\end{bmatrix}\cos t+
+\begin{bmatrix}0\\1\end{bmatrix}\sin t$$
+
+The homogeneous problem has already been solved, so that
+$$\vect{Y}_1=\begin{bmatrix}1\\1\end{bmatrix}e^{5t}$$
+$$\vect{Y}_2=\begin{bmatrix}1\\-1\end{bmatrix}e^{-3t}$$
+Try a particular solution of the form
+$$\vect{Y}_{\rm ps}=\vect{D}\cos t+\vect{E}\sin t$$
+whose derivative is
+$$\vect{\dot{Y}}_{\rm ps}=-\vect{D}\sin t+\vect{E}\cos t$$
+Substituting into the differential equation gives
+$$-\vect{D}\sin t+\vect{E}\cos t=\vect{A}\vect{D}\cos t
++\vect{A}\vect{E}\sin t+
+\begin{bmatrix}1\\0\end{bmatrix}\cos t+
+\begin{bmatrix}0\\1\end{bmatrix}\sin t$$
+where $\vect{A}=\begin{bmatrix}1&4\\4&1\end{bmatrix}$.  Equating
+coefficients of $\cos t$ and $\sin t$ gives
+$$-\vect{D}=\vect{A}\vect{E}+\begin{bmatrix}0\\1\end{bmatrix}$$
+$$\vect{E}=\vect{A}\vect{D}+\begin{bmatrix}1\\0\end{bmatrix}$$
+This is four equations in four unknowns
+$$-d_1=e_1+4e_2$$
+$$-d_2=4e_1+e_2+1$$
+$$e_1=d_1+4d_2+1$$
+$$e_2=4d_1+e_1$$
+where $\vect{D}=\begin{bmatrix}d_1\\d_2\end{bmatrix}$ and
+$\vect{E}=\begin{bmatrix}e_1\\e_2\end{bmatrix}$.  Solving for $d_1$, $d_2$,
+$e_1$ and $e_2$ gives the general solution
+$$\vect{Y}=C_1\begin{bmatrix}1\\1\end{bmatrix}e^{5t}+
+C_2\begin{bmatrix}1\\-1\end{bmatrix}e^{-3t}+
+\begin{bmatrix}d_1\\d_2\end{bmatrix}\cos t+
+\begin{bmatrix}e_1\\e_2\end{bmatrix}\sin t$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{exercise}
+Exercise 8.7 of Zill, pp. 472--473, has more examples of inhomogeneous 
+simultaneous systems.
+\end{exercise}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coupled Oscillators}
+
+A \name{coupled second order linear system} is one such as
+$$\ddot{\vect{Y}}=-\vect{A}\vect{Y}$$
+where
+$$\vect{Y}=\begin{bmatrix}y_1\\y_2\\\vdots\end{bmatrix}\qquad
+\ddot{\vect{Y}}=\begin{bmatrix}\ddot{y}_1\\\ddot{y}_2\\\vdots\end{bmatrix}$$
+If the solution has the form
+$$\vect{Y}=\vect{K}e^{i\lambda t}$$
+then
+$$\ddot{\vect{Y}}=-\lambda^2\vect{K}e^{i\lambda t}$$
+Substituting in the original differential equation shows that
+$$\vect{A}\vect{K}=\lambda^2\vect{K}$$
+Thus $\lambda^2$ is an eigenvalue of $\vect{A}$ and $\vect{K}$ is its
+corresponding eigenvector.  Taking the square root to recover $\lambda$
+gives both a positive and a negative solution.  Therefore a $2\times 2$
+second order system may have two eigenvalues and four values of $\lambda$.
+The general solution is
+$$\vect{Y}=\vect{K}_1\left(C_1e^{i\lambda_1t}+C_2e^{-i\lambda_1t}\right)
++\vect{K}_2\left(C_3e^{i\lambda_2t}+C_4e^{-i\lambda_2t}\right)$$
+The four constants of integration are determined by the initial or boundary
+conditions on $y_1$, $\dot{y_1}$, $y_2$ and $\dot{y_2}$.  Alternatively, the
+solution can be expressed as
+$$\vect{Y}=\vect{K}_1A\cos(\lambda_1t+\phi_1)+\vect{K}_2B\cos(\lambda_2t
++\phi_2)$$
+where $A$, $B$, $\phi_1$ and $\phi_2$ are the constants to be determined.
+
+%============================================================================
+\begin{example}
+To find the general solution of
+$$\ddot{\vect{Y}}=-\begin{bmatrix}3&-1\\-2&2\end{bmatrix}\vect{Y}$$
+the eigenvalues are found from
+$$\det\begin{bmatrix}3-\alpha&-1\\-2&2-\alpha\end{bmatrix}=0$$
+which is the quadratic
+$$(3-\alpha)(2-\alpha)-2=0$$
+This gives $\alpha=1,4$.
+
+The eigenvector $\vect{K}_1$ corresponding to $\alpha=4$ satisfies
+$$\begin{bmatrix}1&1\\2&2\end{bmatrix}
+\begin{bmatrix}k_1\\k_2\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}$$
+so that
+$$\vect{K}_1=\begin{bmatrix}1\\-1\end{bmatrix}$$
+
+The eigenvector $\vect{K}_2$ corresponding to $\alpha=1$ satisfies
+$$\begin{bmatrix}-2&1\\2&-1\end{bmatrix}
+\begin{bmatrix}k_1\\k_2\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}$$
+so that
+$$\vect{K}_2=\begin{bmatrix}1\\2\end{bmatrix}$$
+
+Therefore the general solution is
+$$\vect{Y}=\begin{bmatrix}1\\-1\end{bmatrix}A\cos(2t+\phi_1)
++\begin{bmatrix}1\\2\end{bmatrix}B\cos(t+\phi_2)$$
+\end{example}
+%============================================================================
+
+Note that if the coupling terms in the previous example are turned off, we
+would have
+$$\ddot{\vect{Y}}=-\begin{bmatrix}3&0\\0&2\end{bmatrix}\vect{Y}$$
+with solution
+$$y_1=A_1\cos(\sqrt{3}t+\phi_1)$$
+$$y_2=A_2\cos(\sqrt{2}t+\phi_2)$$
+so that the uncoupled frequencies are $\sqrt{3}$ and $\sqrt{2}$.  When the
+coupling is turned on, the system's frequencies are $1$ and $2$.  Note that
+it is not just $y_1$ which oscillates with frequency $2$; both components
+$y_1$ and $y_2$ exhibit a frequency $2$ contribution.
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The rapid mode $\omega=\omega_{+}$ for the coupled springs has the 
+two masses moving in opposite directions.}
+\label{sde fig:cs II}
+
+\psset{unit=2.5cm}
+\begin{pspicture}(-2,-0.4)(2,2.2)
+\rput(-1.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,1.2){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,-0.2){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=0.7]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1.3]{-}{mA}{mB}
+	\psline{->}(0.2,1.4)(0.2,1.0)
+	\psline{->}(0.2,-0.4)(0.2,0.0)
+}
+\rput(-0.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,1){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,0){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mA}{mB}
+	\psline{<-}(0.2,0.8)(0.2,1.2)
+	\psline{<-}(0.2,0.2)(0.2,-0.2)
+}
+\rput(0.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,1){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,0){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mA}{mB}
+	\psline{->}(0.2,0.8)(0.2,1.2)
+	\psline{->}(0.2,0.2)(0.2,-0.2)
+}
+\rput(1.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,1.2){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,-0.2){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=0.7]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1.3]{-}{mA}{mB}
+	\psline{<-}(0.2,1.4)(0.2,1.0)
+	\psline{<-}(0.2,-0.4)(0.2,0.0)
+}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The slow mode $\omega=\omega_{-}$ for the coupled springs has the 
+two masses moving in the same direction.}
+\label{sde fig:cs III}
+
+\psset{unit=2.5cm}
+\begin{pspicture}(-2,-0.8)(2,2.2)
+\rput(-1.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,1.2){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,0.2){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=0.7]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mA}{mB}
+	\psline{->}(0.2,1)(0.2,1.4)
+	\psline{->}(0.2,0)(0.2,0.4)
+}
+\rput(-0.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,0.8){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,-0.2){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=1.3]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mA}{mB}
+	\psline{->}(0.2,1.0)(0.2,0.6)
+	\psline{->}(0.2,0.0)(0.2,-0.4)
+}
+\rput(0.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,1.2){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,0.2){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=0.7]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mA}{mB}
+	\psline{->}(0.2,1)(0.2,1.4)
+	\psline{->}(0.2,0)(0.2,0.4)
+}
+\rput(1.5,0){
+	\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.3,2)(0.3,2)
+	\pnode(0,2){mC}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,0.8){mA}{$m_1$}
+	\cnodeput[fillstyle=solid,fillcolor=lightgray](0,-0.2){mB}{$m_2$}
+	\nccoil[coilwidth=0.15,coilheight=1.3]{-}{mC}{mA}
+	\nccoil[coilwidth=0.15,coilheight=1]{-}{mA}{mB}
+	\psline{->}(0.2,1.0)(0.2,0.6)
+	\psline{->}(0.2,0.0)(0.2,-0.4)
+}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[Coupled Springs II]
+
+The coupled spring system of example \ref{sde ex:cs I} can be written as
+$$\ddot{\vect{X}}=-\vect{A}\vect{X}+\vect{F}$$
+where $\vect{A}$ is
+$$\vect{A}=\begin{bmatrix}	\frac{k_1+k_2}{m_1} & -\frac{k_2}{m_1} 	 \\
+  -\frac{k_2}{m_2} & \frac{k_2}{m_2}  \end{bmatrix} $$
+and $\vect{F}$ is a constant
+$$\vect{F}=\begin{bmatrix} g+\frac{k_1l_1-k_2l_2}{m_1} \\  
+  g+\frac{k_2l_2}{m_2}\end{bmatrix}$$
+
+The eigenvalues of $\vect{A}$ are found by solving
+$$\det\begin{bmatrix} \frac{k_1+k_2}{m_1}-\alpha & -\frac{k_2}{m_1} \\
+  -\frac{k_2}{m_2} & \frac{k_2}{m_2}-\alpha \end{bmatrix} =0$$
+which gives the quadratic
+$$\alpha^2-\left(\frac{k_1+k_2}{m_1}+\frac{k_2}{m_2}\right)\alpha+
+\frac{k_1k_2}{m_1m_2}=0$$
+The solutions are
+$$\alpha=\frac{1}{2}\left(\frac{k_1+k_2}{m_1}+\frac{k_2}{m_2}\pm\sqrt{\left(
+\frac{k_1+k_2}{m_1}+\frac{k_2}{m_2}\right)^2-4\frac{k_1k_2}{m_1m_2}}
+\right)$$
+Denote these two solutions $\omega_+^2$ and $\omega_-^2$.
+
+Therefore the system of coupled springs can oscillate in two distinct
+\name{modes}
+$$\vect{X}_1=\vect{K}_1\cos(\omega_{+}t+\phi_1)$$
+and
+$$\vect{X}_2=\vect{K}_2\cos(\omega_{-}t+\phi_2)$$
+and the general motion is the linear combination
+$$\vect{X}=A_1\vect{K}_1\cos(\omega_{+}t+\phi_1)
++A_2\vect{K}_2\cos(\omega_{-}t+\phi_2)$$
+where the values of $A_1$, $A_2$, $\phi_1$ and $\phi_2$ depend on how the
+system is started off.
+
+For simplicity, consider equal spring constants $k_1=k_2=k$ and equal masses
+$m_1=m_2=m$.   Then the system is described by
+$$\ddot{\vect{X}}=-\omega_0^2
+\begin{bmatrix} 2&-1\\-1&1\end{bmatrix}\vect{X}$$
+where $\omega_0=\sqrt{k/m}$ is the natural frequency of the single spring and
+mass system.  
+
+The eigenvalues are
+$$\omega_{\pm}^2=\frac{3k}{2m}\pm\frac{1}{2}\sqrt{\left(\frac{3k}{m}\right)^2
+-4\frac{k^2}{m^2}}=\frac{1}{2}(3\pm\sqrt{5})\frac{k}{m}$$
+
+The eigenvector for $\omega_{+}$ satisfies
+$$\begin{bmatrix} 2-\frac{1}{2}(3+\sqrt{5})&-1\\-1&1-\frac{1}{2}
+(3+\sqrt{5})\end{bmatrix}
+\begin{bmatrix} k_1\\k_2\end{bmatrix}=
+\begin{bmatrix} 0\\0\end{bmatrix}$$
+so that
+$$\vect{K}_{+}=\begin{bmatrix} 1-\frac{1}{2}(3+\sqrt{5})\\1\end{bmatrix}$$
+where $1-\frac{1}{2}(3+\sqrt{5})<0$.  In this mode,
+$$x_1(t)=-\left(\frac{1}{2}(3+\sqrt{5})-1\right)x_2(t)$$
+so when the second spring is extended ($x_2(t)>0$), the first spring is
+compressed ($x_1(t)<0$), and vice versa.  This is shown in figure
+\ref{sde fig:cs II}.
+
+
+The eigenvector for $\omega_{-}$ satisfies
+$$\begin{bmatrix} 2-\frac{1}{2}(3-\sqrt{5})&-1\\-1&1-\frac{1}{2}
+(3-\sqrt{5})\end{bmatrix}
+\begin{bmatrix} k_1\\k_2\end{bmatrix}=
+\begin{bmatrix} 0\\0\end{bmatrix}$$
+so that
+$$\vect{K}_{-}=\begin{bmatrix} 1-\frac{1}{2}(3-\sqrt{5})\\1\end{bmatrix}$$
+where $1-\frac{1}{2}(3-\sqrt{5})>0$.  In this mode,
+$$x_1(t)=-\left(\frac{1}{2}(3-\sqrt{5})-1\right)x_2(t)$$
+so the two springs move in the same direction.  This is shown in figure
+\ref{sde fig:cs III}.
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The double pendulum has two segments, each of length $l$ with
+weights of mass $m$ at the end.}
+\label{sde fig:dp}
+
+\psset{unit=3cm}
+\begin{pspicture}(-0.1,-1.5)(2.25,1)
+\SpecialCoor
+% The pendulum's base
+\psline[linecolor=darkgray,linewidth=2pt]{-}(-0.116,0.816)(0.484,0.816)
+% The pendulum itself
+\qdisk(1,0){3pt}
+\qdisk(2,-0.577){3pt}
+\psline[linecolor=gray,linewidth=2pt]{-}(0.184,0.816)(1,0)(2,-0.577)
+% Angle at the base
+\psarc{->}(0.184,0.816){0.2}{270}{315}
+\uput[d](0.284,0.666){$\theta$}
+\psline[linecolor=black,linestyle=dashed]{-}(0.184,0.816)(0.184,0.6) 
+% Angle at the midpoint
+\psarc{->}(1,0){0.2}{270}{330}
+\uput[d](1.1,-0.15){$\phi$}
+\psline[linecolor=black,linestyle=dashed]{-}(1,0)(1,-0.4) 
+% Two weight vectors
+\psline{->}(1,0)(1,-0.4)
+\uput[d](1,-0.4){$mg$}
+\psline{->}(2,-0.577)(2,-0.977)
+\uput[d](2,-0.977){$mg$}
+% Tension at the midpoint
+\put(1,0){
+	\psline{->}(0,0)(0.3;135)
+	\uput[ur](0.3;135){$T_1$}
+	\psline{->}(0,0)(0.3;-30)
+	\uput[u](0.3;-30){$T_2$}
+}
+% Tension at the end
+\put(2,-0.577){
+	\psline{->}(0,0)(0.3;150)
+	\uput[u](0.3;150){$T_2$}
+}
+% The two arrows
+\pcline{->}(0.184,-0.6)(1,-0.6)
+\Aput{$x_1$}
+\pcline{->}(0.184,-1.2)(2,-1.2)
+\Aput{$x_2$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[Double Pendulum]
+In the diagram of the double pendulum in figure \ref{sde fig:dp}, assume
+that $\phi$ and $\theta$ are small so that the masses hardly move
+vertically.  Therefore the vertical forces on each mass should balance,
+giving
+$$T_1\cos\theta=mg+T_2\cos\phi$$
+$$T_2\cos\phi=mg$$
+If $\phi$ and $\theta$ are small, their cosines are approximately unity, so
+that
+$$T_1=mg+T_2$$
+$$T_2=mg$$
+which shows that $T_1=2mg$.  Now 
+$$x_1=l\sin\theta\approx l\theta$$
+and
+$$x_2=x_1+l\sin\phi\approx l(\theta+\phi)$$
+
+In the horizontal direction on particle 1,
+$$m\ddot{x}_1=-T_1\sin\theta+T_2\sin\phi$$
+Thus
+$$\ddot{\theta}=-\frac{2g}{l}\theta+\frac{g}{l}\phi$$
+
+In the horizontal direction on particle 2,
+$$m\ddot{x}_2=-T_2\sin\phi$$
+Thus
+$$\ddot{\phi}=\frac{2g}{l}\theta-\frac{2g}{l}\phi$$
+
+These can be written as the system
+$$\begin{bmatrix}\ddot{\theta}\\\ddot{\phi}\end{bmatrix}
+=-\omega_0^2\begin{bmatrix}2&-1\\-2&2\end{bmatrix}
+\begin{bmatrix}\theta\\\phi\end{bmatrix}$$
+where $\omega_0=\sqrt{g/l}$ is the natural frequency of a single pendulum.
+
+The general solution is 
+$$\begin{bmatrix}\theta\\\phi\end{bmatrix}
+=C_1\vect{K}_1\cos(\omega_1t+\phi_1)
++C_2\vect{K}_2\cos(\omega_2t+\phi_2)$$
+with
+$$\omega_1=\omega_0\sqrt{\alpha_1}$$
+$$\omega_2=\omega_0\sqrt{\alpha_2}$$
+where $\alpha_1$ and $\alpha_2$ are the eigenvalues of 
+$\begin{bmatrix}2&-1\\-2&2\end{bmatrix}$ and $\vect{K}_1$ and
+$\vect{K}_2$ are the corresponding eigenvectors.
+
+The eigenvalues are found by solving
+$$\det\begin{bmatrix}2-\alpha&-1\\-2&2-\alpha\end{bmatrix}=0$$
+which gives the quadratic
+$$(2-\alpha)^2-2=0$$
+The solutions are $\alpha_1=2+\sqrt{2}$ and $\alpha_2=2-\sqrt{2}$.
+
+The eigenvector for $\alpha_1=2+\sqrt{2}$ satisfies
+$$\begin{bmatrix} -\sqrt{2}&-1\\-2&-\sqrt{2}\end{bmatrix}
+\begin{bmatrix} k_1\\k_2\end{bmatrix}=
+\begin{bmatrix} 0\\0\end{bmatrix}$$
+so that
+$$\vect{K}_1=\begin{bmatrix} 1\\-\sqrt{2}\end{bmatrix}$$
+
+The eigenvector for $\alpha_2=2-\sqrt{2}$ satisfies
+$$\begin{bmatrix} \sqrt{2}&-1\\-2&\sqrt{2}\end{bmatrix}
+\begin{bmatrix} k_1\\k_2\end{bmatrix}=
+\begin{bmatrix} 0\\0\end{bmatrix}$$
+so that
+$$\vect{K}_2=\begin{bmatrix} 1\\\sqrt{2}\end{bmatrix}$$
+
+This gives two modes of operation of the double pendulum.  The high
+frequency mode is $\omega_1=\omega_0\sqrt{2+\sqrt{2}}$ so that
+$$\begin{bmatrix}\theta\\\phi\end{bmatrix}_1
+=\begin{bmatrix} 1\\-\sqrt{2}\end{bmatrix}
+\cos(\omega_{1}t+\phi_1)$$
+Here $\phi$ and $\theta$ have opposite signs, so the two halves of the
+double pendulum move in opposite directions.
+
+The low frequency mode is $\omega_2=\omega_0\sqrt{2-\sqrt{2}}$ so that
+$$\begin{bmatrix}\theta\\\phi\end{bmatrix}_2
+=\begin{bmatrix} 1\\\sqrt{2}\end{bmatrix}
+\cos(\omega_{2}t+\phi_1)$$
+Here $\phi$ and $\theta$ have the same sign, so the two halves of the
+double pendulum move in the same direction.
+\end{example}
+%============================================================================
+
+

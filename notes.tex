@@ -1,0 +1,206 @@
+% LaTeX2e version of Maths 132 Notes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8-Feb-96 SS: \conj{x} changed from \overline{x} to {x}^*
+% 9-Feb-96 SS: Make gray in diagrams lighter to improve photocopies
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper]{book}
+
+% If not present on your system, these LaTeX2e packages can be found at
+% ftp.cs.rmit.edu.au in a subdirectory of tex-archive.  Use the 
+% 'site index xxxx' command to find where 'xxxx' lives in the archive.
+
+\usepackage{amsmath}   % Was amstex
+\usepackage{amssymb}
+\usepackage{theorem}		% Flexible definitions of theorem styles
+\usepackage{xspace}
+\usepackage{picinpar}		% Used only for 1 picture in chapter 7
+
+% Use the PSTricks macro package developed by Tim Van Zandt.  This is
+% used for almost every diagram in the notes.
+\input{pstricks}
+\input{pst-node}       
+\input{pst-plot}
+\input{pst-coil}
+%\input{pstricks.bug}
+% PSTricks defines gray as 0.5.  This comes out too dark when the notes
+% are photocopied, so lighten it to 0.6.
+\newgray{gray}{0.6}
+
+% This is a PostScript header file which adds support for drawing 
+% phase portraits, as used in chapter 7.
+\pstheader{phasport.pro}
+
+% Page setup
+\oddsidemargin=-1cm
+\marginparsep=3mm
+\marginparwidth=3.5cm
+
+% Simple abbreviations
+\newcommand{\ODE}{o.d.e.\xspace}
+\newcommand{\ODEs}{o.d.e.s\xspace}
+\newcommand{\parbreak}{\par\mbox{}\par}
+% Maths things
+\newcommand{\arcsinh}{\operatorname{arcsinh}}
+\newcommand{\arccosh}{\operatorname{arccosh}}
+\newcommand{\nn}{\nonumber}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\mif}{\;\Longrightarrow\;} 		% Like \iff
+\newcommand{\thus}{\;\therefore\;}		% therefore (.:) with space
+\newcommand{\grad}{\nabla}
+\newcommand{\del}{\partial}
+\newcommand{\conj}[1]{{#1}^*}			% Used to be \overline, not *
+% Derivatives
+\newcommand{\der}[2]{\frac{d#1}{d#2}}
+\newcommand{\dder}[2]{\frac{d^2#1}{d{#2}^2}}
+\newcommand{\nder}[3]{\frac{d^{#3}#1}{d{#2}^{#3}}}
+\newcommand{\dbd}[1]{\frac{d}{d{#1}}}
+\newcommand{\ndbd}[2]{\frac{d^{#2}}{d{#1}^{#2}}}
+% Other bits
+\newcommand{\wo}{\omega_0}
+% Cartesian unit vectors
+\newcommand{\ivect}{\hat{\vect{i}}}
+\newcommand{\jvect}{\hat{\vect{j}}}
+\newcommand{\kvect}{\hat{\vect{k}}}
+% Polar unit vectors
+\newcommand{\rvect}{\hat{\vect{r}}}
+\newcommand{\tvect}{\hat{\boldsymbol{\theta}}}
+% Intrinsic unit vectors
+\newcommand{\Tvect}{\hat{\vect{T}}}
+\newcommand{\Nvect}{\hat{\vect{N}}}
+
+% Vectors
+\DeclareMathAlphabet{\mathbfit}{OT1}{cmr}{bx}{it}
+\SetMathAlphabet{\mathbfit}{normal}{OT1}{cmr}{bx}{it}
+\newcommand{\vect}[1]{\mathbfit{#1}}
+
+
+% This gathers together the definition of the phase portraits used 
+% throughout chapter 7.  The first parameter is the bits of PostScript
+% which draw the phase portrait, and the second parameter is any additional
+% PSTricks TeX commands for overlaying things on top of the basic phase
+% portrait.
+\def\phaseportrait#1#2{
+{\small
+\psset{unit=1.3cm}
+\begin{pspicture}(-1.4,-1.4)(1.6,1.6)
+%\psframe(-1.4,-1.4)(1.6,1.6)
+\pscustom[linecolor=gray,linewidth=1pt]{
+  \code{
+    % First scale to make the PS coordinate system the same as PSTricks'
+    % The first number on the next line of code should be the same as that in
+    % the \psset{unit=1.3cm} above.  If changing the scale, change this too!
+    1.3 2.54 div 72 mul dup dup scale CLW exch div SLW
+    % Now the phase portrait, using the macros in PHASPORT.PRO
+    clsDict begin
+      #1
+      clsend
+    end
+  }
+}
+% Draw the axes and their labels last so they show through
+\psset{linewidth=1.2pt,linecolor=black}
+\psline{->}(-1.2,0)(1.2,0)
+\psline{->}(0,-1.2)(0,1.2)
+\uput[r](1.2,0){$y_1$}
+\uput[u](0,1.2){$y_2$}
+#2
+\end{pspicture}
+}
+}
+% A couple of the phase portraits have z instead of y for the axes' labels.
+\def\zphaseportrait#1#2{
+{\small
+\psset{unit=1.3cm}
+\begin{pspicture}(-1.4,-1.4)(1.6,1.6)
+%\psframe(-1.4,-1.4)(1.6,1.6)
+\pscustom[linecolor=gray,linewidth=1pt]{
+  \code{
+    % First scale to make the PS coordinate system the same as PSTricks'
+    % The first number on the next line of code should be the same as that in
+    % the \psset{unit=1.3cm} above.  If changing the scale, change this too!
+    1.3 2.54 div 72 mul dup dup scale CLW exch div SLW
+    % Now the phase portrait, using the macros in PHASPORT.PRO
+    clsDict begin
+      #1
+      clsend
+    end
+  }
+}
+% Draw the axes and their labels last so they show through
+\psset{linewidth=1.2pt,linecolor=black}
+\psline{->}(-1.2,0)(1.2,0)
+\psline{->}(0,-1.2)(0,1.2)
+\uput[r](1.2,0){$z_1$}
+\uput[u](0,1.2){$z_2$}
+#2
+\end{pspicture}
+}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define the visual layout of the notes
+%
+% This is set up as follows:
+%
+% Definitions:			\textbf
+% Names of theorems, etc.:	\textbf
+% Theorem body:			\textit
+% Proofs:			\textrm
+% Example title:		\textbf
+% Example statement problem:	\textrm
+% Example solution:		\textsl
+% Exercise:			\textsf
+
+% Emphasise a definition with \name...
+\newcommand{\name}[1]{\textbf{#1}}
+
+\theoremstyle{break}
+\theoremheaderfont{\upshape\bfseries}
+
+% Theorems numbered within chapters
+{\theorembodyfont{\rmfamily\itshape}\newtheorem{theorem}{THEOREM}[chapter]}
+
+% Proofs not numbered
+\def\finishproof{\hspace*{\fill}\rule{2mm}{2mm}}
+\newenvironment{proof}{\par\medskip\noindent\textbf{Proof:}\par\rmfamily}
+	{\finishproof\par\medskip}
+
+% Examples numbered within chapters, and have a black box at their end
+{\theorembodyfont{\rmfamily\slshape}\newtheorem{example}{EXAMPLE}[chapter]}
+\let\newendexample=\endexample
+\def\endexample{\finishproof\newendexample\smallskip}
+
+% For examples with a separate problem statment then solution, use these
+% to change the type style.
+\newcommand{\problem}{\upshape}
+\newcommand{\solution}{\noindent \textbf{Solution:} \slshape}
+
+% Exercises
+\newenvironment{exercise}{\par\medskip\centering\par\sffamily}
+	{\par\par\medskip}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start of document
+
+\begin{document}
+\frontmatter
+\tableofcontents
+\include{ch00-pre}	
+\mainmatter
+\include{ch01-ode}	
+\include{ch02-vf}        
+\include{ch03-spd}	
+\include{ch04-mpd}	
+\include{ch05-rbm}
+\include{ch06-sde}
+\include{ch07-nlc}	
+\end{document}
+

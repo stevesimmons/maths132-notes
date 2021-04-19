@@ -1,0 +1,336 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8 Feb-96 SS: Updated with corrections from semester 2, 1995
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+
+\chapter{Dynamics of Systems of Particles}
+\label{mpd chp}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Centre of Mass and Momentum}
+
+Consider a system of particles where $\vect{r}_i$ is the position vector of
+the $i^{\rm th}$ particle whose mass is $m_i$.  Then the position vector of
+the \name{centre of mass} of the system of particles is
+$$\vect{r}_{\rm cm}=\frac{\ds\sum_i m_i\vect{r}_i}{\ds\sum_i m_i}$$
+The total mass of the system of particles is
+$$M=\sum_i m_i$$
+
+%============================================================================
+\begin{example}
+The centre of mass of a two particle system is
+$$\vect{r}_{\rm cm}=\frac{m_1\vect{r}_1+m_2\vect{r}_2}{m_1+m_2}$$
+If, for example, the two particles are the Sun and a planet,
+$$\vect{r}_{\rm cm}=\frac{M_s\vect{r}_s+m_p\vect{r}_p}{M_s+m_p}$$
+\end{example}
+%============================================================================
+
+The linear momentum of the $i^{\rm th}$ particle is
+$$\vect{p}_i=m_i\dot{\vect{r}}_i$$
+so the total linear momentum of the system of particles is
+$$\vect{P}=\sum_i\vect{p}_i=\sum_im_i\dot{\vect{r}}_i$$
+If the total mass of the system is constant with time, this can be written 
+as the total mass times the velocity of the centre of mass
+$$\vect{P}=\dbd{t}\sum_im_i\vect{r}_i=M\dbd{t}\left(\frac{1}{M}
+\sum_im_i\vect{r}_i\right)=M\dot{\vect{r}}_{\rm cm}$$
+
+Newton's second law applies to the system as a whole.  Newton's second law
+for an individual particle is
+$$m_i\ddot{\vect{r}}_i=\vect{F}_i+\sum_{j\neq i}\vect{F}_{ij}$$
+where $\vect{F}_i$ is the total external force on the $i^{\rm th}$ particle
+and $\vect{F}_{ij}$ is the force exerted on the $i^{\rm th}$ particle by the
+$j^{\rm th}$ particle (note that by Newton's third law,
+$\vect{F}_{ij}=-\vect{F}_{ji}$).
+
+%============================================================================
+\begin{theorem}
+Newton's second law for the system of particles is
+$$M\ddot{\vect{r}}_{\rm cm}=\sum_i\vect{F}_i$$
+\end{theorem}
+\begin{proof}
+Start with
+$$M\vect{r}_{\rm cm}=\sum_i m_i\vect{r}_i$$
+and differentiate twice with respect to time to give
+$$M\ddot{\vect{r}}_{\rm cm}=\sum_i m_i\ddot{\vect{r}}_i$$
+Then from Newton's second law for the $i^{\rm th}$ particle,
+$$M\ddot{\vect{r}}_{\rm cm}
+=\sum_i\left(\vect{F}_i+\sum_{j\neq i}\vect{F}_{ij}\right)
+=\sum_i\vect{F}_i+\sum_i\sum_{j\neq i}\vect{F}_{ij}$$
+The second summation is zero because $\vect{F}_{ij}=-\vect{F}_{ji}$, leaving
+$$M\ddot{\vect{r}}_{\rm cm}=\sum_i\vect{F}_i$$
+as required.
+\end{proof}
+%============================================================================
+
+Note that when no net external force acts on the system
+\typeout{LRW says this should be 'no nett external force', but I think
+'net' is correct.}
+$$\sum_i\vect{F}_i=0$$
+and
+$$M\ddot{\vect{r}}_{\rm cm}=0$$
+so that $\vect{P}=M\dot{\vect{r}}_{\rm cm}$ is constant.  Therefore a system
+of particles under no net external force has constant linear momentum
+$\vect{P}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kinetic and Potential Energy}
+
+The \name{kinetic energy} of a system is the sum of the kinetic energies of
+the individual particles
+$$KE=\sum_i\frac{1}{2}m_i\dot{\vect{r}}_i\cdot\dot{\vect{r}}_i$$
+The \name{potential energy} of external conservative forces is
+$$PE_{\rm ext}=\sum_iV_{\rm ext}(\vect{r}_i)$$
+where the potential fuction $V_{\rm ext}(\vect{r})$ is defined in terms of
+the external force by
+$$-\grad V_{\rm ext}(\vect{r})=F(\vect{r})$$
+
+Internal forces are usually central forces between each pair of particles so
+that there is associated with each pair of particles an internal potential
+energy $V_{\rm int}(r_{ij})$ which is a function of separation distance
+$r_{ij}=\left|\vect{r}_i-\vect{r}_j\right|$ between the pair.  The internal
+potential energy is
+$$PE_{\rm int}=\frac{1}{2}\sum_i\sum_j V_{\rm int}(r_{ij})$$
+Here the summation counts each pair of particles twice, hence the factor of
+$1/2$.
+
+The \name{total mechanical energy} of the system is
+\begin{eqnarray*}
+E&=&KE+PE_{\rm ext}+PE_{\rm int}\\
+&=&\sum_i\frac{1}{2}m_i\dot{\vect{r}}_i\cdot\dot{\vect{r}}_i+
+\sum_iV_{\rm ext}(\vect{r}_i)+\frac{1}{2}\sum_i\sum_j V_{\rm int}(r_{ij})
+\end{eqnarray*}
+
+%============================================================================
+\begin{theorem}
+In the absence of external extraneous forces
+$$\der{E}{t}=0$$
+so $E$ is a constant of the motion of the system and mechanical energy is
+conserved.
+\end{theorem}
+%============================================================================
+
+%============================================================================
+\begin{example}[Reduced Mass of a Two Body System]
+When no external force acts, $\dot{\vect{r}}_{\rm cm}$ is constant.  A
+coordinate system with the centre of mass at the origin would therefore be an
+inertial frame of reference.
+
+If $\vect{r}_1$ and $\vect{r}_2$ are the positions of two
+particles relative to this coordinate system, then
+$$m_1\vect{r}_1+m_2\vect{r}_2=0$$
+Define the position vector of particle 1 with respect to particle 2 as
+$$\vect{r}=\vect{r}_1-\vect{r}_2
+=\vect{r}_1\left(1+\frac{m_1}{m_2}\right)$$
+Newton's second law holds in inertial frames of reference, so that
+$$m_1\ddot{\vect{r}}_1=\vect{F}_{12}$$
+If the force that particle 2 exerts on particle 1 is a function of the
+distance between them and directed along the line of their centres
+$$\vect{F}_{12}=f(r)\rvect$$
+then
+$$m_1\ddot{\vect{r}}_1=f(r)\rvect$$
+Substituting
+$$\ddot{\vect{r}}_1=\frac{m_2}{m_1+m_2}\vect{r}$$
+we have
+$$\mu\ddot{\vect{r}}=f(r)\rvect$$
+where $\mu$ is the \name{reduced mass} of the system
+$$\mu=\frac{m_1m_2}{m_1+m_2}$$
+This is equivalent to motion in a central force field of a particle of mass
+$\mu$.
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}[Sun-Planet System]
+It was incorrect to assume that the Sun stays fixed at the origin as a
+planet orbits it.  Instead we should use the centre of mass of the
+Sun/planet system as the origin.  In this case, the position vector of the
+planet relative to the Sun is
+$$\vect{r}=\vect{r}_p-\vect{r}_s$$
+and therefore
+$$\mu\ddot{\vect{r}}=-\frac{GM_sm_p}{r^2}\rvect$$
+where
+$$\mu=\frac{M_sm_p}{M_s+m_p}\approx m_p$$
+when $M_s\gg m_p$.
+
+Our previous calculations are all valid if we replace $GM_s$ by
+$G(M_s+m_p)$.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Torque}
+
+The \name{angular momentum} of the $i^{\rm th}$ particle about the origin is
+$$\vect{L}_i=\vect{r}_i\times\vect{p}_i
+=\vect{r}_i\times(m_i\dot{\vect{r}}_i)$$
+The angular momentum of the system of particles about the origin is
+$$\vect{L}=\sum_i\vect{L}_i=\sum_i\vect{r}_i\times\vect{p}_i$$
+
+%============================================================================
+\begin{theorem}
+In an inertial frame of reference
+$$\der{\vect{L}}{t}=\vect{N}$$
+where
+$$\vect{N}=\sum_i\vect{r}_i\times\vect{F}_i$$
+is the \name{total external torque} on the system of particles about the
+origin.
+\end{theorem}
+\begin{proof}
+From the definition of $\vect{L}$
+$$\der{\vect{L}}{t}=\dbd{t}\sum_i\vect{r}_i\times m_i\dot{\vect{r}}_i$$
+If the masses $m_i$ are constant with time, $\der{m_i}{t}=0$ so
+$$\der{\vect{L}}{t}=\sum_i\vect{r}_i\times m_i\ddot{\vect{r}}_i$$
+Now $m_i\ddot{\vect{r}}_i$ can be written in terms of the internal and
+external forces to give
+$$\der{\vect{L}}{t}=\sum_i\vect{r}_i\times\left(\vect{F}_i+\sum_j
+\vect{F}_{ij}\right)$$
+The second summation is zero because it is composed of pairs of the form
+$$\vect{r}_i\times\vect{F}_{ij}+\vect{r}_j\times\vect{F}_{ji}
+=(\vect{r}_i-\vect{r}_j)\times\vect{F}_{ij}=0$$
+which are zero if $\vect{F}_{ij}$ lies along the line of the two particles'
+centres.  
+
+Therefore
+$$\der{\vect{L}}{t}=\sum_i\vect{r}_i\times\vect{F}_i=\vect{N}$$
+\end{proof}
+%============================================================================
+
+Note that when there is no external torque, $\vect{N}=0$ so $\vect{L}$ is
+constant and angular momentum is conserved.  $\vect{N}=0$ when all of 
+the external forces are zero, hence angular momentum is conserved when no
+external forces act on the system.
+
+%============================================================================
+\begin{example}
+\label{mpd ex:L and N}
+Angular momentum and torque depend on the origin of the coordinate system.
+
+Define $\bar{\vect{r}}_i$ to be the position of the $i^{\rm th}$ particle 
+relative to a coordinate system fixed on the centre of mass.
+$$\bar{\vect{r}}_i=\vect{r}_i-\vect{r}_{\rm cm}$$
+Therefore
+$$\vect{r}_i=\bar{\vect{r}}_i+\vect{r}_{\rm cm}$$
+and
+$$\dot{\vect{r}}_i=\dot{\bar{\vect{r}}}_i+\dot{\vect{r}}_{\rm cm}$$
+
+Now the angular momentum is
+$$\vect{L}=\sum_i\vect{r}_i\times(m_i\dot{\vect{r}}_i)
+=\sum_i m_i(\bar{\vect{r}}_i+\vect{r}_{\rm cm})
+\times(\dot{\bar{\vect{r}}}_i+\dot{\vect{r}}_{\rm cm})$$
+Expanding the cross-product of the sums gives the sum of four
+cross-products. 
+\begin{eqnarray*}
+\vect{L}&=&
+\left(\sum_i m_i\right)\vect{r}_{\rm cm}\times\dot{\vect{r}}_{\rm cm}
++\vect{r}_{\rm cm}\times\left(\sum_im_i\dot{\bar{\vect{r}}}_i\right)\\
+&&{}
++\left(\sum_i m_i\bar{\vect{r}}_i\right)\times\dot{\vect{r}}_{\rm cm}
++\sum_i \bar{\vect{r}}_i\times m_i\dot{\bar{\vect{r}}}_i
+\end{eqnarray*}
+Now $\sum_i m_i\bar{\vect{r}}_i=0$ from the definition of centre of mass
+$$\sum_i m_i\bar{\vect{r}}_i=\sum_im_i\vect{r}_i-\sum_im_i\vect{r}_{\rm cm}
+=M\vect{r}_{\rm cm}-M\vect{r}_{\rm cm}=0$$
+Differentiating shows that $\sum_i m_i\dot{\bar{\vect{r}}}_i=0$, which
+leaves
+$$\vect{L}=
+\left(\sum_i m_i\right)\vect{r}_{\rm cm}\times\dot{\vect{r}}_{\rm cm}
++\sum_i \bar{\vect{r}}_i\times m_i\dot{\bar{\vect{r}}}_i$$
+which is the sum of the angular momentum of the centre of mass about the 
+origin and the angular momentum of the system about the centre of mass
+$$\vect{L}=
+\vect{r}_{\rm cm}\times(M\dot{\vect{r}}_{\rm cm})
++\sum_i \bar{\vect{r}}_i\times (m_i\dot{\bar{\vect{r}}}_i)$$
+\end{example}
+%============================================================================
+
+
+The \name{kinetic energy} of the system $T$ is the sum of the kinetic
+energies of the individual particles
+$$T=\frac{1}{2}\sum_im_i\dot{\vect{r}}_i\cdot\dot{\vect{r}}_i=\sum_i T_i$$
+where $T_i=\frac{1}{2}m_i\dot{\vect{r}}_i\cdot\dot{\vect{r}}_i$ is the
+kinetic energy of the $i^{\rm th}$ particle.
+
+%============================================================================
+\begin{example}
+The kinetic energy of a system is the sum of the kinetic energy due to the
+translation of the centre of mass plus the kinetic energy due to the system's
+motion about the centre of mass.
+
+To see this, write
+$$\dot{\vect{r}}_i=\dot{\bar{\vect{r}}}_i+\dot{\vect{r}}_{\rm cm}$$
+
+Now the kinetic energy is
+$$T=\frac{1}{2}\sum_i m_i
+(\dot{\bar{\vect{r}}}_i+\dot{\vect{r}}_{\rm cm})\cdot
+(\dot{\bar{\vect{r}}}_i+\dot{\vect{r}}_{\rm cm})$$
+Expanding the dot-product of the sums gives the sum of four
+dot-products. 
+\begin{eqnarray}
+\vect{T}&=&
+\frac{1}{2}\left(\sum_i m_i\right)\dot{\vect{r}}_{\rm cm}\cdot\dot{\vect{r}}_{\rm cm}
++\frac{1}{2}\dot{\vect{r}}_{\rm cm}\cdot\left(\sum_im_i\dot{\bar{\vect{r}}}_i\right)
+\\
+&&{}+\frac{1}{2}\left(\sum_i m_i\dot{\bar{\vect{r}}}_i\right)\cdot\dot{\vect{r}}_{\rm cm}
++\frac{1}{2}\sum_i \dot{\bar{\vect{r}}}_i\cdot m_i\dot{\bar{\vect{r}}}_i
+\end{eqnarray}
+As in the previous example, $\sum_i m_i\dot{\bar{\vect{r}}}_i=0$, which
+leaves
+$$\vect{T}
+=\frac{1}{2}\left(\sum_i m_i\right)\dot{\vect{r}}_{\rm cm}\cdot\dot{\vect{r}}_{\rm cm}
++\frac{1}{2}\sum_i \dot{\bar{\vect{r}}}_i\cdot m_i\dot{\bar{\vect{r}}}_i$$
+which is the sum of the kinetic energy of translation of the system as a
+whole and the kinetic energy of the motion of the system about the 
+centre of mass
+$$\vect{T}
+=\frac{1}{2}M\dot{\vect{r}}_{\rm cm}\cdot\dot{\vect{r}}_{\rm cm}
++\frac{1}{2}\sum_i m_i\dot{\bar{\vect{r}}}_i\cdot \dot{\bar{\vect{r}}}_i$$
+\end{example}
+%============================================================================
+
+From example \ref{mpd ex:L and N}, the angular momentum $\vect{L}$ relative
+to an inertial origin can be written as
+$$\vect{L}=\vect{L}_{\rm cm}+\vect{L}_{\rm r}$$
+where $\vect{L}_{\rm r}$ is the system's angular momentum relative to the
+centre of mass.  $\vect{L}$ is related to the total external torque relative
+to the origin according to
+$$\vect{N}=\der{\vect{L}}{t}=\sum_i\vect{r}_i\times\vect{F}_i$$
+The following theorem shows that a similar result applies to the angular
+momentum about the centre of mass, even though the centre of mass may not be
+an inertial reference frame.
+
+%============================================================================
+\begin{theorem}
+The total external torque relative to the centre of mass is
+$$\vect{N}_{\rm r}=\der{\vect{L}_{\rm r}}{t}
+=\sum_i \bar{\vect{r}}_i\times\vect{F}_i$$
+\end{theorem}
+\begin{proof}
+From the definition of
+$$\vect{L}_{\rm cm}=\vect{r}_{\rm cm}\times M\dot{\vect{r}}_{\rm cm}$$
+differentiate to give
+$$\der{\vect{L}_{\rm cm}}{t}
+=\vect{r}_{\rm cm}\times M\ddot{\vect{r}}_{\rm cm}
+=\vect{r}_{\rm cm}\times \sum_i\vect{F}_i$$
+But
+$$\vect{L}=\vect{L}_{\rm cm}+\vect{L}_{\rm r}$$
+so
+$$\der{\vect{L}}{t}=\der{\vect{L}_{\rm cm}}{t}+\der{\vect{L}_{\rm r}}{t}$$
+Therefore
+$$\der{\vect{L}_{\rm r}}{t}=\der{\vect{L}}{t}-\der{\vect{L}_{\rm cm}}{t}$$
+This is
+$$\der{\vect{L}_{\rm r}}{t}
+=\sum_i\vect{r}_i\times\vect{F}_i-\vect{r}_{\rm cm}\times\sum_i\vect{F}_i
+=\sum_i(\vect{r}_i-\vect{r}_{\rm cm})\times\vect{F}_i$$
+which gives
+$$\der{\vect{L}_{\rm r}}{t}=\sum_i \bar{\vect{r}}_i\times\vect{F}_i$$
+as required.
+\end{proof}
+%============================================================================

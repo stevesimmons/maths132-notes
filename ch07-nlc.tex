@@ -1,0 +1,1109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8 Feb-96 SS: Updated with corrections from semester 2, 1995
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+
+\chapter[Non-Linear Coupled 1st Order Equations]{Non-Linear Coupled 
+First Order Equations}
+\label{nlc chp}
+
+All \ODEs of any order can be written in the autonomous form
+$$\dot{\vect{Y}}=\vect{F}(\vect{Y})$$
+To see why, consider the general $(n-1)$th order \ODE 
+$$0=F(t, Y, Y', Y'', \ldots, Y^{(n-1)})$$
+This can, in principle, be written in the alternative form
+$$t=G(Y, Y', Y'', \ldots, Y^{(n-1)})$$
+Now differentiate with respect to $t$, giving
+$$1=\sum_{i=0}^{n-1} \frac{\del G}{\del Y^{(i)}}\,\der{Y^{(i)}}{t}$$
+Since $\der{Y^{(i)}}{t}=Y^{(i+1)}$, this can be written
+$$1=\sum_{i=1}^n \frac{\del G}{\del Y^{(i-1)}}\,Y^{(i)}$$
+by changing the limits of $i$ in the summation.  
+
+Then rearranging this equation gives $Y^{(n)}$ in terms of the lower-order
+derivatives
+$$Y^{(n)}=\Phi(Y, Y',Y'',\ldots, Y^{(n-1)})$$
+This is referred to as an \name{autonomous system} because there is now no
+explicit dependence on time $t$.
+
+Finally, define the set of variables
+$$y_i=Y^{(i-1)}\qquad\mbox{for $i=1,\ldots,n$}$$
+so that
+\begin{eqnarray*}
+\dot{y}_1=&Y'&=y_2\\
+\dot{y}_2=&Y''&=y_3\\
+&\vdots&\\
+\dot{y}_n=&Y^{(n)}&=\Phi(y_1,y_2,\ldots,y_{n-1})
+\end{eqnarray*}
+These relations can written more generally as
+\begin{eqnarray*}
+\dot{y}_1&=&f_1(y_1,y_2,\ldots,y_{n})\\
+\dot{y}_2&=&f_2(y_1,y_2,\ldots,y_{n})\\
+&\vdots&\\
+\dot{y}_n&=&f_n(y_1,y_2,\ldots,y_{n})
+\end{eqnarray*}
+which can be expressed more concisely as a set of $n$ coupled first-order
+differential equations of a vector argument
+$$\dot{\vect{Y}}=\vect{F}(\vect{Y})$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Phase Space and Trajectories}
+
+Consider the coupled system for $n=2$:
+$$\begin{bmatrix} \dot{y}_1 \\ \dot{y}_2\end{bmatrix} =
+\begin{bmatrix} f_1(y_1,y_2) \\ f_2(y_1,y_2)\end{bmatrix}$$
+Solve this to obtain expressions for $y_1(t)$ and $y_2(t)$.  Then, for each 
+time $t$, plot $(y_1,y_2)$.  This gives a \name{trajectory} of points
+$(y_1(t),y_2(t))$ through the $(y_1,y_2)$ \name{phase space}.
+
+%----------------------------------------------------------------------------
+\begin{window}[0,l,{%
+% General trajectory
+\psset{unit=2.5cm}
+\begin{pspicture}(-0.4,-0.3)(1.4,1.5)
+%\psframe(-0.4,-0.3)(1.4,1.5)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=1.5pt,plotstyle=curve]%
+{0}{1.1}{x 1.5 sub x mul 0.66 add x mul 0.1 add 3 mul}
+% Now the axes and their labels
+\psset{linewidth=1.2pt,linecolor=black}
+\psline{->}(-0.3,0)(1.1,0)
+\psline{->}(-0.1,-0.2)(-0.1,1.2)
+\uput[r](1.1,0){$y_1$}
+\uput[u](-0.1,1.2){$y_2$}
+% Then the arrows on the trajectory
+\rput{63}(0,0.3){\psline[linewidth=1.2pt]{->}(0,0)(0.3,0)\rput[tl]{*0}(0.1,-0.1){$t_0$}}
+\put(0.333,0.5778){\psline[linewidth=1.2pt]{->}(0,0)(0.3,0)\rput[br](0.1,0.1){$t_1$}}
+\put(0.667,0.5222){\psline[linewidth=1.2pt]{->}(0,0)(0.3,0)\rput[br](0.1,0.1){$t_2$}}
+\rput{63}(1,0.8){\psline[linewidth=1.2pt]{->}(0,0)(0.3,0)\rput[br]{*0}(0.1,0.1){$t_3$}}
+\end{pspicture}
+},{}]
+The diagram at the left shows a trajectory through phase space starting at the initial
+position $(y_1(t_0),y_2(t_0))$.  The arrows indicate the direction of motion
+along the trajectory at different times.
+Note that there is always only one trajectory for any set of initial
+conditions $(y_1(t_0),y_2(t_0))$.  This follows from the uniqueness of the
+solution of the differential equations.
+In this chapter, we will restrict ourselves to two-dimensional systems
+($n=2$) for ease of graphical interpretation.  However the concept of phase
+space and trajectories holds in higher dimensions.
+\end{window}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+The coupled system for $y''+y=0$ is found by setting
+$y_1=y$ and $y_2=\dot{y}$.  Then 
+\begin{eqnarray*}
+\dot{y}_1&=&y_2\\
+\dot{y}_2&=&\ddot{y}=-y_1
+\end{eqnarray*}
+so that the coupled system is
+\begin{eqnarray*}
+\dot{y}_1&=&y_2\\
+\dot{y}_2&=&-y_1
+\end{eqnarray*}
+The solutions have the form
+\begin{eqnarray*}
+y_1&=&A\sin(t+\phi)\\
+y_2&=&A\cos(t+\phi)
+\end{eqnarray*}
+which gives
+$$y_1^2+y_2^2=A^2$$
+when $t$ is eliminated.  Therefore the phase portrait consists of  
+concentric circles about the origin starting at the initial value $(y_1(t_0),
+y_2(t_0))$.  The movement of each trajectory is clockwise because when
+$y_1>0$ and $y_2=0$, $\dot{y}_2<0$.
+\begin{center}
+% Circular phase portraits
+\phaseportrait{clsinit 0.02 0 1 -1 0 100 0.42 0.42 cls 200 0.707 0.707 cls}{}
+\end{center}
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Critical Points in Phase Space}
+
+A point $(y_1, y_2, \ldots, y_n)$ where the $n$ equations
+$$f_k(y_1, y_2, \ldots, y_n)=0\qquad\mbox{for $k=1,2,\ldots,n$}$$
+are simultaneously satisfied is a \name{critical point} of the system.  The
+trajectory which passes through a critical point is just the point itself
+since the phase point has zero velocity.
+
+A trajectory can approach a critical point arbitrarily closely as
+$t\to\pm\infty$ but can never reach the critical point in finite time.
+
+%===========================================================================
+\begin{example}
+\label{nlc: ex vl}
+
+\problem
+Find the critical points of the Volterra-Lotka system
+\begin{eqnarray*}
+\dot{y}_1&=&-ay_1+by_1y_2\\
+\dot{y}_2&=&cy_2-dy_1y_2
+\end{eqnarray*}
+
+\solution
+The critical points are found by setting $(\dot{y}_1,\dot{y}_2)=(0,0)$.
+Now
+\begin{eqnarray*}
+\dot{y}_1=0&\mif& y_1=0\mbox{\ or\ }y_2=a/b\\
+\dot{y}_2=0&\mif& y_2=0\mbox{\ or\ }y_1=c/d
+\end{eqnarray*}
+so the two critical points are $(0,0)$ and $(c/d,a/b)$.
+\end{example}
+%============================================================================
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classification of Critical Points}
+
+Critical points are named according to the trajectory's behaviour in the
+neighbourhood of the critical point.  For $n=2$, there are six basic
+behaviours:
+
+\begin{description}
+\item[Stable node:] Trajectories approach the critical point along an
+asymptotically straight line.
+\item[Stable spiral:] Trajectories approach the critical point along a
+spiral.
+\item[Unstable node:] Trajectories move away from the critical point along a
+straight line.
+\item[Unstable spiral:] Trajectories move away from the critical point 
+along a spiral.
+\item[Saddle Point:] Some trajectories approach; some move away.
+\item[Centre:] Trajectories orbit around the critical point.
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classification for Linear Systems}
+
+For the linear system
+$$\dot{\vect{Y}}=\vect{A}\vect{Y}$$
+there is one critical point, at $(0,0)$.  The general solution for distinct
+eigenvalues is
+$$\begin{bmatrix} y_1 \\ y_2 \end{bmatrix} = 
+C_1 \begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix} e^{\alpha_1 t}
++C_2 \begin{bmatrix} \phi_2 \\ \psi_2 \end{bmatrix} e^{\alpha_2 t}$$
+where $\alpha_1$ and $\alpha_2$ are the eigenvalues of $\vect{A}$ whose
+corresponding eigenvectors are
+$$\vect{K}_{\alpha_1}=\begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix}
+\qquad\vect{K}_{\alpha_2}=\begin{bmatrix} \phi_2 \\ \psi_2 \end{bmatrix}$$
+The fundamental behaviour of the critical point depends on the values of
+$\alpha_1$ and $\alpha_2$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 1: $\alpha_1>\alpha_2>0$}
+
+If $C_2=0$, the solution is
+$$\vect{Y}=C_1 \begin{bmatrix} \phi_1 \\ \psi_1\end{bmatrix} e^{\alpha_1 t}$$
+so that
+$$y_2=\frac{\psi_1}{\phi_1}y_1$$
+This trajectory is a line with slope $\psi_1/\phi_1$ moving away from the
+origin.
+
+Similarly, if $C_1=0$, the trajectory is a line with slope $\psi_2/\phi_2$
+moving away from the origin.  
+
+\begin{center}
+	\phaseportrait{clsinit 0.02 2 1 1 2   50 0.5 0.5 cls    
+  50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls}
+  {\uput[u](-1,1){slope=$\frac{\psi_2}{\phi_2}$}
+   \uput[u](1,1){slope=$\frac{\psi_1}{\phi_1}$}}
+\end{center}
+
+In the general case, the gradient of the trajectory is 
+$$\der{y_2}{y_1}=\frac{\dot{y}_2}{\dot{y}_1}=
+\frac{\alpha_1C_1\psi_1e^{\alpha_1t}+\alpha_2C_2\psi_2e^{\alpha_2t}}
+{\alpha_1C_1\phi_1e^{\alpha_1t}+\alpha_2C_2\phi_2e^{\alpha_2t}}$$
+As $t\to+\infty$, the gradient tends to $\psi_1/\phi_1$.  As $t\to-\infty$,
+the gradient tends to $\psi_2/\phi_2$.
+
+\begin{center}
+\phaseportrait
+{      clsinit 0.02 2 1 1 2
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      50 0.9 0.1 cls	50 1 -0.3 cls	   50 0.1 0.9 cls     50 -0.3 1 cls
+      50 -0.9 -0.1 cls	50 -1 0.3 cls	   50 -0.1 -0.9 cls   50 0.3 -1 cls
+}
+{}
+\end{center}
+
+Since the trajectories move away from the origin asymptotically along a
+straight line, this is an \textbf{unstable node}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 2: $\alpha_1<\alpha_2<0$}
+
+This is similar to case 1, except that the arrows point the other direction.
+Since the trajectories move towards the origin, this is a \textbf{stable node}.
+
+\begin{center}
+\phaseportrait
+{clsinit 0.02 -2 -1 -1 -2
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      50 0.9 0.1 cls	50 1 -0.3 cls	   50 0.1 0.9 cls     50 -0.3 1 cls
+      50 -0.9 -0.1 cls	50 -1 0.3 cls	   50 -0.1 -0.9 cls   50 0.3 -1 cls
+}
+{}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 3: $\alpha_1>0>\alpha_2$}
+
+As $t\to\infty$, the trajectories' gradients tend to $\psi_1/\phi_1$, and as
+$t\to-\infty$, their gradients tend to $\psi_2/\phi_2$, similar to cases 1
+and 2.  However, as $t\to\pm\infty$, $y_1$ and $y_2$ also tend to
+$\pm\infty$.  
+
+This gives a \textbf{saddle point}.
+
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 0 2 2 0
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      80 0 0.4 cls	80 0 0.8 cls	   80 0 -0.8 cls      80 0 -0.4 cls
+      80 0.4 0 cls	80 0.8 0 cls	   80 -0.8 0 cls      80 -0.4 0 cls
+      80 0 1.2 cls	80 0 -1.2 cls	   80 1.2 0 cls	      80 -1.2 0 cls}{
+}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 4: $\alpha_1$ and $\alpha_2$ are imaginary}
+
+When $\alpha_1=i\eta$ and $\alpha_2=-i\eta$, the solution is
+$$\vect{Y}= C_1 \begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix} e^{i\eta t}
++C_2 \begin{bmatrix} \phi_2 \\ \psi_2 \end{bmatrix} e^{-i\eta t}$$
+For real solutions, we require that $C_1=C_2^*$.  Therefore, there are only
+two arbitrary constants---the real and imaginary parts of $C_1$.
+Then the solution is
+$$\vect{Y}=
+\begin{bmatrix} A_1 \\ A_2 \end{bmatrix} \cos\eta t
++\begin{bmatrix} B_1\\ B_2 \end{bmatrix} \sin\eta t$$
+where
+$$\begin{bmatrix} A_1 \\ A_2 \end{bmatrix} = 
+2\Re \begin{bmatrix} C_1\phi_1 \\ C_1\psi_1 \end{bmatrix}$$
+$$\begin{bmatrix} B_1 \\ B_2 \end{bmatrix} = 
+-2\Im \begin{bmatrix} C_1\phi_1 \\ C_1\psi_1 \end{bmatrix}$$
+Upon eliminating $t$ from the solution, we have
+$$(B_2y_1-B_1y_2)^2 + (A_2y_1-A_1y_2)^2 = (A_1B_2-A_2B_1)^2$$
+This is the equation of an ellipse.  The orientation of the ellipse's axes
+are determined by $\phi_1$, $\psi_1$, $\phi_2$ and $\psi_2$.
+
+Since the trajectories orbit the origin, this is a \textbf{centre}.
+
+\begin{center}
+\phaseportrait
+{      clsinit 0.01 1 -2 5 -1
+      100 0.2 0.2 cls    200 0.4 0.4 cls    300 0.6 0.6 cls}
+{}
+\end{center}
+
+To obtain a rough idea of the ellipse's shape, examine $\der{y_2}{y_1}$ for
+$y_1=0$ and for $y_2=0$.  Determine the sense of the rotation (clockwise or
+anticlockwise) by examining $\dot{y}_2$ for $y_2=0$ and $y_1>0$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 5: $\alpha_1$ and $\alpha_2$ are complex conjugates}
+
+When the eigenvalues are complex conjugates,
+$$\alpha_1=\mu+i\eta\qquad\mbox{and}\qquad\alpha_2=\mu-i\eta$$
+the eigenvectors are also complex conjugates
+$$\begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix} = 
+\conj{\begin{bmatrix} \phi_2 \\ \psi_2 \end{bmatrix}}$$
+So for a real solution, the arbitrary constants must be complex conjugates
+too
+$$C_1=\conj{C_2}$$
+Thus the solution is
+$$\vect{Y}= e^{\mu t} \left(
+\begin{bmatrix} A_1 \\ A_2 \end{bmatrix} \cos\eta t
++\begin{bmatrix} B_1\\ B_2 \end{bmatrix} \sin\eta t\right)$$
+This is a spiral about the origin.  If $\mu>0$, $\left\|\vect{Y}\right\|
+\to\infty$ as
+$t\to\infty$, so we have an \textbf{unstable spiral}. If $\mu<0$, 
+$\left\|\vect{Y}\right\|\to 0$ as $t\to\infty$, so we have a 
+\textbf{stable spiral}.
+
+\begin{center}
+\phaseportrait{clsinit 0.01 1 -3 3 1	  400 0.5 0.5 cls}{}
+\hspace{3cm}
+\phaseportrait{clsinit 0.01 1 3 -3 1      400 0.5 0.5 cls}{}
+\end{center}
+
+To obtain a rough idea of the spiral's shape, examine $\der{y_2}{y_1}$ for
+$y_1=0$ and for $y_2=0$.  Determine the sense of the rotation (clockwise or
+anticlockwise) by examining $\dot{y}_2$ for $y_2=0$ and $y_1>0$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 6: $\alpha_1$ and $\alpha_2$ are equal and non-zero}
+
+When $\alpha_1=\alpha_2=\alpha\neq 0$, there are two subcases, depending on
+whether the coefficient matrix $\vect{A}$ has one or an infinite number of
+eigenvectors.
+
+When there is only a single eigenvector, the solution is
+$$\vect{Y}=
+C_1 \begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix} e^{\alpha t}
++C_2 \left(\begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix}t 
+	 + \begin{bmatrix} p_1 \\ p_2 \end{bmatrix} 
+\right) e^{\alpha t}$$
+where 
+$$(\vect{A}-\vect{I}\alpha)\begin{bmatrix} p_1 \\ p_2 \end{bmatrix}=
+\begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix}$$
+A little algebra shows that
+$$\der{y_2}{y_1}\to \frac{\psi_1}{\phi_1}$$
+as $t\to\pm\infty$.  Therefore, the trajectories become parallel to
+$\begin{bmatrix} \phi_1 \\ \psi_1 \end{bmatrix}$ as $t\to\pm\infty$.
+This is a \textbf{degenerate node}.  It is \textbf{unstable} if
+$\alpha>0$ or \textbf{stable} if $\alpha<0$.  
+
+\begin{center}
+unstable degenerate nodes
+
+\phaseportrait{      clsinit 0.02 3 -1 1 1
+      100 0.5 0.5  cls  100 -0.5 -0.5 cls
+      100 0.7 0.3  cls  100 -0.7 -0.3 cls
+      100 0.7 0    cls  100 -0.7 0    cls
+      100 0.7 -0.3 cls  100 -0.7 0.3  cls
+      100 0.4 -0.7 cls  100 -0.4 0.7  cls		
+      100 0.1 -1   cls  100 -0.1 1    cls}{}
+\hspace{3cm}
+\phaseportrait{clsinit 0.02 1 1 -1 3
+      100 0.5  0.5 cls  100 -0.5 -0.5 cls
+      100 0.3  0.7 cls  100 -0.3 -0.7 cls
+      100 0    0.7 cls  100 0    -0.7 cls
+      100 -0.3 0.7 cls  100 0.3  -0.7 cls
+      100 -0.7 0.4 cls  100 0.7  -0.4 cls		
+      100 -1   0.1 cls  100 1    -0.1 cls}{}
+
+\medskip
+stable degenerate nodes\par
+
+\phaseportrait{clsinit -0.02 3 -1 1 1
+      100 0.5 0.5  cls  100 -0.5 -0.5 cls
+      100 0.7 0.3  cls  100 -0.7 -0.3 cls
+      100 0.7 0    cls  100 -0.7 0    cls
+      100 0.7 -0.3 cls  100 -0.7 0.3  cls
+      100 0.4 -0.7 cls  100 -0.4 0.7  cls		
+      100 0.1 -1   cls  100 -0.1 1    cls}{}
+\hspace{3cm}
+\phaseportrait{clsinit -0.02 1 1 -1 3
+      100 0.5  0.5 cls  100 -0.5 -0.5 cls
+      100 0.3  0.7 cls  100 -0.3 -0.7 cls
+      100 0    0.7 cls  100 0    -0.7 cls
+      100 -0.3 0.7 cls  100 0.3  -0.7 cls
+      100 -0.7 0.4 cls  100 0.7  -0.4 cls		
+      100 -1   0.1 cls  100 1    -0.1 cls}{}
+\end{center}
+
+When there is an infinite number of independent eigenvectors, the equations 
+have become decoupled and the solution is
+$$\vect{Y}=\begin{bmatrix} C_1 \\ C_2 \end{bmatrix} e^{\alpha t}$$
+
+This gives an \textbf{unstable star point} if $\alpha>0$ or a \textbf{stable
+star point} if $\alpha<0$.
+
+\begin{center}
+\hbox{\begin{minipage}{0.5\textwidth}\centering
+unstable star point\par
+
+\phaseportrait{      clsinit 0.02 1 0 0 1
+      50 0.46 0.19 cls     50 0.19 0.46 cls
+      50 -0.46 0.19 cls    50 -0.19 0.46 cls
+      50 0.46 -0.19 cls    50 0.19 -0.46 cls
+      50 -0.46 -0.19 cls   50 -0.19 -0.46 cls}{}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}\centering
+stable star point\par
+
+\phaseportrait{      clsinit 0.02 -1 0 0 -1
+      50 0.46 0.19 cls     50 0.19 0.46 cls
+      50 -0.46 0.19 cls    50 -0.19 0.46 cls
+      50 0.46 -0.19 cls    50 0.19 -0.46 cls
+      50 -0.46 -0.19 cls   50 -0.19 -0.46 cls
+}{}
+\end{minipage}
+}\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case 7: $\alpha_1=0$}
+
+The case of $\alpha_1=0$ is only possible if the coefficient matrix
+$\vect{A}$ has zero determinant.  Therefore there is an infinite number of
+critical points which satisfy
+\begin{eqnarray*}
+a_{11}y_1+a_{12}y_2&=&0\\
+a_{21}y_1+a_{22}y_2&=&0
+\end{eqnarray*}
+These two equations are equivalent because $a_{11}a_{22}-a_{12}a_{21}=0$. 
+Therefore any point on the line
+$$y_2=-\frac{a_{11}}{a_{12}}y_1=-\frac{a_{21}}{a_{22}}y_1$$
+is a critical point.  Any point on this line is a constant solution to the 
+differential equation system.  
+
+For any point away from this line, 
+$$\der{y_2}{y_1}=\frac{a_{21}y_1+a_{22}y_2}{a_{11}y_1+a_{12}y_2}
+=\frac{a_{21}}{a_{11}}=\frac{a_{22}}{a_{12}}$$
+Therefore the trajectory is 
+$$y_2=\frac{a_{21}}{a_{11}}y_1+c$$
+There are two subcases, depending on whether $\alpha_2$ is non-zero or zero.
+
+If $\alpha_2$ is non-zero, the trace of $\vect{A}$ is non-zero and
+$$a_{11}+a_{22}\neq 0$$
+Therefore the slope of the trajectory, $a_{21}/a_{11}$, is not equal to
+$-a_{21}/a_{22}$, the slope of the line of critical points.  Thus the
+trajectories are not parallel to the line of critical points.
+
+\begin{center}
+\phaseportrait{      clsinit -0.02 1 1 1 1
+      100 -0.9 0.7 cls  100 -0.7 0.9 cls 	100 0.7 -0.9 cls  100 0.9 -0.7 cls
+      100 -0.3 0.9 cls  100 -0.1 0.7 cls  100 0.1 0.5 cls 100 0.3 0.3 cls
+      100 0.5 0.1 cls   100 0.7 -0.1 cls  100 0.9 -0.3 cls
+      100 0.3 -0.9 cls  100 0.1 -0.7 cls  100 -0.1 -0.5 cls  100 -0.3 -0.3 cls
+      100 -0.5 -0.1 cls   100 -0.7 0.1 cls  100 -0.9 0.3 cls}
+{\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(1,-1)(-1,1)}
+\hspace{3cm}
+\phaseportrait{      clsinit 0.02 1 1 1 1
+      100 -0.9 0.7 cls  100 -0.7 0.9 cls 	100 0.7 -0.9 cls 100 0.9 -0.7 cls
+      100 -0.3 0.9 cls  100 -0.1 0.7 cls  100 0.1 0.5 cls  100 0.3 0.3 cls
+      100 0.5 0.1 cls   100 0.7 -0.1 cls  100 0.9 -0.3 cls
+      100 0.3 -0.9 cls  100 0.1 -0.7 cls  100 -0.1 -0.5 cls  100 -0.3 -0.3 cls
+      100 -0.5 -0.1 cls   100 -0.7 0.1 cls  100 -0.9 0.3 cls}
+{\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(1,-1)(-1,1)}
+\end{center}
+
+When $\alpha_2=0$, the trace of $\vect{A}$ is 
+$a_{11}+a_{22}=0$.  Thus the slope of the trajectory, $a_{21}/a_{11}$, is 
+equal to $-a_{21}/a_{22}$, the slope of the line of critical points, and
+the trajectories are parallel to the line of critical points.
+
+\begin{center}
+\phaseportrait
+{clsinit 0.02 1 1 -1 -1
+      100 -0.2 -0.2 cls  100 -0.4 -0.4 cls  100 -0.6 -0.6 cls  100 -0.8 -0.8 cls
+      100 0.2 0.2 cls    100 0.4 0.4 cls  100 0.6 0.6 cls  100 0.8 0.8 cls}
+{\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(1,-1)(-1,1)}
+\hspace{3cm}
+\phaseportrait
+{      clsinit -0.02 1 1 -1 -1
+      100 -0.2 -0.2 cls  100 -0.4 -0.4 cls  100 -0.6 -0.6 cls  100 -0.8 -0.8 cls
+      100 0.2 0.2 cls    100 0.4 0.4 cls    100 0.6 0.6 cls    100 0.8 0.8 cls}
+{\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(1,-1)(-1,1)}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Summary of Classification of Critical Points}
+
+Define $p$ and $q$ in terms of the coefficient matrix $\vect{A}$ as
+\begin{eqnarray*}
+p&=&\frac{1}{2}\,\mbox{trace}(\vect{A})\\
+q&=&\left|\vect{A}\right|
+\end{eqnarray*}
+Then the eigenvalues of $\vect{A}$ are
+$$\alpha_1, \alpha_2 = p\pm\sqrt{p^2-q}$$
+The critical points can be classified in terms of $p$ and $q$ as shown in 
+figure~\ref{nlc fig:cp}.
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This illustrates the classification of critical points in terms of 
+$p$ and $q$.  The abbreviations are: un - unstable node; us - unstable spiral;
+c - centre; ss - stable spiral; sn - stable node; dn - degenerate node; st -
+star point; dc - degenerate case; sp - saddle point.}
+\label{nlc fig:cp}
+
+\psset{unit=2.5cm}
+\begin{pspicture}(-1.4,-1.4)(1.5,1.5)
+%\psframe(-1.4,-1.4)(1.5,1.5)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=1.5pt,plotstyle=curve]{0}{1}{x sqrt}
+\psplot[linecolor=gray,linewidth=1.5pt,plotstyle=curve]{0}{1}{x sqrt neg}
+% Now the axes and their labels
+\psset{linewidth=1.2pt,linecolor=black}
+\psline{->}(-1.2,0)(1.2,0)
+\psline{->}(0,-1.2)(0,1.2)
+\uput[r](1.2,0){$q$}
+\uput[u](0,1.2){$p$}
+% The items of text
+\put(0.7,0.3){us}
+\put(0.7,-0.3){ss}
+\put(0.7,0.02){c}
+\put(0.3,0.9){un}
+\put(0.3,-0.9){sn}
+\put(-0.7,0.3){sp}
+\put(-0.7,-0.3){sp}
+\put(0,0.6){dc}
+\put(0,-0.6){dc}
+\put(0.81,0.85){dn or st}
+\put(0.81,-0.9){dn or st}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Examples}
+
+The following examples illustrate phase portraits of the system
+$$\dot{\vect{Y}}=\vect{A}\vect{Y}$$
+for various matrices $\vect{A}$.
+
+%============================================================================
+\begin{example}
+When $$\vect{A}=\begin{bmatrix}2 & 1 \\ 1 & 2 \end{bmatrix}$$
+$p=2$ and $q=3$ so
+the eigenvalues are $2\pm\sqrt{4-3}$ or $1$ and $3$.  The corresponding
+eigenvectors are $\vect{K}_3=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and
+$\vect{K}_1=\begin{bmatrix} 1 \\ -1 \end{bmatrix}$.  As $t\to\infty$, the
+trajectories become parallel to the eigenvector with the largest eigenvalue, 
+hence parallel to $\vect{K}_3$.  Since $p>0$, this is an unstable node.
+
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 2 1 1 2
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      50 0.9 0.1 cls	50 1 -0.3 cls	   50 0.1 0.9 cls     50 -0.3 1 cls
+      50 -0.9 -0.1 cls	50 -1 0.3 cls	   50 -0.1 -0.9 cls   50 0.3 -1 cls
+}{
+\uput[u](1,1){$\vect{K}_3$}
+\uput[u](-1,1){$\vect{K}_1$}
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When $$\vect{A}=\begin{bmatrix}-2 & 1 \\ 1 & -2 \end{bmatrix}$$
+$p=-2$ and $q=3$ so
+the eigenvalues are $-2\pm\sqrt{4-3}$ or $-1$ and $-3$.  The corresponding
+eigenvectors are $\vect{K}_{-3}=\begin{bmatrix} 1 \\ -1 \end{bmatrix}$ and
+$\vect{K}_{-1}=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$.  
+Since $p<0$, this is a stable node.
+
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 -2 1 1 -2
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      50 0.9 0.1 cls	50 1 -0.3 cls	   50 0.1 0.9 cls     50 -0.3 1 cls
+      50 -0.9 -0.1 cls	50 -1 0.3 cls	   50 -0.1 -0.9 cls   50 0.3 -1 cls
+}{
+\uput[u](1,1){$\vect{K}_{-1}$}
+\uput[u](-1,1){$\vect{K}_{-3}$}
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When 
+$$\vect{A}=\begin{bmatrix} 1 & 2 \\ 2 & 1 \end{bmatrix}$$ 
+$p=1$ and $q=-3$ so
+the eigenvalues are $1\pm\sqrt{1+3}$ or $3$ and $-1$.  The corresponding
+eigenvectors are $\vect{K}_{3}=\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and
+$\vect{K}_{-1}=\begin{bmatrix} 1 \\ -1 \end{bmatrix}$.  
+Since $q<0$, this is a saddle point.
+
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 1 2 2 1
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      80 0 0.4 cls	80 -0.1 0.8 cls	   80 -0.2 1.2 cls
+      80 0.1 -0.8 cls   80 0 -0.4 cls	   80 0.2 -1.2 cls	
+      80 0.4 0 cls	80 0.8 -0.1 cls	   80 1.2 -0.2 cls
+      80 -0.8 0.1 cls   80 -0.4 0 cls    80 -1.2 0.2 cls
+}{
+\uput[u](1,1){$\vect{K}_3$}
+\uput[u](-1,1){$\vect{K}_{-1}$}
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When $$\vect{A}=\begin{bmatrix}1 & -2 \\ 5 & -1 \end{bmatrix}$$
+$p=0$ and $q=9$ so
+the eigenvalues are $0\pm\sqrt{0-9}$ or $\pm i3$.  The eigenvector 
+corresponding to $\alpha=i3$ is $\vect{K}_{i3}=\begin{bmatrix} 1 \\
+(1-i3)/2 \end{bmatrix}$.
+
+Therefore this is a centre, and the trajectories are ellipses about the
+origin.  Since $\dot{y}_2>0$ when $y_2=0$ and $y_1>0$, the trajectories are
+anticlockwise.  The ellipses can be sketched by noting that
+\begin{eqnarray*}
+\der{y_2}{y_1}&=&5\qquad\mbox{when $y_2=0$}\\
+\der{y_2}{y_1}&=&\frac{1}{2}\qquad\mbox{when $y_1=0$}
+\end{eqnarray*}
+
+\begin{center}
+\phaseportrait{
+      clsinit 0.01 1 -2 5 -1
+      100 0.2 0.2 cls    200 0.4 0.4 cls    300 0.6 0.6 cls
+}{
+\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(0.5,-0.5)(0.7,0.5)
+\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(-0.5,0.7)(0.5,1.2)
+\uput[d](1,-0.3){slope=$5$}
+\uput[ul](0,0.91){slope=$\frac{1}{2}$}
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When 
+$$\vect{A}=\begin{bmatrix} 1 & -3 \\ 3 & 1 \end{bmatrix}$$
+$p=1$ and $q=10$ so
+the eigenvalues are $1\pm\sqrt{-9}$ or $1\pm i3$.  Therefore the
+trajectories are unstable spirals.  To find out whether the arrow on the
+spiral trajectories is pointing clockwise or anticlockwise, consider
+$\dot{y}_2=3y_1$.  Thus when $y_2=0$ and $y_1>0$, the trajectory's gradient
+is positive.  Hence the spiral has anticlockwise sense.  The shape of the
+spiral is found by considering
+\begin{eqnarray*}
+\der{y_2}{y_1}&=&3\quad\mbox{when $y_2=0$}\\
+\der{y_2}{y_1}&=&-\frac{1}{3}\quad\mbox{when $y_1=0$}
+\end{eqnarray*}
+
+% Example 5
+\begin{center}
+\phaseportrait{
+      clsinit 0.01 1 -3 3 1
+      400 0.5 0.5 cls 
+}{
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When
+$$\vect{A}=\begin{bmatrix} -1 & -3 \\ 3 & -1 \end{bmatrix}$$
+$p=-1$ and $q=10$ so
+the eigenvalues are $-1\pm\sqrt{-9}$ or $-1\pm i3$.  Therefore the
+trajectories are stable spirals.  To find out whether the arrow on the
+spiral trajectories is pointing clockwise or anticlockwise, consider
+$\dot{y}_2=3y_1$.  Thus when $y_2=0$ and $y_1>0$, the trajectory's gradient
+is positive.  Hence the spiral has anticlockwise sense.  The shape of the
+spiral is found by considering
+\begin{eqnarray*}
+\der{y_2}{y_1}&=&-3\quad\mbox{when $y_2=0$}\\
+\der{y_2}{y_1}&=&\frac{1}{3}\quad\mbox{when $y_1=0$}
+\end{eqnarray*}
+
+% Example 6
+\begin{center}
+\phaseportrait{
+      clsinit 0.01 -1 -3 3 -1
+      400 0.5 0.5 cls 
+}{
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When 
+$$\vect{A}=\begin{bmatrix} 1 & 1 \\ -1 & 3 \end{bmatrix}$$
+$p=2$ and $q=4$ so
+there is a repeated eigenvalue of $2$.  This is therefore an unstable
+degenerate node.  The eigenvector is $\vect{K}_{2}=\begin{bmatrix} 1 \\ 1 
+\end{bmatrix}$.  The form of the phase portrait can be sketched
+once $\dot{y}_2=-y_1$ has been determined for $y_2=0$ and $y_1>0$.
+
+% Example 7
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 1 1 -1 3
+      100 0.5  0.5 cls  100 -0.5 -0.5 cls
+      100 0.3  0.7 cls  100 -0.3 -0.7 cls
+      100 0    0.7 cls  100 0    -0.7 cls
+      100 -0.3 0.7 cls  100 0.3  -0.7 cls
+      100 -0.7 0.4 cls  100 0.7  -0.4 cls		
+      100 -1   0.1 cls  100 1    -0.1 cls	
+}{
+\uput[u](1,1){$\vect{K}_2$}
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When 
+$$\vect{A}=\begin{bmatrix} -1 & 1 \\ -1 & -3 \end{bmatrix}$$
+$p=-2$ and $q=4$ so
+there is a repeated eigenvalue of $-2$.  This is therefore a stable
+degenerate node.  The eigenvector is $\vect{K}_{-2}=\begin{bmatrix} 1 \\ -1 
+\end{bmatrix}$.  The form of the phase portrait can be sketched
+once $\dot{y}_2=-y_1$ has been determined for $y_2=0$ and $y_1>0$.
+
+% Example 8
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 -1 1 -1 -3
+      100 -0.5  0.5 cls  100 0.5 -0.5 cls
+      100 -0.3  0.7 cls  100 0.3 -0.7 cls
+      100 0    0.7 cls   100 0    -0.7 cls
+      100 0.3 0.7 cls    100 -0.3  -0.7 cls
+      100 0.7 0.4 cls    100 -0.7  -0.4 cls		
+      100 1   0.1 cls    100 -1    -0.1 cls	
+}{
+\uput[u](-1,1){$\vect{K}_{-2}$}
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+When 
+$$\vect{A}=\begin{bmatrix} 1 & 1 \\ 3 & 3 \end{bmatrix}$$
+$p=2$ and $q=0$ so
+the eigenvalues are $2\pm\sqrt{4}$ or $0$ and $4$.  $\alpha=0$ shows that
+this is a degenerate case, and $\alpha=4$ shows that the critical points are
+unstable.
+
+The line of critical points satisfies $y_1+y_2=0$ hence is given by
+$y_1=-y_2$.  For points away from this line, the trajectories are straight
+lines with gradients given by
+$$\der{y_2}{y_1}=\frac{3y_1+3y_2}{y_1+y_2}=3$$
+hence the equation of the trajectories is
+$$y_2=3y_1+c$$
+
+% Example 9
+\begin{center}
+\phaseportrait{
+      clsinit 0.04 1 1 3 3
+      50 -0.9 1.3 cls   50 0.9 -1.3 cls
+      50 -0.7 1.1 cls   50 0.7 -1.1 cls 
+      50 -0.5 0.9 cls   50 0.5 -0.9 cls 
+      50 -0.3 0.7 cls   50 0.3 -0.7 cls 
+      50 -0.1 0.5 cls   50 0.1 -0.5 cls 
+      50 0.1 0.3  cls   50 -0.1 -0.3 cls 
+      50 0.3 0.1  cls   50 -0.3 -0.1 cls 
+      50 0.5 -0.1 cls   50 -0.5 0.1 cls 
+      50 0.7 -0.3 cls   50 -0.7 0.3 cls 
+      50 0.9 -0.5 cls   50 -0.9 0.5 cls 
+      50 1.1 -0.7 cls   50 -1.1 0.7 cls
+      50 1.3 -0.9 cls   50 -1.3 0.9 cls
+}{
+\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(1,-1)(-1,1)
+}
+\end{center}
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Non-Linear Critical Point Analysis}
+
+Suppose the non-linear coupled system
+\begin{eqnarray*}
+\dot{y}_1&=&f_1(y_1,y_2)\\
+\dot{y}_2&=&f_2(y_1,y_2)
+\end{eqnarray*}
+has a critical point at $(y_1^*,y_2^*)$ so that
+$$f_1(y_1^*,y_2^*)=f_2(y_1^*,y_2^*)=0$$
+Then using Taylor's theorem, we can expand the function $f(y_1,y_2)$ about
+$(y_1^*,y_2^*)$
+\begin{eqnarray*}
+f(y_1,y_2)&=&f(y_1^*,y_2^*)
++\left.\frac{\del f}{\del y_1}\right|_{(y_1^*,y_2^*)}(y_1-y_1^*)\\
+&&{}+\left.\frac{\del f}{\del y_2}\right|_{(y_1^*,y_2^*)}(y_2-y_2^*)+\cdots
+\end{eqnarray*}
+where the ``$\cdots$'' indicates terms that are quadratic and higher powers
+of $(y_1-y_1^*)$ and $(y_2-y_2^*)$.
+
+Close to the critical point, the quadratic and higher order terms may be
+neglected, leading to the approximate expression for the coupled system
+\begin{eqnarray*}
+\dot{y}_1&=&\left.\frac{\del f_1}{\del y_1}\right|_{(y_1^*,y_2^*)}(y_1-y_1^*)
++\left.\frac{\del f_1}{\del y_2}\right|_{(y_1^*,y_2^*)}(y_2-y_2^*)\\
+\dot{y}_2&=&\left.\frac{\del f_2}{\del y_1}\right|_{(y_1^*,y_2^*)}(y_1-y_1^*)
++\left.\frac{\del f_2}{\del y_2}\right|_{(y_1^*,y_2^*)}(y_2-y_2^*)
+\end{eqnarray*}
+Define new local variables
+\begin{eqnarray*}
+z_1&=&y_1-y_1^*\\
+z_2&=&y_2-y_2^*
+\end{eqnarray*}
+Then for sufficiently small $(z_1,z_2)$, we have
+$$\begin{bmatrix} \dot{z}_1 \\ \dot{z}_2\end{bmatrix} =	\vect{A}
+\begin{bmatrix} z_1 \\ z_2\end{bmatrix}$$
+where $\vect{A}$ is the matrix
+$$\begin{bmatrix} \frac{\del f_1}{\del y_1} & \frac{\del f_1}{\del y_2} \\
+\frac{\del f_2}{\del y_1} & \frac{\del f_2}{\del y_2}\end{bmatrix}$$
+evaluated at $(y_1^*,y_2^*)$.
+
+Then locally in the neighbourhood of the critical point, the trajectories of
+the non-linear system will be the same as those of the local linear system
+$$\dot{\vect{Z}}=\vect{A}\vect{Z}$$
+
+This gives the following procedure for classifying the critical points of a
+general non-linear coupled system:
+\begin{itemize}
+\item Classify the critical points of
+\begin{eqnarray*}
+\dot{y}_1&=&f_1(y_1,y_2)\\
+\dot{y}_2&=&f_2(y_1,y_2)
+\end{eqnarray*}
+by classifying the local linear problem
+$$\dot{\vect{Z}}=\vect{A}\vect{Z}$$
+for each critical point in turn.  Note that $\vect{A}$ will be different for each
+critical point.
+\item Construct the global phase portrait by blending the local linear phase
+portraits around each critical point.
+\end{itemize}
+
+%============================================================================
+\begin{example}[Volterra-Lotka System]
+
+As previously shown in example \ref{nlc: ex vl}, the critical points of the 
+Volterra-Lotka system are at $(0,0)$ and at $(c/d,a/b)$.
+
+In the neighbourhood of $(0,0)$, $y_1$ and $y_2$ are both small so the
+quadratic terms $y_1y_2$ may be neglected.  This gives the linearised system
+$$\begin{bmatrix} \dot{y}_1 \\ \dot{y}_2 \end{bmatrix} = 
+\begin{bmatrix} -a & 0 \\ 0 & c \end{bmatrix}
+\begin{bmatrix} y_1 \\ y_2 \end{bmatrix} $$
+The eigenvalues are $-a$ and $c$, hence the origin is a saddle point.  
+The eigenvectors are 
+$\vect{K}_{-a}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and
+$\vect{K}_{c}=\begin{bmatrix} 0 \\ 1 \end{bmatrix}$.  
+We are only interested in the system's behaviour for positive $y_1$ and $y_2$,
+so the portion of the phase portrait near the origin is
+
+\begin{center}
+\phaseportrait{
+      clsinit 0.02 -1 0 0 1
+      50 0.5 0 cls    50 0 0.5 cls 
+      80 0.4 0.4 cls	80 0.8 0.8 cls	  
+}{
+}
+\end{center}
+
+\noindent In the neighbourhood of $(c/d,a/b)$, shift the origin by writing
+\begin{eqnarray*}
+y_1&=&\frac{c}{d}+z_1\\
+y_2&=&\frac{a}{b}+z_2
+\end{eqnarray*}
+and substitute into the Volterra-Lotka equations.  After neglecting
+quadratic terms, the linearised system is
+$$\begin{bmatrix} \dot{z}_1 \\ \dot{z}_2 \end{bmatrix} = 
+\begin{bmatrix} 0 & cb/d \\ -ad/b & 0 \end{bmatrix}
+\begin{bmatrix} z_1 \\ z_2 \end{bmatrix}$$
+The eigenvalues are $\pm i\sqrt{ac}$, hence this critical point is a centre.
+Looking at the signs of the coefficients shows that the direction of
+rotation about the critical point is clockwise.
+
+\begin{center}
+% Circular phase portraits
+\zphaseportrait{clsinit 0.02 0 1 -1 0 100 0.42 0.42 cls 200 0.707 0.707 cls}{}
+\end{center}
+
+Putting these two critical points together and smoothly combining their
+trajectories gives the global phase portrait shown below.
+
+\begin{center}
+\psset{unit=2cm}
+\begin{pspicture}(0,-0.3)(2.5,2.9)
+% First the Volterra-Lotka curves.  These are plotted by a PostScript routine
+\pscustom[linewidth=0.0278pt,linecolor=gray]{
+\code{
+gsave
+2 2.5 div 72 mul dup scale
+% Draw Volterra-Lotke system about (1,1).  The equations are
+% \dot{x}=x(y-1)	\dot{y}=y(1-x)
+% Volterra: dt x y  --  dt x+dx y+dy
+/volterra {
+	2 copy 1 sub mul	% --  dt x y x(y-1)
+	4 copy pop		% --  dt x y x(y-1) dt x y
+	exch 1 exch sub mul 	% --  dt x y x(y-1) dt y(1-x)
+	exch dup	 	% --  dt x y x(y-1) y(1-x) dt dt
+	3 -1 roll mul 		% --  dt x y x(y-1) dt dty(1-x)
+	3 1 roll mul 		% --  dt x y dty(1-x) dtx(y-1)
+	4 -1 roll add 		% --  dt y dty(1-x) x+dtx(y-1)
+	3 1 roll add 		% --  dt x+dtx(y-1) y+dty(1-x)
+} def
+%
+% Draw one cycle of VL phase portrait.  The starting point is assumed to be
+% (x0,y0) where x0=1 and 0<y0<1.
+% drawvolterra: dt y  --  dt
+/drawvolterra {
+	/VLstoppable false def
+	newpath 1 exch		% --  dt 1 y
+	2 copy moveto		% --  dt 1 y
+	800 {			% --  dt 1 y
+		volterra	% --  dt x y 
+		2 copy lineto	% --  dt x y 
+		dup 1 gt {/VLstoppable true def} if
+		2 copy 1 lt exch 1 lt and VLstoppable and {exit} if
+	} repeat
+	pop pop			% --  dt
+%	closepath
+	stroke
+} def
+% phaseportrait
+newpath
+%0 0 moveto 3 0 lineto 3 3 lineto 0 3 lineto closepath stroke
+%0 0 moveto 1 0 lineto 1 1 lineto 0 1 lineto closepath stroke
+0 0 moveto 2.5 0 lineto 2.5 2.5 lineto 0 2.5 lineto closepath clip
+0.01 0.1 drawvolterra
+0.2 drawvolterra 
+0.3 drawvolterra 
+0.4 drawvolterra 
+0.5 drawvolterra 
+0.6 drawvolterra 
+0.7 drawvolterra 
+0.8 drawvolterra 
+0.9 drawvolterra pop
+grestore
+}
+}
+% Axes
+\psline{->}(0,0)(2.6,0)
+\psline{->}(0,0)(0,2.6)
+\uput[r](2.6,0){$y_1$}
+\uput[u](0,2.6){$y_2$}
+\uput[d](1,0){$\ds\frac{c}{d}$}
+\uput[l](0,1){$\ds\frac{a}{b}$}
+\uput[dl](0,0){$0$}
+% Dashed lines
+\psline[linecolor=black,linestyle=dashed]{-}(0,1)(1,1) 
+\psline[linecolor=black,linestyle=dashed]{-}(1,0)(1,1) 
+% Arrows on the VL curves
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.1)(0.99,0.1)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.2)(0.99,0.2)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.3)(0.99,0.3)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.4)(0.99,0.4)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.5)(0.99,0.5)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.6)(0.99,0.6)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.7)(0.99,0.7)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.8)(0.99,0.8)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.9)(0.99,0.9)
+\end{pspicture}
+\end{center}
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+
+For the system
+\begin{eqnarray*}
+\dot{y}_1&=&1-y_1^2-y_2^2\\
+\dot{y}_2&=&2y_1
+\end{eqnarray*}
+the critical points are $(0,1)$ and $(0,-1)$.
+
+For the critical point at $(0,1)$, let $y_1=z_1$ and $y_2=1+z_2$ and
+substitute into the differential equations.  Neglecting the quadratic terms
+gives the linearised system
+$$\begin{bmatrix} \dot{z}_1 \\ \dot{z}_2 \end{bmatrix} = 
+\begin{bmatrix} 0 & -2 \\ 2 & 0 \end{bmatrix}
+\begin{bmatrix} z_1 \\ z_2 \end{bmatrix}$$
+The eigenvalues are $\pm i\sqrt{ac}$, hence this critical point is a centre.
+Looking at the signs of the coefficients shows that the direction of
+rotation about the critical point is anticlockwise.
+
+\begin{center}
+% Circular phase portraits
+\zphaseportrait{clsinit 0.02 0 -2 2 0 100 0.42 0.42 cls 200 0.707 0.707 cls}{}
+\end{center}
+
+For the critical point at $(0,-1)$, let $y_1=z_1$ and $y_2=-1+z_2$ and
+substitute into the differential equations.  Neglecting the quadratic terms
+gives the linearised system
+$$\begin{bmatrix} \dot{z}_1 \\ \dot{z}_2 \end{bmatrix} = 
+\begin{bmatrix} 0 & 2 \\ 2 & 0 \end{bmatrix}
+\begin{bmatrix} z_1 \\ z_2 \end{bmatrix}$$
+This gives a saddle point.
+
+\begin{center}
+\zphaseportrait{
+      clsinit 0.02 0 2 2 0
+      50 0.5 0.5 cls    50 -0.5 0.5 cls    50 0.5 -0.5 cls    50 -0.5 -0.5 cls 
+      80 0 0.4 cls	80 0 0.8 cls	   80 0 -0.8 cls      80 0 -0.4 cls
+      80 0.4 0 cls	80 0.8 0 cls	   80 -0.8 0 cls      80 -0.4 0 cls
+      80 0 1.2 cls	80 0 -1.2 cls	   80 1.2 0 cls	      80 -1.2 0 cls}{
+}
+\end{center}
+
+Putting these two critical points together and smoothly combining their
+trajectories gives the global phase portrait shown below.
+
+\begin{center}
+\psset{unit=1.3cm}
+\begin{pspicture}(-2.4,-2.4)(2.6,2.6)
+%\psframe(-2.4,-2.4)(2.6,2.6)
+\pscustom[linecolor=gray,linewidth=1.5pt]{
+  \code{
+    % First scale to make the PS coordinate system the same as PSTricks'
+    1.3 2.54 div 72 mul dup dup scale CLW exch div SLW
+    % Now the phase portrait, using the macros in PHASPORT.PRO
+    save
+    % This redefines the /clsiterate loop in the file phasport.pro 
+    % to do the quadratic system x'=1-x^2-y^2, y'=2x.  
+    % The four parameters a, b, c and d are ignored, for compatibility.
+    % clsiterate: dt a b c d x y -- dt a b c d x+dx y+dy
+    clsDict begin
+    /clsiterate {
+    	7 copy 2 copy 		% -- dt a b c d x y dt a b c d x y x y 
+    	pairmul add 1 exch sub	% -- dt a b c d x y dt a b c d 1-x^2-y^2
+	5 1 roll pop pop pop pop % -- dt a b c d x y dt 1-x^2-y^2
+	4 copy pop pop pop 2 mul % -- dt a b c d x y dt 1-x^2-y^2 2x
+	2 copy 2 copy pairmul	% -- dt a b c d x y dt dx dy dx^2 dy^2
+	add sqrt  		% -- dt a b c d x y dt dx dy dr
+	4 -1 roll   		% -- dt a b c d x y dx dy dr dt
+	exch div   		% -- dt a b c d x y dx dy dd
+	dup pairmul  		% -- dt a b c d x y dx*dd dy*dd
+	pairadd			% -- dt a b c d x1 y1
+    } def
+    % The following code replaces /clsinit
+    % Set the clipping path to the box from (-2.2,-2.2) to (2.2,2.2)
+    newpath -2.2 -2.2 moveto 0 4.4 rlineto 4.4 0 rlineto 0 -4.4 rlineto 
+    closepath clip
+    % The coefficients 1 1 1 1 are dummies.  The new /clsiterate does not use them.
+    0.01 1 1 1 1
+    800 -0.3 1.6 cls
+    800 -0.4 1.8 cls
+    250 0.1 0 cls
+    160 0.1 0.4 cls
+    100 0.1 0.8 cls
+    300 0.1 -0.4 cls
+    350 0.1 -0.8 cls
+    200 0.1 -1.4 cls
+    200 0.1 -1.8 cls
+    clsend
+    end
+    restore
+  }
+}
+% Draw the axes and their labels last so they show through
+\psset{linewidth=1.2pt,linecolor=black}
+\psline{->}(-2.2,0)(2.2,0)
+\psline{->}(0,-2.2)(0,2.2)
+\uput[r](2.2,0){$y_1$}
+\uput[u](0,2.2){$y_2$}
+\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(-0.5,-1.5)(0.5,-0.5)
+\psline[linecolor=black,linestyle=dashed,linewidth=0.8pt]{-}(-0.5,-0.5)(0.5,-1.5)
+\uput[l](0,1){$1$}
+\uput[l](0,-1){$-1$}
+\end{pspicture}
+\end{center}
+\end{example}
+%============================================================================
+

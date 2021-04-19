@@ -1,0 +1,416 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8 Feb-96 SS: Updated with corrections from semester 2, 1995
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+
+\chapter{Vector Functions}
+\label{vf chp}
+
+A vector function $\vect{F}(t)$
+$$\vect{F}(t)=F_x(t)\ivect+F_y(t)\jvect+F_z(t)\kvect$$
+where $F_x(t)$, $F_y(t)$ and $F_z(t)$ are scalar functions of $t$, describes 
+a trajectory in space as the parameter $t$ is varied.
+
+Since the three unit vectors $\ivect$, $\jvect$ and $\kvect$ are constant
+vectors, the first and second derivatives of $\vect{F}(t)$ are
+\begin{eqnarray*}
+\der{\vect{F}}{t}=\dot{\vect{F}}
+&=&\lim_{\delta t\to 0}\frac{\vect{F}(t+\delta t)-\vect{F}(t)}{\delta t} \\
+&=&\dot{F_x}\ivect+\dot{F_y}\jvect+\dot{F_z}\kvect
+\end{eqnarray*}
+and
+\begin{eqnarray*}
+\dder{\vect{F}}{t}=\ddot{\vect{F}}
+&=&\lim_{\delta t\to 0}\frac{\dot{\vect{F}}(t+\delta t)
+-\dot{\vect{F}}(t)}{\delta t} \\
+&=&\ddot{F_x}\ivect+\ddot{F_y}\jvect+\ddot{F_z}\kvect
+\end{eqnarray*}
+
+In the limit as $\delta t\to 0$, $\vect{F}(t+\delta t)-\vect{F}(t)$ becomes
+tangential to the trajectory curve so that $\dot{\vect{F}}(t)$ is the tangent 
+at $t$.
+
+If $t$ is time and $\vect{r}(t)$ is the position of a particle at time $t$
+$$\vect{r}(t)=x(t)\ivect+y(t)\jvect+z(t)\kvect$$
+where $x(t)$, $y(t)$ and $z(t)$ are the particle's Cartesian coordinates, 
+the velocity of the particle is
+$$\dot{\vect{r}}(t)=\dot{x}(t)\ivect+\dot{y}(t)\jvect+\dot{z}(t)\kvect$$
+and the acceleration is 
+$$\ddot{\vect{r}}(t)=\ddot{x}(t)\ivect+\ddot{y}(t)\jvect+\ddot{z}(t)\kvect$$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Differentiation of Sums and Products}
+
+Let $\vect{F}(t)$ and $\vect{G}(t)$ be vector functions and $f(t)$ be a
+scalar function.  Then
+$$\dbd{t}\left(\vect{F}+\vect{G}\right)=\der{\vect{F}}{t}+\der{\vect{G}}{t}$$
+$$\dbd{t}\left(\vect{F}\cdot\vect{G}\right)=\der{\vect{F}}{t}\cdot\vect{G}
++\vect{F}\cdot\der{\vect{G}}{t}$$
+$$\dbd{t}\left(\vect{F}\times\vect{G}\right)=\der{\vect{F}}{t}\times\vect{G}
++\vect{F}\times\der{\vect{G}}{t}$$
+$$\dbd{t}\left(f\vect{F}\right)=\der{f}{t}\vect{F}+f\der{\vect{F}}{t}$$
+
+%============================================================================
+\begin{example}
+A particle moving with \name{constant rectilinear motion} has Cartesian 
+coordinates
+\begin{eqnarray*}
+x(t)&=&at+b\\
+y(t)&=&ct+d\\
+z(t)&=&et+f
+\end{eqnarray*}
+so the position of the particle can be written
+$$\vect{r}(t)=(at+b)\ivect+(ct+d)\jvect+(et+f)\kvect=\vect{r}_0+\vect{v}t$$
+where
+\begin{eqnarray*}
+\vect{r}_0&=&b\ivect+d\jvect+f\kvect \\
+\vect{v}&=&a\ivect+c\jvect+e\kvect 
+\end{eqnarray*}
+are constant vectors.
+
+Then the velocity is
+$$\dot{\vect{r}}=\dot{x}\ivect+\dot{y}\jvect+\dot{z}\kvect
+=a\ivect+c\jvect+e\kvect=\vect{v}$$
+and the acceleration is
+$$\ddot{\vect{r}}=\ddot{x}\ivect+\ddot{y}\jvect+\ddot{z}\kvect
+=\vect{0}$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+A particle moving with \name{uniform circular motion} has Cartesian 
+coordinates
+\begin{eqnarray*}
+x(t)&=&x_0+a\cos\omega t\\
+y(t)&=&y_0+a\sin\omega t\\
+z(t)&=&0
+\end{eqnarray*}
+so the position of the particle can be written
+$$\vect{r}(t)=\vect{r}_0+a\cos\omega t\ivect+a\sin\omega t\jvect$$
+where
+$$\vect{r}_0=x_0\ivect+y_0\jvect$$
+Note that
+$$\left|\vect{r}-\vect{r}_0\right|
+=\left|a\cos\omega t\ivect+a\sin\omega t\jvect\right|=a$$
+
+The velocity is
+$$\dot{\vect{r}}(t)=-a\omega\sin\omega t\ivect+a\omega\cos\omega t\jvect$$
+so the speed is constant
+$$\left|\dot{\vect{r}}\right|=a\omega$$
+and that the velocity is orthogonal to $\vect{r}-\vect{r}_0$
+$$\dot{\vect{r}}\cdot\left(\vect{r}-\vect{r}_0\right)=0$$
+This orthogonality can be proved by direct substitution, or alternatively,
+by using 
+$$\left(\vect{r}-\vect{r}_0\right)\cdot\left(\vect{r}-\vect{r}_0\right)
+=\left|\vect{r}-\vect{r}_0\right|^2=a^2$$
+Then differentiating with respect to time, 
+$$0=\dbd{t}a^2=\dbd{t}\left|\vect{r}-\vect{r}_0\right|^2
+=2\left(\dbd{t}(\vect{r}-\vect{r}_0)\right)
+\cdot\left(\vect{r}-\vect{r}_0\right)$$
+Since $\dot{\vect{r}}_0=0$, 
+$$\dot{\vect{r}}\cdot\left(\vect{r}-\vect{r}_0\right)=0$$
+as required.
+
+The acceleration is
+$$\ddot{\vect{r}}(t)=-a\omega^2\cos\omega t\ivect
+-a\omega^2\sin\omega t\jvect=-\omega^2 (\vect{r}-\vect{r}_0)$$
+Note that the acceleration is inwards along the radius of the circle and
+that the magnitude of the acceleration is constant
+$$\left|\ddot{\vect{r}}\right|=\omega^2 a$$
+Also, the acceleration and velocity are at right angles
+$$\dot{\vect{r}}\cdot\ddot{\vect{r}}=0$$
+This can be shown by direct substitution or by differentiating 
+$$\dot{\vect{r}}\cdot\dot{\vect{r}}=\left|\dot{\vect{r}}\right|^2
+=a^2\omega^2$$
+with respect to $t$ to give
+$$\dot{\vect{r}}\cdot\ddot{\vect{r}}+\ddot{\vect{r}}\cdot\dot{\vect{r}}=0$$
+so that
+$$\dot{\vect{r}}\cdot\ddot{\vect{r}}=0$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{exercise}
+Problems and more examples can be found in chapter 1 of Fowles.
+\end{exercise}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Polar Coordinates}
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The unit vectors for polar coordinates $(r,\theta)$ are $\rvect$ in 
+the radial direction and $\tvect$ in the transverse direction.}
+\label{vf fig:polar}
+
+\psset{xunit=5cm,yunit=5cm}
+\begin{pspicture}(-0.25,-0.35)(1.3,1.4)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0.5}{1}%
+{1 1 x x mul sub sqrt sub}
+% Now the axes and their labels
+\psline{->}(-0.25,0)(1.2,0)
+\psline{->}(0,-0.3)(0,1.2)
+\uput[dl](0,0){$O$}
+\uput[r](1.2,0){$x$}
+\uput[u](0,1.2){$y$}
+\pcline[linecolor=black,linewidth=1pt]{->}(0,0)(0.707,0.293)
+\Aput{$r$}
+
+\rput[bl]{22.5}(0.707,0.293){
+	\psline{->}(0,0)(0.15,0) \rput[l]{*0}(0.16,0){$\rvect$}
+	\psline{->}(0,0)(0,0.15) \rput[b]{*0}(0,0.16){$\tvect$}
+}
+\uput[dr](0.707,0.293){$P$}
+\psarc{->}(0,0){1}{0}{22.5}
+\uput[r](0.2,0.05){$\theta$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+Consider a point $P$ at $(x,y)$ so that $\vect{r}=x\ivect+y\jvect$.
+As shown in figure \ref{vf fig:polar}, $\vect{r}$ can be written in terms of
+$r$ and $\theta$, where $r$ is the particle's distance from the origin and
+$\theta$ is the angle that $\vect{r}$ makes with the positive $x$ axis.
+\begin{eqnarray*}
+x&=&r\cos\theta\\
+y&=&r\sin\theta
+\end{eqnarray*}
+Then the velocity can also be written in terms of $r$ and $\theta$
+\begin{eqnarray*}
+\dot{x}&=&\dot{r}\cos\theta-r\dot{\theta}\sin\theta\\
+\dot{y}&=&\dot{r}\sin\theta+r\dot{\theta}\cos\theta
+\end{eqnarray*}
+so that
+\begin{eqnarray*}
+\dot{\vect{r}}
+&=&\dot{x}\ivect+\dot{y}\jvect\\
+&=&(\dot{r}\cos\theta-r\dot{\theta}\sin\theta)\ivect+
+(\dot{r}\sin\theta+r\dot{\theta}\cos\theta)\jvect \\
+&=&\dot{r}(\cos\theta\ivect+\sin\theta\jvect)+r\dot{\theta}(-\sin\theta\ivect
++\cos\theta\jvect)
+\end{eqnarray*}
+Therefore
+$$\dot{\vect{r}}=\dot{r}\rvect+r\dot{\theta}\tvect$$
+where $\rvect$ is the \name{radial unit vector} in the direction of
+$r$ increasing
+$$\rvect=\cos\theta\ivect+\sin\theta\jvect=\frac{\vect{r}}{r}$$
+Note that $\left|\hat{\vect{r}}\right|=1$ because $\hat{\vect{r}}$ is a unit
+vector.  $\hat{\vect{r}}$ is not a constant vector (like $\ivect$) but
+changes direction as $\theta$ changes.
+
+$\tvect$ is the \name{transverse unit vector} in the direction 
+of $\theta$ increasing
+$$\tvect=-\sin\theta\ivect+\cos\theta\jvect$$
+which is orthogonal to $\rvect$ 
+$$\tvect\cdot\rvect=0$$
+Note that $\left|\hat{\vect{\theta}}\right|=1$ because $\hat{\vect{\theta}}$ 
+is a unit vector.  $\hat{\vect{\theta}}$ is not a constant vector but
+changes direction as $\theta$ changes.
+
+In the expression for velocity in polar coordinates,
+$$\dot{\vect{r}}=\dot{r}\rvect+r\dot{\theta}\tvect$$
+$\dot{r}$ is called the \name{radial velocity} and $r\dot{\theta}$ is called
+the \name{transverse velocity}.
+
+The derivative of the radial unit vector is
+$$\der{\rvect}{t}=\dbd{t}(\cos\theta\ivect+\sin\theta\jvect)
+=-\dot{\theta}\sin\theta\ivect+\dot{\theta}\cos\theta\jvect$$
+which can be written
+$$\dot{\rvect}=\dot{\theta}\tvect$$
+
+The derivative of the transverse unit vector is
+$$\der{\tvect}{t}=\dbd{t}(-\sin\theta\ivect+\cos\theta\jvect)
+=-\dot{\theta}\cos\theta\ivect-\dot{\theta}\sin\theta\jvect$$
+which can be written
+$$\dot{\tvect}=-\dot{\theta}\rvect$$
+
+Taking the derivative of the polar form of the particle's velocity gives
+\begin{eqnarray*}
+\ddot{\vect{r}}
+&=&\dbd{t}\left(\dot{r}\rvect+r\dot{\theta}\tvect\right)\\
+&=&\ddot{r}\rvect+\dot{r}\dot{\rvect}+\dot{r}\dot{\theta}\tvect
+   +r\ddot{\theta}\tvect+r\dot{\theta}\dot{\tvect} \\
+&=&\ddot{r}\rvect+\dot{r}\dot{\theta}\tvect
++\dot{r}\dot{\theta}\tvect+r\ddot{\theta}\tvect-r\dot{\theta}^2\rvect
+\end{eqnarray*}
+Gathering terms shows that acceleration in polar coordinates is
+$$\ddot{\vect{r}}=\left(\ddot{r}-r\dot{\theta}^2\right)\rvect
++\left(r\ddot{\theta}+2\dot{r}\dot{\theta}\right)\tvect$$
+where $\ddot{r}-r\dot{\theta}^2$ is called the \name{radial acceleration}
+and $r\ddot{\theta}+2\dot{r}\dot{\theta}$ is called the \name{transverse
+acceleration}.
+
+%============================================================================
+\begin{example}
+For a particle moving in a circular orbit around the origin, $r=a$ so
+$$\dot{\vect{r}}=a\dot{\theta}\tvect$$
+so that the velocity is always transverse, and
+$$\ddot{\vect{r}}=-a\dot{\theta}^2\rvect+a\ddot{\theta}\tvect$$
+where $\dot{\theta}$ is the \name{instantaneous angular velocity} and
+$\ddot{\theta}$ is the \name{instantaneous angular acceleration}.
+
+If we write $v=a\dot{\theta}=\left|\dot{\vect{r}}\right|$ as the speed of
+the particle, then the radial acceleration is $-a\dot{\theta}^2=-v^2/a$.
+\end{example}
+%============================================================================
+
+
+%============================================================================
+\begin{example}
+For a particle moving with rectilinear motion through the origin, $\theta$
+is constant so that $\rvect$ is constant.  Therefore
+\begin{eqnarray*}
+\vect{r}&=&r\rvect \\
+\dot{\vect{r}}&=&\dot{r}\rvect \\
+\ddot{\vect{r}}&=&\ddot{r}\rvect 
+\end{eqnarray*}
+These equations for rectilinear motion in polar coordinates are only simple
+if the particle's trajectory includes the origin, otherwise $\theta$ changes
+along the trajectory.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intrinsic Coordinates}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Two-Dimensional Intrinsic Coordinates}
+\label{vf sec:2D ic}
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The unit vectors for intrinsic coordinates $(s,\psi)$ are $\Tvect$ 
+in the tangential direction and $\Nvect$ in the normal direction.  $s$ is
+the distance along the curve and $\psi$ the angle the tangent makes with the
+$x$ axis.}
+\label{vf fig:2D intrinsic}
+
+\psset{xunit=5cm,yunit=5cm}
+\begin{pspicture}(-0.25,-0.35)(1.3,1.4)
+% First the curve, so the axes show through
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve]{0.25}{1}%
+{1 1 x x mul sub sqrt sub}
+\psplot[linecolor=gray,linewidth=2pt,plotstyle=curve,arrows=>->]{0.35}{0.55}%
+{1 1 x x mul sub sqrt sub}
+\rput[B](0.45,0.135){$s$}
+\uput*[r](0.2,0.05){$\theta$}
+% Now the axes and their labels
+\psline{->}(-0.25,0)(1.2,0)
+\psline{->}(0,-0.3)(0,1.2)
+\uput[dl](0,0){$O$}
+\uput[r](1.2,0){$x$}
+\uput[u](0,1.2){$y$}
+\pcline[linecolor=black,linewidth=1pt]{->}(0,0)(0.707,0.293)
+\Aput{$r$}
+\psline[linecolor=black,linewidth=1pt,linestyle=dashed]{-}(0.414,0)(0.707,0.293)
+\psarc{->}(0.414,0){1}{0}{45}
+\uput[r](0.6,0.05){$\psi$}
+\rput[bl]{22.5}(0.707,0.293){
+	\psline{->}(0,0)(0.15,0) \rput[l]{*0}(0.16,0){$\rvect$}
+	\psline{->}(0,0)(0,0.15) \rput[b]{*0}(0,0.16){$\tvect$}
+}
+\rput[bl]{45}(0.707,0.293){
+	\psline[linecolor=black]{->}(0,0)(0.15,0) 
+	\rput[bl]{*0}(0.16,0){$\Tvect$}
+	\psline[linecolor=black]{->}(0,0)(0,0.15) 
+	\rput[br]{*0}(0,0.16){$\Nvect$}
+}
+\uput[dr](0.707,0.293){$P$}
+\psarc{->}(0,0){1}{0}{22.5}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+The point $P$ at $(x,y)$ in Cartesian coordinates or $(r,\theta)$ is polar
+coordinates can also be described by the \name{intrinsic coordinates} 
+$(s,\psi)$ shown in figure \ref{vf fig:2D intrinsic}.
+
+$s$ is arc length measured along the trajectory from some specified starting
+point and $\psi$ is the angle the tangent to the trajectory makes with the
+positive $x$ axis.
+
+The associated unit vectors are $\Tvect$, the unit vector along the tangent
+in the direction of increasing $s$
+$$\Tvect=\cos\psi\ivect+\sin\psi\jvect$$
+and $\Nvect$, the unit vector transverse to $\Tvect$ in the direction of
+increasing $\psi$
+$$\Nvect=-\sin\psi\ivect+\cos\psi\jvect$$
+
+To find expressions for velocity and acceleration in intrinsic coordinates,
+let $\vect{\delta r}$ be the difference in $\vect{r}$ as the particle moves a
+distance $\delta s$ along the curve 
+$$\vect{\delta r}=\vect{r}(s+\delta s)-\vect{r}(s)$$
+As $\delta s\to 0$, $\vect{\delta r}$ becomes tangential to the curve so
+that the magnitude of $\vect{\delta r}$ tends to $\delta s$
+$$\frac{\left|\vect{\delta r}\right|}{\delta s}\to 1$$
+and $\vect{\delta r}$ becomes a tangent to the curve
+$$\frac{\vect{\delta r}}{\delta s}\to \Tvect$$
+This implies that
+$$\der{\vect{r}}{s}=\Tvect$$
+Therefore
+$$\dbd{t}\left(\vect{r}\left(s(t)\right)\right)=\der{\vect{r}}{s}\der{s}{t}
+=\dot{s}\Tvect$$
+so the expression for velocity in intrinsic coordinates is
+$$\dot{\vect{r}}=\dot{s}\Tvect$$
+
+To find the expression for acceleration, 
+$$\ddot{\vect{r}}=\dbd{t}\left(\dot{s}\Tvect\right)
+=\ddot{s}\Tvect+\dot{s}\dot{\Tvect}$$
+Now $\Tvect=\cos\psi\ivect+\sin\psi\jvect$ so
+$$\dot{\Tvect}=\dot{\psi}\left(-\sin\psi\ivect+\cos\psi\jvect\right)
+=\dot{\psi}\Nvect$$
+Therefore the expression for acceleration in intrinsic coordinates is
+$$\ddot{\vect{r}}=\ddot{s}\Tvect+\dot{s}\dot{\psi}\Nvect$$
+
+Note that from the definitions of $\Tvect$ and $\Nvect$,
+$$\der{\Tvect}{s}=\der{\psi}{s}\Nvect$$
+on the curve $\psi(s)$. $\der{\psi}{s}$ is the \name{curvature} of the curve
+at $P(s)$ and
+$$\der{\psi}{s}=\frac{1}{\rho(s)}$$
+where $\rho(s)$ is the \name{radius of curvature} of the curve at the point
+$P(s)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Three-Dimensional Intrinsic Coordinates}
+
+
+When the particle follows a trajectory through three-dimensional space, 
+$s$ is the arc length measured along the curve from some specified point.
+As for two-dimensional intrinsic coordinates,
+$$\der{\vect{r}}{s}=\Tvect$$
+and
+$$\der{\Tvect}{s}=\kappa \Nvect=\frac{1}{\rho}\Nvect$$
+where $\Nvect$ is the \name{principal normal} to the curve (transverse to
+$\Tvect$ in the plane of the local curve).  Here $\kappa$ is the 
+\name{curvature} of the curve at $P(s)$
+$$\kappa=\left|\der{\Tvect}{s}\right|$$
+and $\rho$ is the \name{radius of curvature} at $P(s)$.
+
+Velocity in three-dimensional intrinsic coordinates is given by
+$$\dot{\vect{r}}=\dbd{t}\vect{r}(s(t))=\der{\vect{r}}{s}\dot{s}$$
+so that
+$$\dot{\vect{r}}=\dot{s}\Tvect$$
+
+Acceleration in three-dimensional intrinsic coordinates is 
+$$\ddot{\vect{r}}=\dbd{t}(\dot{s}\Tvect)=\ddot{s}\Tvect+\dot{s}
+\der{\Tvect}{t}$$
+Now $\dbd{t}\Tvect=\der{\Tvect}{s}\dot{s}$ so that acceleration can be
+written
+$$\ddot{\vect{r}}=\ddot{s}\Tvect+\frac{\dot{s}^2}{\rho(s)}\Nvect$$
+
+
+
+
+

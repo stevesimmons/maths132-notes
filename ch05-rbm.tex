@@ -1,0 +1,955 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+% 8 Feb-96 SS: Updated with corrections from semester 2, 1995
+%
+%%%%%%%%%%%%%%%%%%% Copyright (C) 1995-96 Stephen Simmons %%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Rigid Body Motion}
+\label{rbm chp}
+
+A system of particles behaves as a rigid body if, during the motion of the
+system, the particles do not change their relative internal positions.  Even
+in solids, the particles vibrate about their equilibrium positions, so there
+is always internal vibrational kinetic energy.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Continuous Rigid Bodies}
+
+If the body is large compared with the internal particle separations, we can
+regard it as a continuum with negligible error.  The mass density of the
+material in the body then becomes the \name{mass per unit volume}, which is
+denoted by the symbol $\rho$.
+
+This is a meaningful concept provided we are interested in large volumes
+containing many particles.
+
+The position of the centre of mass of a system of particles
+$$\vect{r}_{\rm cm}=\frac{1}{M}\sum_im_i\vect{r}_i$$
+becomes an integral
+$$\vect{r}_{\rm cm}=\frac{1}{M}\int_V \rho\,\vect{r}\,dV$$
+where the integral is taken over the whole of the volume of the rigid body,
+and $\rho(\vect{r})$ is the function giving the body's mass per unit volume
+as a function of position $\vect{r}$.  The total mass of the body is
+$$M=\int_V \rho\,dV$$
+
+If the body is uniform so that $\rho$ is constant, the formula for the
+centre of mass becomes
+$$\vect{r}_{\rm cm}=\frac{1}{V}\int_V \vect{r}\,dV$$
+
+In a Cartesian coordinate system, $dV=dx\,dy\,dz$ and
+$$\vect{r}_{\rm cm}=\frac{1}{M}\int\!\!\int\!\!\int \rho(x,y,z)
+\vect{r}(x,y,z)\,dx\,dy\,dz$$
+or, for a uniform body
+$$\vect{r}_{\rm cm}=\frac{1}{V}\int\!\!\int\!\!\int 
+\vect{r}(x,y,z)\,dx\,dy\,dz$$
+
+The centres of mass of the individual coordinates for a uniform body are
+$$x_{\rm cm}=\frac{1}{V}\int_V x\,dV$$
+with similar expressions for $y_{\rm cm}$ and $z_{\rm cm}$.
+
+For a thin sheet, called a \name{lamina}, the volume element is $dV=dA\,t$ where
+$dA$ is the element of area on the sheet and $t$ is the thickness of the
+sheet.  Then
+$$\vect{r}_{\rm cm}=\frac{\ds\int_A\bar{\rho}\vect{r}\,dA}
+{\ds\int_A\bar{\rho}\,dA}$$
+where $\bar{\rho}=\rho t$ is the mass per unit area of the lamina.  The
+total mass of the sheet is 
+$$M=\int_A\bar{\rho}\,dA$$
+
+If the rigid body has a plane of symmetry, $\vect{r}_{\rm cm}$ lies in that
+plane.  If the rigid body has a line of symmetry, $\vect{r}_{\rm cm}$ lies
+on that line.
+
+
+%============================================================================
+\begin{example}
+For a solid hemisphere with its centre at the origin, radius $a$ and $z\geq0$
+$$x_{\rm cm}=y_{\rm cm}=0\qquad z_{\rm cm}=\frac{3a}{8}$$
+For a hemispherical shell with its centre at the origin, radius $a$ 
+and $z\geq0$
+$$x_{\rm cm}=y_{\rm cm}=0\qquad z_{\rm cm}=\frac{a}{2}$$
+For a semicircular line of radius $a$
+$$x_{\rm cm}=y_{\rm cm}=0\qquad z_{\rm cm}=\frac{2a}{\pi}$$
+For a semicircular lamina of radius $a$
+$$x_{\rm cm}=y_{\rm cm}=0\qquad z_{\rm cm}=\frac{4a}{3\pi}$$
+For an isosceles triangular lamina with height $h$
+$$x_{\rm cm}=y_{\rm cm}=0\qquad z_{\rm cm}=\frac{h}{3}$$
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This semicircular lamina in the $xz$ plane has its centre at the
+origin and has radius $a$.  The shaded region is the strip from $z$ to
+$z+dz$.}
+\label{rbm fig:scl}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.7,-0.3)(0.7,0.75)
+% The shaded region
+\psclip{\psarc[linewidth=1pt,linestyle=none]{-}(0,0){0.5}{0}{180}}
+	\psframe*[fillcolor=lightgray,linecolor=gray](-0.5,0.27)(0.5,0.3)
+\endpsclip
+% Now the circle
+\psarc[linecolor=darkgray,linewidth=2pt]{-}(0,0){0.5}{0}{180}
+% Axes
+\psline{->}(-0.6,0)(0.6,0)
+\psline{->}(0,0)(0,0.6)
+\uput[r](0.6,0){$x$}
+\uput[u](0,0.6){$z$}
+\SpecialCoor
+\uput[d](-0.5,0){$-a$}
+\uput[d](0.5,0){$a$}
+\uput[dl](0,0.5){$a$}
+\pcline{<->}(0,-0.1)(!0.27 0.25 exch dup mul sub sqrt -0.1)
+\Bput{$\sqrt{a^2-z^2}$}
+% Dashed lines
+\psline[linecolor=black,linestyle=dashed]{-}(0,-0.2)(0,0) 
+\psline[linecolor=black,linestyle=dashed]{-}%
+(!0.27 0.25 exch dup mul sub sqrt 0.27)(!0.27 0.25 exch dup mul sub sqrt -0.2)
+\uput[dl](0,0.27){$z$}
+% Arrows to indicate width of dz
+\psline{->}(-0.15,0.2)(-0.15,0.27) 
+\psline{->}(-0.15,0.37)(-0.15,0.3) 
+\uput[d](-0.15,0.2){$dz$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[Semicircular Lamina]
+\problem
+Show that the centre of mass of the semicircular lamina of radius $a$ in the
+half-plane $z>0$ is
+$$z_{\rm cm}=\frac{4a}{3\pi}$$
+
+\solution
+As shown in figure \ref{rbm fig:scl}, the mass of 
+the strip of width $dz$ of the semicircular lamina is
+$$w(z)=\bar{\rho}\cdot2\sqrt{a^2-z^2}\,dz$$
+The $z$ axis is a line of symmetry, so the centre of mass of the strip is on
+the $z$ axis at $z$ ($x=y=0$).  Therefore the centre of mass of the whole
+body is
+$$z_{\rm cm}=\frac{1}{M}\int_0^a 2\bar{\rho}z\sqrt{a^2-z^2}\,dz$$
+The mass of the lamina is
+$$M=\bar{\rho}\cdot\frac{\pi a^2}{2}$$
+so the location of the centre of mass becomes
+$$z_{\rm cm}=\frac{4}{\pi a^2}\int_0^a z\sqrt{a^2-z^2}\,dz$$
+Make the substitution
+$$u^2=1-\frac{z^2}{a^2}$$
+so that
+$$z_{\rm cm}=\frac{4a}{\pi}\int_0^1 u^2\,du=\frac{4a}{3\pi}$$
+\end{example}
+%============================================================================
+
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The hemispherical shell has its centre at the
+origin and has radius $a$.  The shaded region is the circumferential strip
+from $\theta$ to $\theta+d\theta$.}
+\label{rbm fig:hss}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.7,-0.3)(0.7,0.75)
+% Now the circle
+\psarc[linecolor=darkgray,linewidth=2pt]{-}(0,0){0.5}{0}{180}
+% The shaded region
+\psclip{\psarc[linewidth=1pt,linestyle=none]{-}(0,0){0.5}{0}{180}}
+	\psframe*[fillcolor=lightgray,linecolor=gray](-0.5,0.27)(0.5,0.3)
+\endpsclip
+% Axes
+\psline{->}(-0.6,0)(0.6,0)
+\psline{->}(0,0)(0,0.6)
+\uput[r](0.6,0){$x$}
+\uput[u](0,0.6){$z$}
+\SpecialCoor
+\uput[d](-0.5,0){$-a$}
+\uput[d](0.5,0){$a$}
+\uput[dl](0,0.5){$a$}
+\pcline{<->}(0,-0.1)(!0.27 0.25 exch dup mul sub sqrt -0.1)
+\Bput{$a\cos\theta$}
+% Dashed lines
+\psline[linecolor=black,linestyle=dashed]{-}(0,-0.2)(0,0) 
+\psline[linecolor=black,linestyle=dashed]{-}%
+(!0.27 0.25 exch dup mul sub sqrt 0.27)(!0.27 0.25 exch dup mul sub sqrt -0.2)
+% Dark lines for ad\theta
+\psline[linecolor=black,linewidth=2pt]{-}%
+(!0.27 0.25 exch dup mul sub sqrt 0.27)(!0.3 0.25 exch dup mul sub sqrt 0.3)
+\psline[linecolor=black,linewidth=2pt]{-}%
+(!0.27 0.25 exch dup mul sub sqrt neg 0.27)(!0.3 0.25 exch dup mul sub sqrt
+neg 0.3)
+% Arrows to indicate width of ad\theta
+\rput[B]{(0.0208,0.03)}(!0.27 0.25 exch dup mul sub sqrt neg 0.27){
+	\psline{->}(-0.15,0.05)(0,0.05) 
+	\psline{<-}(0.0365,0.05)(0.1865,0.05) 
+}
+\uput[ul](!0.27 0.25 exch dup mul sub sqrt neg 0.27){$a\,d\theta$}
+% theta and dtheta
+\psline[linestyle=dashed]{-}(0,0)(!0.25 0.27 dup mul sub sqrt 0.27)
+\psarc{->}(0,0){0.2}{0}{(!0.25 0.27 dup mul sub sqrt 0.27)}
+\psline[linestyle=dashed]{-}(0,0)(!0.25 0.3 dup mul sub sqrt 0.3)
+\uput[ur](0.2,0){$\theta$}
+\rput[B](!0.25 0.3 dup mul sub sqrt 0.3 0.6 mul exch 0.6 mul exch)%
+{$d\theta$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[Hemispherical Shell]
+\problem
+Show that the centre of mass of a hemispherical shell of radius $a$ with
+$z>0$ is
+$$z_{\rm cm}=\frac{a}{2}$$
+
+\solution
+As shown in figure \ref{rbm fig:hss}, the strip from an angle $\theta$ to 
+$\theta+d\theta$ has $z$ coordinate
+$$z=a\sin\theta$$
+The surface area of this strip is
+$$dA=2\pi(a\cos\theta)\,a\,d\theta=2\pi a^2\cos\theta\,d\theta$$
+From symmetry, the centre of mass of this strip is at $z=a\sin\theta$. 
+Therefore, the centre of mass of the hemispherical shell has
+$x_{\rm cm}=y_{\rm cm}=0$ and
+$$z_{\rm cm}=\frac{1}{M}\int_A\bar{\rho}z\,dA=\frac{1}{M}\int_0^{\pi/2}
+2\pi a^3\bar{\rho}\cos\theta\sin\theta\,d\theta$$
+The mass of the hemispherical shell is
+$$M=\bar{\rho}\cdot 2\pi a^2$$
+so the location of the centre of mass becomes
+$$z_{\rm cm}=a\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta$$
+Make the substitution
+$$u=\sin\theta$$
+so that
+$$z_{\rm cm}=a\int_0^1 u\,du=\frac{a}{2}$$
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rotation About a Fixed Axis}
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{Here is the point at $(x,y,z)$ rotating at constant speed
+$\omega=\dot{\phi}$ about the $z$-axis.}
+\label{rbm fig:rafi}
+
+\psset{unit=8cm}
+\begin{pspicture}(-0.25,-0.35)(0.5,0.55)
+% First the xyz axes
+\psline{->}(0,0)(0,0.4)
+\uput[u](0,0.4){$z$}
+\psline{->}(0,0)(-0.15,-0.25)
+\uput[dl](-0.15,-0.25){$x$}
+\psline{->}(0,0)(0.4,-0.133)
+\uput[dr](0.4,-0.133){$y$}
+\uput[l](0,0){$O$}
+% The point and vector to it
+\qdisk(0.1,0){5pt}
+\psline[linewidth=3pt]{->}(0,0)(0.1,0)
+\uput[r](0.11,0){$(x,y,z)$}
+\uput[u](0.05,0.05){$\vect{r}$}
+% Construction lines
+\psline[linestyle=dashed]{-}(-0.1,-0.2)(0.1,-0.267) 
+\psline[linestyle=dashed]{-}(0,0)(0.1,-0.267) 
+\psline[linestyle=dashed]{-}(0.2,-0.067)(0.1,-0.267) 
+\psline[linestyle=dashed]{-}(0.1,0)(0,0.3) 
+\psline[linestyle=dashed]{-}(0.1,0)(0.1,-0.267) 
+% Angles
+\SpecialCoor
+\psarc{->}(0,0){0.1}{(-0.1,-0.2)}{(0.1,-0.267)}
+\psarc{->}(0,0.38){0.05}{180}{360}
+\uput[r](0.05,0.38){$\omega$}
+\uput[d](-0.05,-0.1){$\phi$}
+% The velocity v
+\psline[linewidth=2pt]{->}(0.1,0)(0.2,0.05)
+\uput[r](0.2,0.05){$\vect{v}$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+Consider a body rotating about the $z$ axis through a fixed origin $O$ with
+angular speed
+$$\omega=\dot{\phi}$$
+The mass at point $\vect{r}=(x,y,z)$ is moving with velocity $\vect{v}$ in 
+the $xy$ plane through the point, where $\vect{v}$ satisfies
+$$\left|\vect{v}\right|=\omega\sqrt{x^2+y^2}$$
+
+Now the point is moving in uniform circular motion, so $\vect{v}$ is also 
+given by
+$$\vect{v}=\dot{\vect{r}}=\dot{x}\ivect+\dot{y}\jvect$$
+Using
+$$\dot{x}=-\left|\vect{v}\right|\sin\phi=-\omega y$$
+and
+$$\dot{y}=\left|\vect{v}\right|\cos\phi=\omega x$$
+the velocity can be written
+$$\vect{v}=\boldsymbol{\omega}\times\vect{r}$$
+where the angular velocity vector is
+$$\boldsymbol{\omega}=\omega\kvect$$
+
+For a discrete body, the rotational kinetic energy is
+$$T_{\rm rot}=\sum_i\frac{1}{2}m_i\left|\vect{v}_i\right|^2
+=\frac{1}{2}\sum_im_i\left(\omega\sqrt{x_i^2+y_i^2}\right)^2$$
+This can be written as
+$$T_{\rm rot}=\frac{1}{2}I_z\omega^2$$
+where $I_z$ is the \name{moment of inertia} of the body about the $z$ axis
+through $O$
+$$I_z=\sum_i m_i\left(x_i^2+y_i^2\right)$$
+
+For a continuum solid, the same formula holds
+$$T_{\rm rot}=\frac{1}{2}I_z\omega^2$$
+when now the moment of inertia is
+$$I_z=\int_V \rho\,(x^2+y^2) \,dV$$
+
+When the body is rotating about the $z$ axis, the velocity is
+$$\vect{v}=\dot{\vect{r}}=\dot{x}\ivect+\dot{y}\jvect$$
+so the angular momentum about $O$
+$$\vect{L}=\sum_i\vect{r}_i\times(m_i\dot{\vect{r}}_i)$$
+has only a component in the $z$ direction
+$$L_z=\sum_i m_i(x_i\dot{y}_i-y_i\dot{x}_i)$$
+Using $\dot{x}=-\omega y$ and $\dot{y}=\omega x$, this becomes
+$$L_z=\sum_i m_i(x_i^2+y_i^2)\omega=I_z\omega$$
+
+The \name{angular equation of motion} for a rigid body can be found from the
+$z$ component of $\dbd{t}\vect{L}=\vect{N}$
+$$\dbd{t}(I_z\omega)=N_z$$
+For a rigid body, $I_z$ is constant so that
+$$I_z\der{\omega}{t}=N_z$$
+
+This leads to simple relations between the equations of motion for
+translation along the $z$ axis and rotation around the $z$ axis.  Making the
+connections
+$$\left.\begin{array}{c}m \\ v_z \\ \dot{v}_z \end{array}\right\}\iff
+\left\{\begin{array}{c}I_z \\ \omega \\ \dot{\omega} \end{array}\right.$$
+shows how linear and angular momentum obey similar relationships
+$$p_z=mv_z\qquad\iff\qquad L_z=I_z\omega$$
+as do force and torque
+$$F_z=m\dot{v}_z\qquad\iff\qquad N_z=I_z\dot{\omega}$$
+and translational and rotational kinetic energy
+$$\frac{1}{2}mv_z^2\qquad\iff\qquad\frac{1}{2}I_z\omega^2$$
+ 
+%============================================================================
+\begin{example}[Thin Rod about Centre of Mass]
+
+The $z$ component of the moment of inertia of a thin rod of length $l$ 
+about its centre with the rod lying along the $x$ axis is given by
+$$I_z=\int_{-l/2}^{l/2}\int\!\!\int \rho\,(x^2+y^2)\,dz\,dy\,dx$$
+Since the rod is thin and lies along the $x$ axis, this becomes
+$$I_z=\int_{-l/2}^{l/2}\int\!\!\int \rho x^2\,dz\,dy\,dx=\bar{\rho}
+\int_{-l/2}^{l/2}x^2\,dx$$
+where $\bar{\rho}$ is the rod's mass per unit length
+$$\bar{\rho}=\rho\int\!\!\int dz\,dy=\frac{M}{l}$$
+Therefore
+$$I_z=\frac{M}{l}\int_{-l/2}^{l/2}x^2\,dx=\frac{M}{l}\left.\frac{x^3}{3}
+\right|_{-l/2}^{l/2}$$
+so that
+$$I_z=\frac{1}{12}Ml^2$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}[Laminar Annulus about Centre of Mass]
+
+Consider an annulus of radius $R$ and thickness $h$ with $h\ll R$, lying in
+the $xy$ plane with the $z$ axis at its centre.  The element of unit area is
+$$dA=Rh\,d\theta$$
+and the mass per unit area is
+$$\bar{\rho}=\frac{M}{2\pi Rh}$$
+Therefore the moment of inertia about the $z$ axis is
+$$I_z=\int \bar{\rho}\,(x^2+y^2)\,dA=\bar{\rho}\int_0^{2\pi}Rh(R^2)\,d\theta
+=(2\pi Rh\bar{\rho})R^2$$
+Since $M=2\pi Rh\bar{\rho}$, the moment of inertia is
+$$I_z=MR^2$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}[Circular Disc about the Centre of Mass]
+
+From the previous example, the moment of inertia of the annulus from $r$ to
+$r+dr$ is
+$$dI_z=(2\pi r\,dr\,\bar{\rho})r^2$$
+Therefore
+$$I_z=2\pi\bar{\rho}\int_0^ar^3\,dr=2\pi\bar{\rho}\frac{a^4}{4}$$
+But $\bar{\rho}=M/\pi a^2$ so the moment of inertia becomes
+$$I_z=\frac{1}{2}Ma^2$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{exercise}
+Show that the moments of inertia of a sphere and a thin spherical shell,
+both of radius $a$, are respectively
+$$I_z=\frac{2}{5}Ma^2\qquad\mbox{and}\qquad I_z=\frac{2}{3}Ma^2$$
+\end{exercise}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Moments of Inertia about Other Axes}
+
+The moments of inertia of a body about the three Cartesian axes are
+$$I_z=\sum_im_i(x_i^2+y_i^2)$$
+$$I_x=\sum_im_i(y_i^2+z_i^2)$$
+$$I_y=\sum_im_i(x_i^2+z_i^2)$$
+for bodies composed of discrete particles, and
+$$I_z=\int_V\rho\,(x^2+y^2)\,dV$$
+$$I_x=\int_V\rho\,(y^2+z^2)\,dV$$
+$$I_y=\int_V\rho\,(x^2+z^2)\,dV$$
+for continuous bodies.
+
+For a laminar body lying in the $xy$ plane
+$$I_z=\int_V\bar{\rho}\,(x^2+y^2)\,dV$$
+$$I_x=\int_V\bar{\rho}\,y^2\,dV$$
+$$I_y=\int_V\bar{\rho}\,x^2\,dV$$
+because the $z$ component is zero.  Adding these shows that
+$$I_z=I_x+I_y$$
+which is known as the \name{perpendicular axis theorem}. In other words,
+the moment of inertia of any plane body about an axis normal to the body is
+equal to the sum of the moments of inertia about any two perpendicular axes
+passing through the given axis and lying in the plane.
+
+%============================================================================
+\begin{example}
+The moment of inertia in the $z$ direction of a circular plate lying in the
+$xy$ plane is
+$$I_z=\frac{1}{2}Ma^2$$
+if the origin is at the centre of the circular plate.  
+
+By symmetry, $I_x=I_y$ and by the perpendicular axis theorem,
+$$I_z=I_x+I_y$$ 
+so that
+$$I_x=I_y=\frac{1}{2}I_z=\frac{1}{4}Ma^2$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+To find the moment of inertia $I_z$ of a flat square lying in the $xy$
+plane, whose size is $l$ by $l$ and mass is $M$, note that looking along the
+$x$ or the $y$ axes, the plate looks like a rod of length $l$.  Therefore
+$I_x$ and $I_y$ are the moments of inertia of a rod of length $l$ and mass
+$M$ measured about the centre of the rod
+$$I_x=I_y=\frac{1}{12}Ml^2$$
+Then by the perpendicular axis theorem,
+$$I_z=I_x+I_y=\frac{1}{6}Ml^2$$
+\end{example}
+%============================================================================
+
+The following theorem, the \name{parallel axis theorem} describes how the
+moment of inertia changes when measured relative to an axis that is
+parallel to the original axis.
+
+%============================================================================
+\begin{theorem}[Parallel Axis Theorem]
+Suppose a body has a moment of inertia $I_z$ measured through the origin and 
+$I_{z,\rm cm}$ measured relative to the centre of mass.  If the
+perpendicular distance from the centre of mass to the $z$ axis is $l$, 
+the two moments of inertia are related by
+$$I_z=Ml^2+I_{z,\rm cm}$$
+\end{theorem}
+\begin{proof}
+The moment of inertia through the origin is
+$$I_z=\sum_i m_i(x_i^2+y_i^2)$$
+and the moment of inertia through the centre of mass is
+$$I_{z,\rm cm}=\sum_i m_i(\bar{x}_i^2+\bar{y}_i^2)$$
+where the coordinates relative to the origin $\vect{r}_i$ are related to the
+coordinates relative to the centre of mass $\bar{\vect{r}}_i$ according to
+$$\vect{r}_i=\vect{r}_{\rm cm}+\bar{\vect{r}}_i$$
+where $\vect{r}_{\rm cm}$ is the position of the centre of mass relative to
+the origin.  Therefore
+$$I_z=\sum_i m_i(x_i^2+y_i^2)
+=\sum_i m_i\left((x_{\rm cm}+\bar{x}_i)^2+(y_{\rm cm}+\bar{y}_i)^2\right)$$
+Expanding the squares shows that
+\begin{eqnarray*}
+I_z&=&\sum_i m_i(x_{\rm cm}^2+y_{\rm cm}^2)
++2\left(\sum_i m_i\bar{x}_i\right)x_{\rm cm}\\
+&&{}+2\left(\sum_i m_i\bar{y}_i\right)y_{\rm cm}
++\sum_i m_i(\bar{x}_i^2+\bar{y}_i^2)
+\end{eqnarray*}
+The second and third summations are zero.  Writing 
+$l^2=x_{\rm cm}^2+y_{\rm cm}^2$, $M=\sum_i m_i$ and noting that the fourth 
+summation is the moment of inertia about the centre of mass shows that
+$$I_z=Ml^2+I_{z,\rm cm}$$
+as required.
+\end{proof}
+%============================================================================
+
+%============================================================================
+\begin{example}
+To find the moment of inertia $I_z$ of a circular plate in the $xy$ plane
+relative to an axis through the edge of the plate, note that the moment of
+inertia through the centre of the plate is
+$$I_{z,\rm cm}=\frac{1}{2}Ma^2$$
+Measuring the moment of inertia relative to an axis through the edge of the
+plate shifts the axis a distance $l=a$.  Therefore the moment of inertia is
+$$I_z=Ml^2+I_{z,\rm cm}=Ma^2+\frac{1}{2}Ma^2=\frac{3}{2}Ma^2$$
+\end{example}
+%============================================================================
+
+%============================================================================
+\begin{example}
+The moment of inertia $I_x$ for the plate in the previous example can be
+found by noting that the moment of inertia through the centre of mass of the
+plate is
+$$I_{x,\rm cm}=\frac{1}{4}Ma^2$$
+Measuring the moment of inertia relative to an axis through the edge of the
+plate shifts the axis a distance $l=a$.  Therefore the moment of inertia is
+$$I_x=Ml^2+I_{x,\rm cm}=Ma^2+\frac{1}{4}Ma^2=\frac{5}{4}Ma^2$$
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gravitational Torque}
+
+If the force $\vect{F}_i$ on the $i^{\rm th}$ particle is the gravitational 
+force $m_i\vect{g}$, then the
+total external gravitational torque about the origin is
+$$\vect{N}=\sum_i\vect{r}_i\times\vect{F}_i$$
+This can be written
+$$\vect{N}=\sum_i\vect{r}_i\times(m_i\vect{g})
+=\sum_i(m_i\vect{r}_i)\times\vect{g}$$
+In terms of the centre of mass, this becomes
+$$\vect{N}=\sum_i(m_i\vect{r}_i)\times\vect{g}=M\vect{r}_{\rm cm}
+\times\vect{g}$$
+Therefore the gravitional torque is equal to the torque acting on the total
+weight of the body concentrated at the centre of mass.
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This is a compound pendulum of mass $M$ with centre of mass at $C$. 
+It pivots about the point $P$ which is a distance $l$ from the centre of 
+mass.  The $z$ axis points out of the page.}
+\label{rbm fig:cp}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.3,-1.3)(1.3,0.3)
+% The outline of the pendulum
+\psccurve[linecolor=darkgray,linewidth=2pt](-0.2,0.2)(0.1,0.2)(0.3,-0.1)(0.7,-0.4)(0.9,-0.2)%
+(1.1,-0.4)(1.2,-0.8)(0.9,-1.1)(0.5,-0.9)(0.1,-0.6)(-0.1,-0.1)
+% Axes
+\psline{->}(0,0)(1,0)
+\uput[r](1,0){$y$}
+\psline{->}(0,0)(0,-1)
+\uput[d](0,-1){$x$}
+\qdisk(0,0){3pt}
+\uput[ul](0,0){$P$}
+% Centre of mass
+\pcline{->}(0,0)(0.6,-0.6)
+\Aput{$l$}
+\uput[ur](0.6,-0.6){$C$}
+\psline{->}(0.6,-0.6)(0.6,-0.9)
+\uput[d](0.6,-0.9){$Mg$}
+% The angle theta
+\psarc{->}(0,0){0.2}{270}{315}
+\uput[dr](0,-0.2){$\theta$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[The Compound Pendulum]
+The equation of motion of the compound pendulum about the pivot, 
+shown in figure \ref{rbm fig:cp}, is
+$$I_z\dot{\omega}=N_z$$
+where $\dot{\omega}=\ddot{\theta}$, the torque is $\vect{N}=\vect{l}\times
+M\vect{g}$ so that
+$$N_z=-Mgl\sin\theta$$
+and the moment of inertia about the pivot is
+$$I_z=Ml^2+I_{z,\rm cm}$$
+Therefore
+$$(Ml^2+I_{z,\rm cm})\ddot{\theta}=-Mgl\sin\theta$$
+which gives
+$$\ddot{\theta}=-\frac{g}{l+I_{z,\rm cm}/Ml}\sin\theta$$
+
+For small amplitude oscillations, $\left|\theta\right|\ll 1$ so that
+$\sin\theta\approx\theta$.  The equation of motion is approximately
+$$\ddot{\theta}=-\frac{g}{l+I_{z,\rm cm}/Ml}\theta$$
+The solution is
+$$\theta(t)=\theta_0\cos\omega t$$
+where $\theta(0)=\theta_0$ and $\dot{\theta}(0)=0$.  The angular frequency
+of oscillation is
+$$\omega=\sqrt{\frac{g}{l+I_{z,\rm cm}/Ml}}$$
+and the period is
+$$T=\frac{2\pi}{\omega}=2\pi\sqrt{\frac{l+I_{z,\rm cm}/Ml}{g}}$$
+which is independent of the initial conditions.
+
+For large oscillations, the equation of motion is
+$$\ddot{\theta}=-\omega_0^2\sin\theta$$
+where
+$$\omega_0^2=\frac{g}{l+I_{z,\rm cm}/Ml}$$
+Using $\ddot{\theta}=\dbd{\theta}\left(\frac{1}{2}\dot{\theta}^2\right)$,
+integrate to obtain
+$$\frac{1}{2}\dot{\theta}^2=\omega_0^2\cos\theta+C$$
+With $\theta(0)=\theta_0$ and the pendulum starting from rest so that
+$\dot{\theta}(0)=0$, the solution is
+$$\dot{\theta}^2=2\omega_0^2(\cos\theta-\cos\theta_0)$$
+The integral of this is a bit complicated and cannot be obtained in terms of 
+ordinary functions.  However an expression for the period $T$ can be
+obtained.
+
+Taking the square root of the equation for $\dot{\theta}^2$ 
+$$\dot{\theta}=\pm\sqrt{2}\omega_0\sqrt{\cos\theta-\cos\theta_0}$$
+During the period $0<t<\frac{T}{4}$, the pendulum swings from
+$\theta=\theta_0$ to $\theta=0$ so $\dot{\theta}<0$.  Thus for these times,
+the negative square root is appropriate and
+$$\dot{\theta}=-\sqrt{2}\omega_0\sqrt{\cos\theta-\cos\theta_0}$$
+which is a separable equation.
+
+The solution is
+$$T=\frac{\sqrt{8}}{\omega_0}\int^{\theta_0}_0\frac{d\theta}{\sqrt{\cos\theta
+-\cos\theta_0}}$$
+which is an elliptic integral.  Denoting the elliptic integral as
+$f(\theta_0)$, the solution is
+$$T=\frac{\sqrt{8}}{\omega_0}f(\theta_0)$$
+which is a function of the initial conditions.
+\end{example}
+%============================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rolling}
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This diagram shows a body rolling on a plane inclined at an angle
+$\theta$.  The dashed line indicates the path taken by the rolling body's
+centre of mass.}
+\label{rbm fig:rb}
+
+\psset{unit=5cm}
+\begin{pspicture}(-1.3,-0.1)(0.3,0.8)
+\SpecialCoor
+% First the ground
+\psline[linecolor=darkgray,linewidth=2pt]{-}(1.1;150)(0;150)(-1;0)
+% The rolling body
+\rput[b]{330}(0.5;150){
+	\begin{pspicture}(0,-0.2)(0,-0.2)
+		\psline[linestyle=dashed]{-}(-0.4,0)(0.4,0) 
+		\psline(0,0)(0.2;135)
+		\psarc{->}(0,0){0.1}{0}{135}
+		\uput[u](0.1;66){\rput[l]{*0}{$\phi$}}	
+		\pscircle[linecolor=gray,linewidth=2pt](0,0){0.2}
+		% The weight vector
+		\psline{->}(0,0)(0.3;300)
+		\uput[d](0.32;300){\rput[B]{30}{$Mg$}}
+	\end{pspicture}
+}
+\rput[b]{330}(0.5;150){
+	\begin{pspicture}(0,0)(0,0)
+		\psline[linecolor=black]{->}(0,0)(-0.2,0) 
+		\uput[d](-0.2,0){\rput[r]{30}{$F_f$}}
+		\psline[linecolor=black]{->}(0,0)(0,0.1) 
+		\uput[l](0,0.05){\rput[b]{30}{$R$}}
+	\end{pspicture}
+}
+% The angle theta
+\psarcn{->}(0,0){0.2}{180}{150}
+\uput[l](-0.2,0.05){$\theta$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+For the body rolling down the slope illustrated in figure \ref{rbm fig:rb}, 
+the forces on the body lead to the following equations of motion
+$$M\ddot{x}_{\rm cm}=Mg\sin\theta-F_f$$
+$$M\ddot{y}_{\rm cm}=-Mg\cos\theta+R$$
+The body stays in contact with the slope so that
+$$y_{\rm cm}=a$$ 
+and
+$$\ddot{y}_{\rm cm}=0$$ 
+so that the reaction is
+$$R=Mg\cos\theta$$
+The torque on the body about the centre of mass is
+$$I_{\rm cm}\dot{\omega}=N_z=-F_fa$$
+since all other forces have zero torque about the centre of mass.  The
+velocity of the point of the rolling body in contact with the slope is
+$$\dot{x}_{\rm cm}=-a\omega$$ 
+so that
+$$\omega=-\frac{\dot{x}_{\rm cm}}{a}\qquad\mif\qquad
+\dot{\omega}=-\frac{\ddot{x}_{\rm cm}}{a}$$
+Substituting into the torque equation gives
+$$I_{\rm cm}\left(-\frac{\ddot{x}_{\rm cm}}{a}\right)=-F_fa$$
+so that
+$$F_f=\frac{I_{\rm cm}}{a^2}\ddot{x}_{\rm cm}$$
+Substituting into the force equation shows that
+$$\ddot{x}_{\rm cm}=\frac{g\sin\theta}{1+I_{\rm cm}/Ma^2}$$
+which is a constant.  Thus
+$$\dot{\omega}=-\frac{\ddot{x}_{\rm cm}}{a}=
+\frac{g\sin\theta}{a\left(1+I_{\rm cm}/Ma^2\right)}$$
+which is also a constant.
+
+If the point of contact slips on the inclined plane, then
+$$F_f=\mu R$$
+where $\mu$ is the coefficient of sliding friction.  Therefore the force
+equation becomes
+$$M\ddot{x}_{\rm cm}=Mg\sin\theta-\mu Mg\cos\theta$$
+or
+$$\ddot{x}_{\rm cm}=g\left(\sin\theta-\mu\cos\theta\right)$$
+which is a constant.  To calculate the angular velocity, use the torque
+equation
+$$I_{\rm cm}\dot{\omega}=-F_fa$$
+so
+$$\dot{\omega}=-\frac{a\mu Mg\cos\theta}{I_{\rm cm}}$$
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{Initially, this billiard ball is spinning with an angular velocity
+of $\omega_0$ and is released with zero forward velocity.   At the time
+shown in this figure, the ball is spinning with angular velocity $\omega$
+and has a forward velocity of $\vect{v}_{\rm cm}$.}
+\label{rbm fig:sbb}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.8,-0.6)(0.6,0.6)
+% Billiard ball
+\pscircle[linecolor=gray,linewidth=2pt](0,0){0.5}
+% Axes
+\psline{->}(-0.6,-0.55)(0.6,-0.55)
+\uput[r](0.6,-0.55){$x$}
+\psline{->}(-0.6,-0.55)(-0.6,0.2)
+\uput[u](-0.6,0.2){$y$}
+% Reaction and friction
+\psline{->}(0,-0.5)(0,-0.3)
+\uput[r](0,-0.3){$R$}
+\psline{->}(0,-0.5)(0.3,-0.5)
+\uput[r](0.3,-0.5){$F_f$}
+% Gravity and velocity
+\psline{->}(0,0)(0.3,0)
+\uput[r](0.3,0){$\vect{v}_{\rm cm}$}
+\psline{->}(0,0)(0,-0.2)
+\uput[r](0,-0.2){$Mg$}
+% The angle omega
+\psarcn{->}(0,0){0.4}{180}{135}
+\SpecialCoor
+\uput[ur](0.4;135){$\omega$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}[Slipping Billiard Ball]
+\problem
+A billiard ball rotating with angular speed $\omega_0$ is released with
+zero forward velocity such that it slips on the table (as shown in figure
+\ref{rbm fig:sbb}), where the coefficient of friction is $\mu$.  When does 
+it start to roll?
+
+\solution
+The reaction is $R=Mg$ and initially, the ball is slipping so that
+$$F_f=\mu R$$
+The force equation gives
+$$M\ddot{x}_{\rm cm}=F_f=\mu Mg$$
+so that
+$$\ddot{x}_{\rm cm}=\mu g\qquad\dot{x}_{\rm cm}=\mu gt\qquad
+x_{\rm cm}=\frac{\mu gt^2}{2}$$
+which is valid up to the point when rolling starts and slipping stops as
+then $F_f\neq \mu R$.
+
+The torque equation about the centre of mass is
+$$I_{\rm cm}\dot{\omega}=+\mu Mga$$
+so that
+$$\omega=\frac{\mu Mga}{I_{\rm cm}}t-\omega_0$$
+Slipping stops when $\omega$ slows down to the point when
+$$-\frac{\dot{x}_{\rm cm}}{a}=\omega$$
+At this time, $t_{\rm roll}$,
+$$-\frac{\mu gt_{\rm roll}}{a}=\frac{\mu Mga}{I_{\rm cm}}t_{\rm roll}
+-\omega_0$$
+so the time when pure rolling starts is
+$$t_{\rm roll}=\frac{a\omega_0}{\mu g\left(1+Ma^2/I_{\rm cm}\right)}$$
+which is a distance
+$$x_{\rm roll}=\frac{a^2\omega_0^2}{2\mu g\left(1+Ma^2/I_{\rm cm}\right)^2}$$
+from the point when it is first released.
+
+After this point, we have
+$$\ddot{x}_{\rm cm}=\frac{F_f}{M}$$
+Now
+$$I_{\rm cm}\dot{\omega}=F_fa$$
+but the  ball is rotating without slipping so
+$$\dot{\omega}=-\frac{\ddot{x}_{\rm cm}}{a}$$
+so that
+$$F_f=-\frac{I_{\rm cm}\ddot{x}_{\rm cm}}{a^2}$$
+This implies that
+$$\ddot{x}_{\rm cm}\left(1+\frac{I_{\rm cm}}{Ma^2}\right)=0$$
+which means that the ball's velocity is constant after pure rolling has 
+started.  This implies that $F_f$ does no work on a rolling body.
+\end{example}
+%============================================================================
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows the forces on a horizontal plank of length $l$ and mass
+$M$ at the instant that the right-hand end is dropped.  The dropped plank
+pivots about the point $P$.}
+\label{rbm fig:dl}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.4,-0.4)(1.4,0.4)
+% The ladder and its support
+\psline[linecolor=gray,linewidth=2pt]{-}(0,0)(1,0)
+\pspolygon*[linecolor=darkgray](0,0)(-0.05,-0.1)(0.05,-0.1)
+% Gravity
+\psline{->}(0.5,0)(0.5,-0.2)
+\uput[d](0.5,-0.2){$Mg$}
+% l/2 labels
+\uput[u](0.25,0){$l/2$}
+\uput[u](0.75,0){$l/2$}
+% Reaction and unit vectors
+\psline{->}(0,0)(0,0.2)
+\uput[u](0,0.2){$R$}
+\psline{->}(1,0)(1,0.2)
+\uput[u](1,0.2){$\tvect$}
+\psline{->}(1,0)(1.2,0)
+\uput[r](1.2,0){$\rvect$}
+% The pivot point P
+\uput[l](0,0){$P$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+Two people hold a plank of mass $M$ and length $l$ at each end.  One person
+lets their end go.  Show that the load supported by the other person drops
+from $Mg/2$ to $Mg/4$ instantly.  Show that the
+acceleration of the free end is $3g/2$.
+
+\solution
+A diagram of the force is shown in figure \ref{rbm fig:dl}.  The plank
+rotates about $P$ according to 
+$$I_P\dot{\omega}=-Mg\frac{l}{2}$$
+With $R$ the reaction from the person holding the plank at $P$, the
+equation of rotation about the plank's centre of mass is
+$$I_{\rm cm}\dot{\omega}=-R\frac{l}{2}$$
+so that
+$$\frac{I_{\rm cm}}{I_P}=\frac{R}{Mg}$$
+Using the parallel axis theorem to write $I_P=I_{\rm cm}+
+M\left(l/2\right)^2$ gives
+$$R=Mg\frac{I_{\rm cm}}{I_{\rm cm}+M\left(l/2\right)^2}$$
+But the moment of inertia about the centre of mass is
+$$I_{\rm cm}=\frac{1}{12}Ml^2$$ 
+so the reaction is
+$$R=Mg\frac{\frac{1}{12}}{\frac{1}{12}+\frac{1}{4}}=\frac{Mg}{4}$$
+
+To work out the acceleration of the free end, use
+$$\ddot{\vect{r}}=\left(\ddot{r}-r\dot{\theta}^2\right)\rvect
++\left(r\ddot{\theta}+2\dot{r}\dot{\theta}\right)\tvect$$
+Here $r=l$ so $\dot{r}=\ddot{r}=0$.  Initially, $\omega=\dot{\theta}=0$ so
+the acceleration is
+$$\ddot{\vect{r}}=l\ddot{\theta}\tvect=l\dot{\omega}\tvect$$
+Using 
+$$I_{\rm cm}\dot{\omega}=-R\frac{l}{2}$$
+shows that
+$$\ddot{\vect{r}}=-l\frac{R\frac{l}{2}}{I_{\rm cm}}\tvect=
+-\frac{Mgl^2}{8I_{\rm cm}}\tvect=-\frac{3}{2}g\tvect$$
+so the initial acceleration of the free end is $3g/2$ as required.
+\end{example}
+%============================================================================
+
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{This shows the forces on a thin rod of mass $M$ and length $l$ 
+falling over on a rough table.}
+\label{rbm fig:fr}
+
+\psset{unit=5cm}
+\begin{pspicture}(-0.4,-0.4)(1.4,1.4)
+% The rod
+\psline[linecolor=gray,linewidth=2pt]{-}(0,0)(1,1)
+% Gravity
+\psline{->}(0.5,0.5)(0.5,0.3)
+\uput[d](0.5,0.3){$Mg$}
+% l/2 labels
+\uput[ul](0.25,0.25){$l/2$}
+\uput[ul](0.75,0.75){$l/2$}
+% Reaction and friction
+\psline{->}(0,0)(0,0.2)
+\uput[u](0,0.2){$R$}
+\psline{->}(0,0)(0.2,0)
+\uput[r](0.2,0){$F$}
+% The pivot point P
+\uput[dl](0,0){$P$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+%============================================================================
+\begin{example}
+\problem
+A thin rod of mass $M$ and length $l$ falls over from an initial vertical
+position on a rough table.  Solve the subsequent motion.
+
+\solution
+A diagram of the falling rod is given in figure \ref{rbm fig:fr}.  The rod's
+equation of angular motion about $P$ is
+$$I_P\ddot{\theta}=-Mg\frac{l}{2}\cos\theta$$
+which can be written as
+$$I_P\dbd{\theta}\left(\frac{1}{2}\dot{\theta}^2\right)=-Mg\frac{l}{2}
+\cos\theta$$
+Integrating and using the initial condition $\dot{\theta}=0$ at $\theta=\pi/2$
+gives
+$$\dot{\theta}^2=\frac{Mgl}{I_P}(1-\sin\theta)$$
+Now from the parallel axes theorem, 
+$$I_P=M\left(\frac{l}{2}\right)^2+\frac{1}{12}Ml^2=\frac{1}{3}Ml^2$$
+so
+$$\dot{\theta}^2=\left(\frac{3g}{l}\right)(1-\sin\theta)$$
+Also, substituting for $I_P$ in the initial equation of angular motion
+about $P$ gives
+$$\ddot{\theta}=-\left(\frac{3g}{2l}\right)\cos\theta$$
+The equations of motion of the centre of mass are
+\begin{eqnarray*}
+M\ddot{x}_{cm}&=&F\\
+M\ddot{y}_{cm}&=&R-Mg
+\end{eqnarray*}
+If no slipping initially, then we have
+\begin{eqnarray*}
+x_{cm}&=&\frac{l}{2}\cos\theta\\
+y_{cm}&=&\frac{l}{2}\sin\theta
+\end{eqnarray*}
+Therefore
+$$\dot{x}_{cm}=-\frac{l}{2}\sin\theta\dot{\theta}$$
+and
+\begin{eqnarray*}
+\ddot{x}_{cm}&=&-\frac{l}{2}\sin\theta\ddot{\theta}
+-\frac{l}{2}\cos\theta\dot{\theta}^2 \\
+&=&-\frac{l}{2}\left[
+\sin\theta\left(-\frac{3g}{2l}\cos\theta\right)
++\cos\theta\left(\frac{3g}{l}(1-\sin\theta)\right)\right]\\
+&=&\frac{3g}{4}\cos\theta(3\sin\theta-2)
+\end{eqnarray*}
+Similarly for $y_{cm}$,
+$$\dot{y}_{cm}=\frac{l}{2}\cos\theta\dot{\theta}$$
+and
+\begin{eqnarray*}
+\ddot{y}_{cm}&=&-\frac{l}{2}\sin\theta\dot{\theta}^2
++\frac{l}{2}\cos\theta\ddot{\theta} \\
+&=&-\frac{l}{2}\left[
+\sin\theta\left(\frac{3g}{l}(1-\sin\theta)\right)
+-\cos\theta\left(-\frac{3g}{2l}\cos\theta\right)\right]\\
+&=&-\frac{3g}{4}(1+2\sin\theta-3\sin^2\theta)
+\end{eqnarray*}
+Substituting into the equations of motion,
+\begin{eqnarray*}
+F &=& M\ddot{x}_{cm}\\
+&=&\frac{3Mg}{4}\cos\theta(3\sin\theta-2)
+\end{eqnarray*}
+and
+\begin{eqnarray*}
+R&=&Mg-M\ddot{y}_{cm}\\
+&=&\frac{Mg}{4}(1-6\sin\theta+9\sin^2\theta)
+\end{eqnarray*}
+Slipping starts at the angle $\theta^*$ where
+$$F=\mu R$$
+so that $\mu$ is given in terms of $\theta^*$ as
+$$\mu=
+\frac{3\cos\theta^*(3\sin\theta^*-2)}{1-6\sin\theta^*+9\sin^2\theta^*}$$
+\end{example}
+%============================================================================

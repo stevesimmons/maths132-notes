@@ -1,0 +1,238 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%			Mathematics 132 Course Notes
+%
+%			 Department of Mathematics,
+%   			  University of Melbourne
+%
+%		Stephen Simmons			Lee White
+%
+%%%%%%%%%%%%%%%%%%%%% Copyright (C) 1995 Stephen Simmons %%%%%%%%%%%%%%%%%%
+
+% This was formerly section 6.4 but was excised when chapter 7 was added.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Phase Trajectories}
+
+The Volterra-Lotka system is
+$$\dot{y}_1=-ay_1+by_1y_2$$
+$$\dot{y}_2=cy_2-dy_1y_2$$
+
+The equilibrium solution  can be found by factorising the system's equations
+$$\dot{y}_1=y_1(-a+by_2)$$
+$$\dot{y}_2=y_2(c-dy_1)$$
+Therefore $\dot{y}_1=\dot{y}_2=0$ at the point $(y_1,y_2)=\left(c/d,
+a/b\right)$.  This is called a \name{singular point} or a
+\name{critical point}.  If we start from this point, the solution is
+$$y_1(t)=y_1(0)=\frac{c}{d}$$
+$$y_2(t)=y_2(0)=\frac{a}{b}$$
+and does not evolve away.
+
+To establish the behaviour close to the equilibrium, write
+$$y_1=\frac{c}{d}+Y_1$$
+$$y_2=\frac{a}{b}+Y_2$$
+so that $Y_1$ and $Y_2$ are the deviations from the equilibrium populations.
+Substituting into the coupled \ODEs, we have
+$$\dot{Y}_1=\left(\frac{c}{d}+Y_1\right)\left(-a+b\left(\frac{a}{b}+Y_2
+\right)\right)=\frac{cb}{d}Y_2+bY_1Y_2$$
+$$\dot{Y}_2=\left(\frac{a}{b}+Y_2\right)\left(c-d\left(\frac{c}{d}+Y_1
+\right)\right)=-\frac{ad}{b}Y_1-dY_1Y_2$$
+If we start close to the equilibrium, then (initially at least) we can
+neglect the quadratic terms in the \ODE to give
+$$\dot{Y}_1=\frac{cb}{d}Y_2$$
+$$\dot{Y}_2=-\frac{ad}{b}Y_1$$
+This is called a \name{linear critical point analysis}.  In matrix form
+$$\vect{\dot{Y}}=\begin{bmatrix}0&\frac{cb}{d}\\-\frac{ad}{b}&0
+\end{bmatrix}\vect{Y}$$
+
+The eigenvalues are the roots of
+$$\alpha^2+ac=0$$
+so that $\alpha=\pm i\sqrt{ac}$.  Therefore $Y_1(t)$ and $Y_2(t)$ are
+oscillatory in time with frequency $\sqrt{ac}$.
+
+This can be used to find the \name{phase trajectory}, which is a plot of
+$y_2$ as a function of $y_1$.  From the linearised equations
+$$\dot{Y}_1=\frac{cb}{d}Y_2$$
+$$\dot{Y}_2=-\frac{ad}{b}Y_1$$
+time can be eliminated by writing
+$$\der{Y_2}{Y_1}=\frac{\dot{Y}_2}{\dot{Y}_1}
+=-\frac{ad^2}{cb^2}\frac{Y_1}{Y_2}$$
+This is a separable \ODE so
+$$Y_2\,dY_2=-\frac{ad^2}{cb^2}Y_1\,dY_1$$
+Integrating gives
+$$Y_2^2=-\frac{ad^2}{cb^2}Y_1^2+A^2$$
+where $A^2$ is the constant of integration.  This gives the equation of an
+ellipse
+$$\frac{Y_2^2}{A^2}+\frac{Y_1^2}{\left(A\sqrt{ad^2/cb^2}\right)^2}
+=1$$
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{Close to the equilibrium point $(c/d,a/b)$, the Volterra-Lotka
+system has a phase trajectory that is approximately elliptical.  The black
+dot marks the designated starting point at $t=0$.  It also sets the parameter
+$A$ determining the size of the ellipse.}
+\label{sde fig:vl I}
+
+\psset{unit=2.5cm}
+\begin{pspicture}(0,-0.3)(2.5,2.9)
+\SpecialCoor
+% The ellipse (which is actually a circle!)
+\pscircle[linewidth=2pt,linecolor=gray](1,1){0.4}
+\psarc[linewidth=2pt,linecolor=gray]{<-}(1,1){0.4}{45}{90}
+\put(1,1){
+	\psline[linewidth=2pt,linecolor=gray]{->}(0.4;45)(0.4;44)
+	\qdisk(0.4;225){3pt}
+}
+% Main axes
+\psline{->}(0,0)(2.6,0)
+\psline{->}(0,0)(0,2.6)
+\uput[r](2.6,0){$y_1$}
+\uput[u](0,2.6){$y_2$}
+\uput[d](1,0){$\ds\frac{c}{d}$}
+\uput[l](0,1){$\ds\frac{a}{b}$}
+\uput[dl](0,0){$0$}
+% Dashed lines
+\psline[linecolor=black,linestyle=dashed]{-}(0,1)(1,1) 
+\psline[linecolor=black,linestyle=dashed]{-}(1,0)(1,1) 
+% Local axes about equilibrium
+\psline{->}(0.5,1)(1.5,1)
+\psline{->}(1,0.5)(1,1.5)
+\uput[r](1.5,1){$Y_1$}
+\uput[u](1,1.5){$Y_2$}
+\uput[l](1,1.4){$A$}
+\uput[d](1.4,1){$A\frac{b}{d}\sqrt{\frac{c}{a}}$}
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+This is illustrated in figure \ref{sde fig:vl I} as an ellipse centred at
+the stationary point.  The starting point at $t=0$ fixed the constant of
+integration $A$, and the motion around the trajectory with time is
+clockwise because $\dot{Y}_2<0$ for $Y_1>0$.  This ellipse indicates that if 
+the system starts close to equilibrium, it will stay close to equilibrium.  
+
+The solution far from equilibrium can be found by noting that
+$$\dot{y}_1=y_1(-a+by_2)$$
+$$\dot{y}_2=y_2(c-dy_1)$$
+leads to
+$$\der{y_2}{y_1}=\frac{y_2}{y_1}\frac{c-dy_1}{-a+by_2}$$
+which is separable
+$$\frac{-a+by_2}{y_2}\,dy_2=\frac{c-dy_1}{y_1}\,dy_1$$
+Integrating gives
+$$-a\ln y_2+by_2=c\ln y_1-dy_1+\ln B$$
+where $\ln B$ is the constant of integration.  This is
+$$\frac{e^{by_2}}{y_2^a}=By_1^ce^{-dy_1}$$
+If $(y_1(0),y_2(0))$ is a given starting point, then the constant is
+$$B=\frac{e^{by_2(0)+dy_1(0)}}{y_2^a(0)y_1^c(0)}$$
+
+The phase portrait can be found by fixing the constant of integration $B$
+and finding the allowable values of $y_1$ and $y_2$.  Suppose $y_1$ is
+specified.  Then $y_2$ is a solution of
+$$\frac{e^{by_2}}{y_2^a}=By_1^ce^{-dy_1}$$
+The left-hand side is a function of $y_2$
+$$f(y_2)=\frac{e^{by_2}}{y_2^a}$$
+where $f(y_2)\to\infty$ as $y_2\to0$ and $y_2\to\infty$.  The minimum of
+$f(y_2)$ occurs when $\dbd{y_2}f(y_2)=0$.  Now
+$$\dbd{y_2}f(y_2)=\left(b-\frac{a}{y_2}\right)\frac{e^{by_2}}{y_2^a}$$
+so the minimum occurs when $y_2=a/b$ and has the value
+$$f\left(\frac{a}{b}\right)=\left(\frac{b}{a}\right)^ae^a$$
+
+This indicates that for small values of $y_1$ and for large values of $y_1$, 
+$By_1^ce^{-dy_1}$ is small so there are no allowable values of $y_2$.  At
+the two values of $y_1$ given by
+$$By_1^ce^{-dy_1}=\left(\frac{b}{a}\right)^ae^a$$
+$y_2$ has the single solution $y_2=a/b$.  Then for values of
+$y_1$ such that
+$$By_1^ce^{-dy_1}>\left(\frac{b}{a}\right)^ae^a$$
+there are two solutions of
+$$\frac{e^{by_2}}{y_2^a}=By_1^ce^{-dy_1}$$
+
+%----------------------------------------------------------------------------
+\begin{figure}\centering
+\caption{The complete phase portrait for a Volterra-Lotka system.}
+\label{sde fig:vl III}
+
+\psset{unit=2.5cm}
+\begin{pspicture}(0,-0.3)(2.5,2.9)
+% First the Volterra-Lotka curves.  These are plotted by a PostScript routine
+\pscustom[linewidth=0.0278pt,linecolor=gray]{
+\code{
+gsave
+72 dup scale
+% Draw Volterra-Lotke system about (1,1).  The equations are
+% \dot{x}=x(y-1)	\dot{y}=y(1-x)
+% Volterra: dt x y  --  dt x+dx y+dy
+/volterra {
+	2 copy 1 sub mul	% --  dt x y x(y-1)
+	4 copy pop		% --  dt x y x(y-1) dt x y
+	exch 1 exch sub mul 	% --  dt x y x(y-1) dt y(1-x)
+	exch dup	 	% --  dt x y x(y-1) y(1-x) dt dt
+	3 -1 roll mul 		% --  dt x y x(y-1) dt dty(1-x)
+	3 1 roll mul 		% --  dt x y dty(1-x) dtx(y-1)
+	4 -1 roll add 		% --  dt y dty(1-x) x+dtx(y-1)
+	3 1 roll add 		% --  dt x+dtx(y-1) y+dty(1-x)
+} def
+%
+% Draw one cycle of VL phase portrait.  The starting point is assumed to be
+% (x0,y0) where x0=1 and 0<y0<1.
+% drawvolterra: dt y  --  dt
+/drawvolterra {
+	/VLstoppable false def
+	newpath 1 exch		% --  dt 1 y
+	2 copy moveto		% --  dt 1 y
+	800 {			% --  dt 1 y
+		volterra	% --  dt x y 
+		2 copy lineto	% --  dt x y 
+		dup 1 gt {/VLstoppable true def} if
+		2 copy 1 lt exch 1 lt and VLstoppable and {exit} if
+	} repeat
+	pop pop			% --  dt
+%	closepath
+	stroke
+} def
+% phaseportrait
+newpath
+%0 0 moveto 3 0 lineto 3 3 lineto 0 3 lineto closepath stroke
+%0 0 moveto 1 0 lineto 1 1 lineto 0 1 lineto closepath stroke
+0 0 moveto 2.5 0 lineto 2.5 2.5 lineto 0 2.5 lineto closepath clip
+0.01 0.1 drawvolterra
+0.2 drawvolterra 
+0.3 drawvolterra 
+0.4 drawvolterra 
+0.5 drawvolterra 
+0.6 drawvolterra 
+0.7 drawvolterra 
+0.8 drawvolterra 
+0.9 drawvolterra pop
+grestore
+}
+}
+% Axes
+\psline{->}(0,0)(2.6,0)
+\psline{->}(0,0)(0,2.6)
+\uput[r](2.6,0){$y_1$}
+\uput[u](0,2.6){$y_2$}
+\uput[d](1,0){$\ds\frac{c}{d}$}
+\uput[l](0,1){$\ds\frac{a}{b}$}
+\uput[dl](0,0){$0$}
+% Dashed lines
+\psline[linecolor=black,linestyle=dashed]{-}(0,1)(1,1) 
+\psline[linecolor=black,linestyle=dashed]{-}(1,0)(1,1) 
+% Arrows on the VL curves
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.1)(0.99,0.1)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.2)(0.99,0.2)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.3)(0.99,0.3)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.4)(0.99,0.4)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.5)(0.99,0.5)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.6)(0.99,0.6)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.7)(0.99,0.7)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.8)(0.99,0.8)
+\psline[linewidth=2pt,linecolor=gray]{->}(1.01,0.9)(0.99,0.9)
+\end{pspicture}
+\end{figure}
+%----------------------------------------------------------------------------
+
+The global phase portrait for the Volterra-Lotka  system is shown in figure
+\ref{sde fig:vl III}.
+

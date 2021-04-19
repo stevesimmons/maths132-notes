@@ -1,0 +1,105 @@
+			
+			    MATHS 132 NOTES
+
+Stephen Simmons	     phone (015) 316 454       simmons@ee.mu.oz.au         
+
+-----------------------------------------------------------------------------
+1. FILES
+
+This directory contains the files required to processing the Maths 132 notes
+using LaTeX.
+
+The source files are
+
+notes.tex		Master LaTeX2e file for notes
+ch00-pre.tex		Preface
+ch01-ode.tex		Chapter 1: ODEs
+ch02-vf.tex		Chapter 2: Vector Functions
+ch03-spd.tex		Chapter 3: Single Particle Dynamics
+ch04-mpd.tex		Chapter 4: Multiple Particle Dynamics
+ch05-rbm.tex		Chapter 5: Rigid Body Motion
+ch06-sde.tex		Chapter 6: Systems of DEs
+ch06a-pp.tex		Section on phase portraits from ch6; superceded by ch 7
+ch07-nlc.tex		Non-Linear Coupled ODEs
+phasport.pro		PostScript header file for drawing phase portraits
+ps2upnn.pro		PostScript header file for 2-up printing
+cover.tex		LaTeX2e file for cover
+melbuni.eps		MU logo for cover
+
+
+The following files are also required to process the notes.  These are 
+available from the TeX archive at ftp.cs.rmit.edu.au, but are included here
+for convenience.
+
+picinpar.sty		Put pictures inside paragraphs (first fig in sec 7.1)
+pstricks.tex		All of the diagrams are done with PSTricks.  These
+pstricks.con		are the TeX source files and the PostScript header
+pstricks.pro		files needed for PSTricks.
+pstricks.bug
+pst-coil.tex
+pst-coil.pro
+pst-node.tex
+pst-node.pro
+
+The AMS-LaTeX set of macros is also required.
+
+-----------------------------------------------------------------------------
+2. PROCESSING THE NOTES
+
+This description assumes that the 'latex' command runs TeX with the LaTeX2e set
+of macros.  These notes are not compatible with LaTeX209, the old version of
+LaTeX.
+
+Process and print the cover sheet:
+
+	latex cover
+	dvips cover
+
+Depending on how dvips is configured, this will either print the cover page
+directly or create the file cover.ps, which can then be printed.
+
+Process and print the body of the notes:
+
+	latex notes
+	latex notes
+
+Two runs through LaTeX are needed to resolve the cross-references and to
+build the table of contents.  To print the notes, dvips is used with a special
+header file to print the pages of the notes two to a sheet of A4 paper.
+The command line for dvips is
+
+	dvips -tlandscape -hps2up.pro -x707 -O"-7mm,-7mm" notes
+
+This will either print the notes directly, or leave a file notes.ps, which ca nbe printed.
+
+'-tlandscape' changes the paper's orientation, '-hps2up.pro' includes the
+header file ps2up.pro for 2-up printing, '-x707' reduces the size of the 
+printed page by 70.7% to account for two A4 pages being printed on each sheet,
+and '-O"-7mm,-7mm"' is an adjustment to dvips's standard 1in offset from the
+top left corner of the page.  
+
+If a 600 dpi printer is being used, dvips looks for fonts at 424 dpi
+(600x0.707) because of the 70.7% magnification.  Since these are not usually
+part of the standard set of fonts, dvips will call METAFONT to create the 
+bitmapped fonts it needs.  This is a slow process first time around, but if
+the fonts are cached somewhere, they will be available next time around.
+If the font generation is not working, existing 300 or 600 dpi fonts can be
+used, by including a command line option of '-D424' or '-D848'.  This works
+because '-D424' tells dvips that the printer is a 424dpi printer.  Since
+the pages are reduced to 70.7%, dvips sends the printer 424x0.707=300 dpi
+fonts because this gives an effctive resolution of 424 dpi when the pages are
+scaled.
+
+------------------------------------------------------------------------------
+3. PROBLEMS?
+
+If there are any problems, ring me on (015) 316 454 or send me email
+on simmons@ee.mu.oz.au.  
+
+NOTE:	I am no longer working at Melbourne University.  From 24 March 1996,
+	I will be at the Boston Consulting Group, level 52, 101 Collins St.
+
+
+Stephen Simmons						9-Feb-96 
+
+
